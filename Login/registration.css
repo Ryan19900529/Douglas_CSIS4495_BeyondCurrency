@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  color: #055240;
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: center;
+  height: 80px;
+  border-bottom: 2px solid #CBCBCB;
+}
+
+.header__img {
+  height: 70%;
+  margin-right: 10px;
+}
+
+.header__title {
+  font-family: 'Chango';
+  font-size: 23px;
+  line-height: normal;
+}
+
+.main__section-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
