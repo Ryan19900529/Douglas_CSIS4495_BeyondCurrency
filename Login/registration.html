@@ -16,8 +16,169 @@
     </header>
     <main class="main main--registration">
       <section class="main__section-register">
-        <div>Finish signing up</div>
-        <div>Hi</div>
+        <div class="main__section__field-title">Finish signing up</div>
+        <form action="" method="POST" class="main__section-registerForm">
+          <div class="main__section__field-fullName">
+            <div class="main__section__field-firstName">
+              <label
+                class="main__section__field-firstName-label"
+                for="firstName"
+                >First Name</label
+              >
+              <input
+                type="text"
+                class="main__section__field-firstName-input"
+                name="firstName"
+                id="firstName"
+                placeholder="John"
+                required
+              />
+            </div>
+            <div class="main__section__field-lastName">
+              <label class="main__section__field-lastName-label" for="firstName"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                class="main__section__field-lastName-input"
+                name="lastName"
+                id="lastName"
+                placeholder="Doe"
+                required
+              />
+            </div>
+          </div>
+          <div class="main__section__field-DOB">
+            <label class="main__section__field-DOB-label" for="dob"
+              >Date of Birth</label
+            ><input
+              type="date"
+              class="main__section__field-DOB-input"
+              data-placeholder="YYYY-MM-DD"
+              name="dob"
+              id="dob"
+              required
+            />
+          </div>
+          <div class="main__section__field-address">
+            <label class="main__section__field-address-label" for="address"
+              >Address</label
+            >
+            <input
+              type="text"
+              class="main__section__field-address-input"
+              name="address"
+              id="address"
+              required
+            />
+          </div>
+          <div class="main__section__field-email">
+            <label class="main__section__field-email-label" for="email"
+              >Email</label
+            >
+            <input
+              type="email"
+              class="main__section__field-email-input"
+              name="email"
+              id="email"
+              required
+            />
+          </div>
+          <div class="main__section__field-password">
+            <label class="main__section__field-password-label" for="password"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="main__section__field-password-input"
+              name="password"
+              id="password"
+              required
+            />
+          </div>
+          <div class="main__section__field-ConPass">
+            <label class="main__section__field-ConPass-label" for="conPass"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              class="form-control main__section__field-ConPass-input"
+              name="conPass"
+              id="conPass"
+              required
+            />
+          </div>
+          <div class="main__section__field-skill1">
+            <label class="main__section__field-skill1-label" for="skill1"
+              >Skill 1</label
+            >
+            <select
+              name="skill1"
+              id="skill1"
+              class="main__section__field-skill1-input"
+              required
+            >
+              <option style="display: none"></option>
+              <option value="assembly">Assembly</option>
+              <option value="mounting">Mounting</option>
+              <option value="moving">Moving</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="outdoorHelp">Outdoor Help</option>
+              <option value="homeRepairs">Home Repairs</option>
+              <option value="painting">Painting</option>
+            </select>
+          </div>
+
+          <div class="main__section__field-skill2">
+            <label class="main__section__field-skill2-label" for="skill2"
+              >Skill 2</label
+            >
+            <select
+              name="skill2"
+              id="skill2"
+              class="main__section__field-skill2-input"
+            >
+              <option style="display: none"></option>
+              <option value="assembly">Assembly</option>
+              <option value="mounting">Mounting</option>
+              <option value="moving">Moving</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="outdoorHelp">Outdoor Help</option>
+              <option value="homeRepairs">Home Repairs</option>
+              <option value="painting">Painting</option>
+            </select>
+          </div>
+          <div class="main__section__field-skill3">
+            <label class="main__section__field-skill3-label" for="skill3"
+              >Skill 3</label
+            >
+            <select
+              name="skill3"
+              id="skill3"
+              class="main__section__field-skill3-input"
+            >
+              <option style="display: none"></option>
+              <option value="assembly">Assembly</option>
+              <option value="mounting">Mounting</option>
+              <option value="moving">Moving</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="outdoorHelp">Outdoor Help</option>
+              <option value="homeRepairs">Home Repairs</option>
+              <option value="painting">Painting</option>
+            </select>
+          </div>
+          <div class="buttonWrap">
+            <a href="" class="button register__button register__button--yet">
+              Not yet
+            </a>
+            <button
+              type="submit"
+              class="button register__button register__button--done"
+            >
+              I am ready!
+            </button>
+          </div>
+        </form>
       </section>
     </main>
     <footer></footer>
