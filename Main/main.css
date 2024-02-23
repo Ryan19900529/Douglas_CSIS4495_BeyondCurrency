@@ -142,7 +142,6 @@
     border-radius: 0 40px 40px 0;
     color: #ffffff;
     text-align: center;
-
     padding: 5px 5px 0 0;
 }
 
@@ -160,7 +159,38 @@
     height: 20vh;
 }
 
+.nav__container{
+    position: relative;
+    display: flex;
+    border: 1px solid red;
+    height: 50vh;
+}
 
+.nav__container nav{
+    width: 70%;
+    height: fit-content;
+    margin: 0 auto;
+    border: 1px solid green;
+}
+
+.nav__container ul li .nav__bar__icon{
+    border: 1px solid red;
+    height: auto;
+}
+
+
+.nav__container nav ul li{
+    display: inline-block;
+    text-align: center;
+    font-size: 27px;
+    color: #055240;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-right: 10px;
+}
+
+
+  
 
 
 
