@@ -56,7 +56,7 @@
 .main__container {
     position: relative;
     margin-top: 80px;
-    height: 100vh;
+    height: 70vh;
     overflow: hidden;
     flex-grow: 1;
     display: flex;
@@ -105,7 +105,7 @@
 .main__slogan {
     text-align: center;
     font-size: 70px;
-    margin-top: -700px;
+    margin-top: -350px;
     margin-bottom: 20px;
     font-weight: bolder;
     color: #055240;
@@ -117,7 +117,7 @@
     display: flex;
     position: absolute;
     width: 800px;
-    margin-top: -150px;
+    margin-top: 250px;
    
 }
 
@@ -154,6 +154,11 @@
     box-shadow: none; 
 }
 
+.main__container .main__content{
+    border: 1px solid red;
+    width: 100%;
+    height: 20vh;
+}
 
 
 
