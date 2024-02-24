@@ -145,9 +145,17 @@
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
+.register__button--yet:active {
+  box-shadow: none; 
+}
+
 .register__button--done:hover
 {
   animation: hover-gradient 15s ease infinite;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.register__button--done:active {
+  box-shadow: none; 
 }
 

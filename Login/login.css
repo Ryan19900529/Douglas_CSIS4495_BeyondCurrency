@@ -114,6 +114,16 @@
   font-weight: bold;
 }
 
+.button.login__button.login__button--register:hover
+{
+  animation: hover-gradient 15s ease infinite;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.button.login__button.login__button--register:active {
+  box-shadow: none; 
+}
+
 .button.login__button.login__button--signin {
   background: #055240;
   color: white;
@@ -124,16 +134,14 @@
   padding-left: 30px;
 }
 
-.button.login__button.login__button--register:hover
-{
-  animation: hover-gradient 15s ease infinite;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-
 .button.login__button.login__button--signin:hover
 {
   animation: hover-gradient 15s ease infinite;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.button.login__button.login__button--signin:active {
+  box-shadow: none; 
 }
 
 .main_section-midLine {
@@ -184,4 +192,8 @@
 {
   animation: hover-gradient 15s ease infinite;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.main__section-loginAlt a:active {
+  box-shadow: none; 
 }

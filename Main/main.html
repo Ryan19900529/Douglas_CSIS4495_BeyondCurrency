@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beyond Currency - Welcome!</title>
-    <link rel="icon" type="image/png" href="../Login/img/favicon.png" />
-
-    <link rel="stylesheet" href="../Login/base.css">
-    <link rel="stylesheet" href="../Login/media.css">
-    <link rel="stylesheet" href="../Login/login.css">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="icon" type="image/png" href="../Login/img/logo.png" />
+    <link rel="stylesheet" href="../Login/base.css" />
+    <link rel="stylesheet" href="../Login/media.css" />
+    <link rel="stylesheet" href="../Login/login.css" />
+    <link rel="stylesheet" href="./main.css" />
   </head>
 
   <body>
@@ -20,59 +19,76 @@
       </div>
 
       <div class="header__right">
-        <a href="../Login/login.html">Log in</a>
-        <button class="header__button">Become a tasker</button>
+        <a class="header__login" href="../Login/login.html">Log in</a>
+        <a class="header__button">Become a tasker</a>
       </div>
     </header>
 
     <main>
       <div class="main__container">
         <div class="main__slogan">
-          Book trusted help<br> for home tasks
-        </div> <br>
-
+          Book trusted help<br />
+          for home tasks
+        </div>
         <div class="main__searchbar">
-          <input type="text" placeholder="What do you need help with?">
-          <button type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
-          </button>
+          <form action="" method="GET" style="display: flex">
+            <input type="text" placeholder="What do you need help with?" />
+            <button type="submit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="bi bi-search"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+                />
+              </svg>
+            </button>
+          </form>
         </div>
       </div>
+      <div class="nav__container-tab">
+        <nav>
+          <ul>
+            <li style="display: flex; flex-direction: column;">
+              <img src="../Login/svg/assembly.svg" class="nav__bar__icon"></img>
+              Assembly
+            </li>
+            <li>
+              <div class="nav__bar__icon"></div>
+              Lawn
+            </li>
+            <li>
+              <div class="nav__bar__icon"></div>
+              Repair
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="nav__container-content"></div>
     </main>
-    
-    <div class="nav__container">
-      <nav>
-        <ul>
-          <li>
-            <div class="nav__bar__icon">
-              
-            </div>
-            Assembly
-          </li>
-          <li>
-            <div class="nav__bar__icon">
-              
-            </div>
-            Lawn
-          </li>
-          <li>
-            <div class="nav__bar__icon">
 
-            </div>
-            Repair
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-
-    <footer>
-      
-    </footer>
+    <footer></footer>
     <script>
+      const tabs = document.querySelectorAll(".tab_btn");
+      const all_content = document.querySelectorAll(".content");
 
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", (e) => {
+          tabs.forEach((tab) => tab.classList.remove("active"));
+          tab.classList.add("active");
+
+          var line = document.querySelector(".line");
+          line.style.width = e.target.offsetWidth + "px";
+          line.style.left = e.target.offsetLeft + "px";
+
+          all_content.forEach((content) => content.classList.remove("active"));
+          all_content[index].classList.add("active");
+        });
+      });
     </script>
   </body>
 </html>

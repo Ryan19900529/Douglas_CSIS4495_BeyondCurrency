@@ -13,6 +13,7 @@
 .header__left {
     display: flex;
     align-items: center; 
+    width: 545px;
 }
 
 .header .header__left img{
@@ -44,7 +45,7 @@
     
 }
 
-.header__right a{
+.header__login {
     font-size: 20px;
     font-weight: bold;
     margin: 4px 6px;
@@ -56,56 +57,47 @@
 .main__container {
     position: relative;
     margin-top: 80px;
-    height: 70vh;
+    height: 45vh;
     overflow: hidden;
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
 }
 
 .main__container::before{
     content: '';
     position: absolute;
-    top: 150px;
-    width: 600px; 
-    height: 600px; 
+    top: 10px;
+    width: 380px;
+    height: 380px;
     border-radius: 50%;
-    background-color: #29c18e; 
+    background-color: #29c18e;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     opacity: 0.9;
     z-index: -1;
-}
-
-.main__container::before {
-    left: -250px; 
-
+    left: -200px;
 }
 
 .main__container::after {
     content: '';
     position: absolute;
     top: 100px;
-    width: 500px; 
-    height: 500px; 
+    width: 300px; 
+    height: 300px; 
     border-radius: 50%;
     background-color: #055240; 
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     opacity: 0.9;
     z-index: -1;
-}
-
-
-.main__container::after {
-    right: -200px; 
+    right: -70px; 
 }
 
 
 .main__slogan {
     text-align: center;
-    font-size: 70px;
-    margin-top: -350px;
+    font-size: 65px;
+    margin-top: -100px;
     margin-bottom: 20px;
     font-weight: bolder;
     color: #055240;
@@ -117,7 +109,7 @@
     display: flex;
     position: absolute;
     width: 800px;
-    margin-top: 250px;
+    margin-top: 200px;
    
 }
 
@@ -153,33 +145,47 @@
     box-shadow: none; 
 }
 
-.main__container .main__content{
+/* .main__container .main__content{
     border: 1px solid red;
     width: 100%;
     height: 20vh;
-}
+} */
 
-.nav__container{
+.nav__container-tab{
     position: relative;
     display: flex;
     border: 1px solid red;
-    height: 50vh;
+    /* height: 50vh; */
 }
 
-.nav__container nav{
+.nav__container-tab::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #29c18e;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+    z-index: -1;
+    left: 50px;
+}
+
+.nav__container-tab nav{
     width: 70%;
     height: fit-content;
     margin: 0 auto;
     border: 1px solid green;
 }
 
-.nav__container ul li .nav__bar__icon{
+.nav__container-tab ul li .nav__bar__icon{
     border: 1px solid red;
     height: auto;
 }
 
 
-.nav__container nav ul li{
+.nav__container-tab nav ul li{
     display: inline-block;
     text-align: center;
     font-size: 27px;
