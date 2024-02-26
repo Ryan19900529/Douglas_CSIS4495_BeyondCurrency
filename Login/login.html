@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond Currency - Log in</title>
+    <link rel="icon" type="image/png" href="./img/logo.png" />
+    <link rel="stylesheet" href="./base.css" />
+    <link rel="stylesheet" href="./media.css" />
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <header class="header">
+      <img class="header__img" src="./img/logo.png" alt="logo" />
+      <p class="header__title">Beyond Currency</p>
+    </header>
+    <main class="main main--login">
+      <section class="main__section main__section--left">
+        <img src="./img/login.jpg" alt="login page" />
+      </section>
+      <section class="main__section main__section--right">
+        <p class="main__section-title">Log in</p>
+        <form action="" method="POST" class="main__section-logInform">
+          <input
+            type="email"
+            class="main__section-input main__section-input--email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+          <div class="main_section-input-passwordField">
+            <input
+              type="password"
+              class="main__section-input main__section-input--password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+            <i class="fas fa-eye-slash main__section-input-togglePassword"></i>
+          </div>
+          <div class="main__section-buttons">
+            <a
+              href="./registration.html"
+              class="button login__button login__button--register"
+              >Register</a
+            >
+            <button
+              class="button login__button login__button--signin"
+              type="submit"
+            >
+              Log in
+            </button>
+          </div>
+        </form>
+        <div class="main_section-midLine">
+          <div class="line"></div>
+          <span class="or">or</span>
+          <div class="line"></div>
+        </div>
+        <div class="main__section-loginAlt">
+          <a
+            role="button"
+            id="facebook-login"
+            href=""
+            class="button login__button-alt"
+            ><img src="./svg/facebook.svg" />Log in with Facebook</a
+          >
+          <a
+            role="button"
+            id="google-login"
+            href=""
+            class="button login__button-alt"
+            ><img src="./svg/google.svg" />Log in with Google</a
+          >
+          <a
+            role="button"
+            id="apple-login"
+            href=""
+            class="button login__button-alt"
+            ><img src="./svg/apple.svg" />Log in with Apple</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+    <script>
+      const togglePassword = document.querySelector(
+        ".main__section-input-togglePassword"
+      );
+      const password = document.querySelector(".main__section-input--password");
+      togglePassword.addEventListener("click", function () {
+        const type =
+          password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+      });
+    </script>
+  </body>
+</html>
