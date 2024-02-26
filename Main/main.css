@@ -206,6 +206,7 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    padding-bottom: 50px;
     /* border: 1px solid red; */
 }
 
@@ -222,6 +223,7 @@
     border-radius: 40px;
     padding: 0 50px 0 50px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .nav__content__buttons:hover{
@@ -282,6 +284,70 @@
 .content__intro ul li{
     margin-bottom: 30px;
 }
+
+.slogan{
+    /* border: 1px solid red; */
+    width: 80%;
+    height: 400px;
+    margin: auto;
+    padding: 30px 200px 30px 200px;
+}
+
+.slogan__title{
+    display: flex;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.slogan__title__1{
+    color: #055240;
+}
+
+.slogan__title__2{
+    color: #29c18e;
+}
+
+.slogan__content{
+    margin-top: 70px;
+    letter-spacing: 1px;
+}
+
+.slogan__content ul{
+    display: flex;
+    justify-content: space-between;
+}
+
+.slogan__content ul li{
+    float: left;
+}
+
+.slogan__content ul li .slogan__subtitle{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.slogan__content ul li .point{
+    font-size: 20px;
+}
+
+.slogan__content ul li .confirmed__mark{
+    display: flex;
+    margin-top: 10px;
+}
+
+.slogan__content ul li .confirmed__mark .confirmed__mark__text{
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #055240;
+}
+
+footer{
+    background: #67727e;
+    height: 350px;
+}
+
 
 
 
