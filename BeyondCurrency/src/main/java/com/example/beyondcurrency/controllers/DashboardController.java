@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/dashboard")
+@RequestMapping("")
 public class DashboardController {
 
-    @GetMapping("")
+    @GetMapping("/dashboard")
     public String displayLogin(Model model){
 
 //       wef

@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/registration")
+@RequestMapping("")
 public class RegistrationController {
 
-    @GetMapping("")
+    @GetMapping("/registration")
     public String showRegisterPage(Model model)
     {
 //        model.addAttribute("NewRegUser", new UserModel());

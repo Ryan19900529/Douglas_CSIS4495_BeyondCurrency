@@ -20,7 +20,7 @@
       </section>
       <section class="main__section main__section--right">
         <p class="main__section-title">Log in</p>
-        <form class="main__section-logInform" method="POST" th:action="@{/home}" th:object="${loginModel}">
+        <form class="main__section-logInform" method="POST" th:action="@{/login/home}" th:object="${loginModel}">
           <input
                   th:field="*{username}"
             type="email"
