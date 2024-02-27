@@ -173,7 +173,6 @@
   cursor: pointer;
 }
 
-
 footer{
   background: #67727e;
   padding: 25px 0 25px 0;
@@ -193,9 +192,19 @@ footer .footer__display__area{
   color: #b1b9c3;
   margin-bottom: 20px;
 }
+.footer__follow__link a{
+  text-align: center;
+}
+
+
+.footer__follow__link a:hover{
+  cursor: pointer;
+  color: #ffffff;
+}
 
 .footer__info{
   display: flex;
+  justify-content: space-between;
 }
 
 .footer__info{
@@ -205,11 +214,15 @@ footer .footer__display__area{
 }
 
 .footer__info__discover{
-  margin-right: 200px;
+  flex: 1;
 }
 
 .footer__info__company{
-  margin-right: 400px;
+  flex: 1;
+}
+
+.footer__info__download{
+  flex: 1;
 }
 
 .footer__info ul li a{
