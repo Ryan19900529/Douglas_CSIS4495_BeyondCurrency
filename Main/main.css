@@ -356,7 +356,7 @@ footer{
 
 footer .footer__display__area{
     /* border: 1px solid #ffffff; */
-    padding: 0 200px 0 200px;
+    padding: 0 80px 0 80px;
     margin: auto;
     width: 80%;
     height: 300px;
@@ -370,6 +370,7 @@ footer .footer__display__area{
 
 .footer__info{
     display: flex;
+    justify-content: space-between;
 }
 
 .footer__info{

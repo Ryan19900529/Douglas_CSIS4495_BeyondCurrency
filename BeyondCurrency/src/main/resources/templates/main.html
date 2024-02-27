@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond Currency - Welcome!</title>
+    
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/media.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header__left">
+        <img class="header__img" src="/img/logo.png" alt="logo" />
+        <p class="header__title">Beyond Currency</p>
+      </div>
+
+      <div class="header__right">
+        <a class="header__login" th:href="@{/login}">Log in</a>
+        <a class="header__button" th:href="@{/registration}">Become a tasker</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="main__container">
+        <div class="main__slogan">
+          Book trusted help<br />
+          for home tasks
+        </div>
+        <div class="main__searchbar">
+          <form action="" method="GET" style="display: flex">
+            <input type="text" placeholder="What do you need help with?" />
+            <button type="submit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="bi bi-search"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="nav__container__tab">
+        <nav>
+          <ul>
+            <li>
+              <div class="nav__bar__icon">
+                <img src="/svg/handyman_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+              </div>
+              Assembly
+            </li>
+            <li>
+              <div class="nav__bar__icon">
+                <img src="/svg/grass_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+              </div>
+              Lawn
+            </li>
+            <li>
+              <div class="nav__bar__icon">
+                <img src="/svg/build_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+              </div>
+              Repair
+            </li>
+            <li>
+              <div class="nav__bar__icon">
+                <img src="/svg/format_paint_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+              </div>
+              Painting
+            </li>
+            <li>
+              <div class="nav__bar__icon">
+                <img src="/svg/local_shipping_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+              </div>
+              Moving
+            </li>
+            <li>
+              <div class="nav__bar__icon">
+                <img src="/svg/luggage_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+              </div>
+              Travel
+            </li>
+            <li>
+              <div class="nav__bar__icon">
+                <img src="/svg/dynamic_feed_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+              </div>
+              Others
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div id="nav__container__content">
+        <div id="content__assembly">
+          <div class="content__buttons">
+            <button class="nav__content__buttons" type="">
+              General Furniture
+            </button>
+            <button class="nav__content__buttons" type="">
+              Electrical Appliances
+            </button>
+          </div>
+          
+          <div class="content">
+            <div class="short__intro">
+              <div class="content__topic">Assembly</div>
+              <div class="content__intro">
+                <ul>
+                  <li>Assemble or disassemble furniture items by unboxing, building, and any cleanup.</li>
+                  <li>Now Trending: Curved sofas, computer desks, and sustainable materials.</li>
+                </ul>
+                
+              </div>
+            </div>
+            <div class="content__image">
+              <img src="/img/assembly.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slogan">
+        <div class="slogan__title">
+          <div class="slogan__title__1">Your satisfaction,&nbsp;</div>
+          <div class="slogan__title__2">guranteed!</div>
+        </div>
+        <div class="slogan__content">
+          <ul>
+            <li>
+              <div class="slogan__subtitle">Happiness Pledge</div>
+              <div class="point">If you’re not satisfied, we’ll work to <br>make it right.</div>
+              <div class="confirmed__mark">
+                 <img src="/svg/verified_user_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+                 <div class="confirmed__mark__text">Happiness Pledge</div>
+              </div>
+            </li>
+            <li>
+              <div class="slogan__subtitle">Vetted Taskers</div>
+              <div class="point">Taskers are always background <br>checked before joining the platform.</div>
+            </li>
+            <li>
+              <div class="slogan__subtitle">Dedicated Support</div>
+              <div class="point">Friendly service when you need us –<br> every day of the week.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="slogan__mark">
+
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer__display__area">
+        <div class="footer__follow__link">Follow us on: <i class=""></i></div>
+        <div class="footer__info">
+          <div class="footer__info__discover">
+            Discover
+            <ul>
+              <li><a href="">Become a Tasker</a></li>
+              <li><a href="">Service By City</a></li>
+              <li><a href="">All Services</a></li>
+              <li><a href="">Elite Taskers</a></li>
+              <li><a href="">Help</a></li>
+            </ul>
+          </div>
+          <div class="footer__info__company">
+            Company
+            <ul>
+              <li><a href="">About Us</a></li>
+              <li><a href="">Careers</a></li>
+              <li><a href="">Press</a></li>
+              <li><a href="">Beyond Currency for Good</a></li>
+              <li><a href="">Blog</a></li>
+              <li><a href="">Terms & Privacy</a></li>
+              <li><a href="">About Our Ads</a></li>
+            </ul>
+          </div>
+          <div class="footer__info__download">
+            Apps coming soon
+            <p>Sorry for your inconvenience, our apps<br />are developing.</p>
+            <div class="ios__google__badge">
+              <a href="">
+                <img
+                        src="/svg/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+                        alt=""
+                />
+              </a>
+              <a href="">
+                <img
+                        id="google__badge"
+                        src="/img/google-play-badge.png"
+                        alt=""
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const tabs = document.querySelectorAll(".tab_btn");
+      const all_content = document.querySelectorAll(".content");
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", (e) => {
+          tabs.forEach((tab) => tab.classList.remove("active"));
+          tab.classList.add("active");
+
+          var line = document.querySelector(".line");
+          line.style.width = e.target.offsetWidth + "px";
+          line.style.left = e.target.offsetLeft + "px";
+
+          all_content.forEach((content) => content.classList.remove("active"));
+          all_content[index].classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
