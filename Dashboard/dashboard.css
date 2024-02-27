@@ -196,6 +196,7 @@ footer .footer__display__area{
 
 .footer__info{
   display: flex;
+  justify-content: space-between;
 }
 
 .footer__info{
@@ -204,13 +205,6 @@ footer .footer__display__area{
   color: #b1b9c3;
 }
 
-.footer__info__discover{
-  margin-right: 200px;
-}
-
-.footer__info__company{
-  margin-right: 400px;
-}
 
 .footer__info ul li a{
   font-size: 18px;
