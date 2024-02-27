@@ -367,6 +367,15 @@ footer .footer__display__area{
     color: #b1b9c3;
     margin-bottom: 20px;
 }
+.footer__follow__link a{
+    text-align: center;
+}
+
+
+.footer__follow__link a:hover{
+    cursor: pointer;
+    color: #ffffff;
+}
 
 .footer__info{
     display: flex;
