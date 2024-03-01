@@ -64,7 +64,7 @@
 
 .main__container-dashboard {
   margin-top: 80px;
-  height: 80vh;
+  margin-bottom: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,13 +117,12 @@
 .main__card-container {
   margin-top: 50px;
   background-color: #F7FAF7;
-  height: 450px;
   width: 100%;
   display: flex;
   align-items: center;
-  padding-left: 120px;
-  padding-right: 120px;
+  padding: 50px 120px 50px 120px;
   gap: 50px;
+  flex-wrap: wrap;
 }
 
 .main__card {
