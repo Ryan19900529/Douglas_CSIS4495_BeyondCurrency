@@ -16,8 +16,10 @@
     width: 545px;
 }
 
-.header .header__left img{
-    max-width: 10%;
+.header .header__left .logo__link{
+    max-width: 54.5px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .header__right {

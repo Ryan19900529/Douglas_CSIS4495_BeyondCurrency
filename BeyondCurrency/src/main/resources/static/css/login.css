@@ -8,9 +8,10 @@
   border-bottom: 2px solid #CBCBCB;
 }
 
-.header__img {
-  height: 70%;
+.header .logo__link{
+  max-width: 54.5px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .header__title {

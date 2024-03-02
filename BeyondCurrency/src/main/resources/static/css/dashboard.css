@@ -12,12 +12,14 @@
 
 .header__left {
   display: flex;
-  align-items: center; 
+  align-items: center;
   width: 545px;
 }
 
-.header .header__left img{
-  max-width: 10%;
+.header .header__left .logo__link{
+  max-width: 54.5px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .header__right {
@@ -51,15 +53,17 @@
 }
 
 .header__searchbar input[type="text"]:focus {
-  box-shadow: 0 0 8px #CBCBCB; 
+  box-shadow: 0 0 8px #CBCBCB;
 }
 
 .header__savedTalent-icon {
   height: 24px;
+  cursor: pointer;
 }
 
 .header__protfolio-icon {
   height: 30px;
+  cursor: pointer;
 }
 
 .main__container-dashboard {
@@ -77,7 +81,7 @@
   width: 100%;
   justify-content:space-between;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 .main__container-dashboard p {
@@ -107,27 +111,62 @@
 .main__title-button:active {
   width: 147px;
   height: 38px;
-  box-shadow: none; 
+  box-shadow: none;
 }
 
 .main__title-button img {
   height: 20px;
 }
 
-.main__card-container {
+.main__card-container--post {
+  position: relative;
   margin-top: 50px;
   background-color: #F7FAF7;
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 50px 120px 50px 120px;
-  gap: 50px;
-  flex-wrap: wrap;
+  padding: 120px 120px 80px 120px;
+  /* gap: 50px; */
+  /* flex-wrap: wrap; */
+}
+
+.main__card-container--post::before{
+  content: 'Your Posts';
+  position: absolute;
+  color: black;
+  top: 30px;
+  left: 120px;
+  font-size: 26px;
+  padding-left: 10px;
+  font-weight: 600;
+  border-left: 3px solid #b1b1b1;
+}
+
+.main__card-container--demand {
+  position: relative;
+  margin-top: 50px;
+  background-color: #f9f9f9;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 120px 120px 80px 120px;
+}
+
+.main__card-container--demand::before{
+  content: "Others' Demands";
+  position: absolute;
+  color: black;
+  top: 30px;
+  left: 120px;
+  font-size: 26px;
+  padding-left: 10px;
+  font-weight: 600;
+  border-left: 3px solid #b1b1b1;
 }
 
 .main__card {
   height: 350px;
-  width: 280px;
+  width: 280px !important;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -146,17 +185,30 @@
   border-top-right-radius: 20px;
 }
 
-.main__card p {
-  width: 100%;
-  height: 25%;
+.main__card .p1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  height: 68px;
   font-size: 20px;
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
+  margin-bottom: 20px;
+}
 
+.main__card .p2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 5; /* Number of lines to show */
+  font-size: 16px;
+  padding: 0px 20px 0px 20px;
 }
 
 .main__card-poster {
   display: flex;
   align-items:center;
+  margin-top: 40px;
 }
 
 .img-poster {
@@ -171,6 +223,7 @@
   font-size: 16px;
   cursor: pointer;
 }
+
 
 footer{
   background: #67727e;
@@ -255,6 +308,48 @@ footer .footer__display__area{
   width: 160px;
   height: 50px;
 }
+
+.swiper-navBtn {
+  color: #8fd98f;
+  transition: color 0.3s ease;
+}
+
+.swiper-navBtn:hover {
+  color: #157509;
+}
+
+.swiper-navBtn::before,
+.swiper-navBtn::after {
+  font-size: 40px;
+}
+
+.swiper-button-next {
+  right: 30px;
+}
+
+.swiper-button-prev {
+  left: 30px;
+}
+
+.swiper-pagination{
+  bottom: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: #157509;
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-navBtn {
+    display: none;
+  }
+
+}
+
+
+
+
+
 
 
 
