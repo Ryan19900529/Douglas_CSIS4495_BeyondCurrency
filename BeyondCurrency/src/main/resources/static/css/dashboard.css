@@ -92,7 +92,7 @@
   background-color: #055240;
   color: white;
   display: flex;
-  width: 150px;
+  width: 160px;
   height: 40px;
   border-radius: 40px;
   cursor: pointer;
@@ -116,12 +116,13 @@
 
 .main__title-button img {
   height: 20px;
+  padding-right: 3px;
 }
 
 .main__card-container--post {
   position: relative;
   margin-top: 50px;
-  background-color: #F7FAF7;
+  background-color: #E7EFE7;
   width: 100%;
   display: flex;
   align-items: center;

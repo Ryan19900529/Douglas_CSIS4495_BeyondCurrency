@@ -79,6 +79,7 @@ input[data-placeholder]::before {
 /* chang dropdown style */
 select {
   cursor: pointer;
-  background: url(../img/polygon.png) no-repeat right;
+  background: url(../img/dropdown.png) no-repeat right;
+  background-size: 20px;
 }
 
