@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css?family=Chango");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
 
-*:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+*:where(:not(iframe, canvas, img, svg, video):not(svg *):not(dialog)) {
   all: unset;
   display: revert;
 }

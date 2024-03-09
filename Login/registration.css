@@ -59,8 +59,10 @@
 .main__section__field-DOB-label,
 .main__section__field-address-label,
 .main__section__field-email-label,
+.main__section__field-phone-label,
 .main__section__field-password-label,
 .main__section__field-ConPass-label,
+.main__section__field-website-label,
 .main__section__field-skill1-label,
 .main__section__field-skill2-label,
 .main__section__field-skill3-label
@@ -76,8 +78,10 @@
 .main__section__field-DOB-input,
 .main__section__field-address-input,
 .main__section__field-email-input,
+.main__section__field-phone-input,
 .main__section__field-password-input,
 .main__section__field-ConPass-input,
+.main__section__field-website-input,
 .main__section__field-skill1-input,
 .main__section__field-skill2-input,
 .main__section__field-skill3-input
@@ -90,8 +94,10 @@
 .main__section__field-DOB,
 .main__section__field-address,
 .main__section__field-email,
+.main__section__field-phone,
 .main__section__field-password,
 .main__section__field-ConPass,
+.main__section__field-website,
 .main__section__field-skill1,
 .main__section__field-skill2,
 .main__section__field-skill3
