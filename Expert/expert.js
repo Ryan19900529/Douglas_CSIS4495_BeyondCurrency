@@ -33,3 +33,13 @@ openModal.addEventListener("click", () => {
 closeModal.addEventListener("click", () => {
   modal.close();
 });
+
+//toggle like image
+let displayImage = document.getElementById("love__icon");
+displayImage.addEventListener("click", (e) => {
+  if (e.target.src.match("./img/love-circled.png")) {
+    e.target.src = "./svg/love-circled-filled.svg";
+  } else {
+    e.target.src = "./img/love-circled.png";
+  }
+});
