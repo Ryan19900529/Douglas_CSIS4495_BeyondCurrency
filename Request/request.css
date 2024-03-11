@@ -100,20 +100,20 @@
   width: 25px;
   height: 25px;
   top: 38px;
-  left: 1078px;
+  /* left: 1078px; */
   background-color: #cdd6cd;
   transform: rotate(45deg);
   transition: all .3s ease-in-out;
  }
 
  .request__content__box{
-  margin-top: 20px;
   background-color: #cdd6cd;
   width: 100%;
  }
 
  .request__content{
   display: none;
+  margin-top: 20px;
   animation: moving .5s ease;
  }
  @keyframes moving{
