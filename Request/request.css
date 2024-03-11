@@ -157,12 +157,13 @@
  .request__content__box .request__content ul li .request__card__pic{
   border-radius: 15px 15px 0 0;
   height: 40%;
+  cursor: pointer;
  }
 
  .request__content__box .request__content ul li .request__card__content{
   border-radius: 0 0 15px 15px;
   height: 60%;
-  padding: 10px 20px;
+  padding: 20px 30px;
  }
 
  .card__title{
@@ -172,7 +173,9 @@
 
  .card__tag__box{
   display: flex;
-  justify-content: left
+  justify-content: left;
+  margin-left: 5px;
+  margin-top: 10px;
  }
 
  .card__tag__box .card__tag{
@@ -188,7 +191,7 @@
 
  .request__user{
   display: flex;
-  margin: 65px 0;
+  margin: 45px 0;
  }
 
  .request__user .request__user__pic{
@@ -198,9 +201,9 @@
  }
 
  .request__user .request__user__name{
-  margin: auto;
   display: flex;
-  font-size: 14px;
+  font-size: 1rem;
+  margin-left: 20px;
   align-items: center;
   font-weight: 600;
   letter-spacing: 1;
@@ -218,6 +221,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  cursor: pointer;
  }
 
  .people__card__name{
