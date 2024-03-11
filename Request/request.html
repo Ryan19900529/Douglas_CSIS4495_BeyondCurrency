@@ -128,6 +128,23 @@
                   </div>
                 </div>
               </li>
+              <li>
+                <img class="request__card__pic" src="./img/how-often-should-you-mow-your-lawn.jpg" alt="">
+                <div class="request__card__content">
+                  <div class="card__title">I need someone to cut grass in my garden.</div>
+                  <div class="card__tag__box">
+                    <div class="card__tag">Skilled offered</div>
+                    <div class="card__tag">Lawn</div>
+                  </div>
+
+                  <div class="request__user">
+                    
+                    <img class="request__user__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+                    
+                    <div class="request__user__name">Matteo Grasso</div>
+                  </div>
+                </div>
+              </li>
 
               <li>
                 <img class="request__card__pic" src="./img/how-often-should-you-mow-your-lawn.jpg" alt="">
@@ -193,30 +210,7 @@
             <div class=""></div>
             <ul class="people__tab">
               <li>
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
+                <img class="people__card__saved-icon" id="saved" src="./img/heart.png" alt="">
                 <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
@@ -266,6 +260,7 @@
               </li>
 
               <li>
+                <img class="people__card__saved-icon" id="saved" src="./img/heart.png" alt="">
                 <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
@@ -290,6 +285,7 @@
               </li>
 
               <li>
+                <img class="people__card__saved-icon" id="saved" src="./img/heart.png" alt="">
                 <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
@@ -314,6 +310,7 @@
               </li>
 
               <li>
+                <img class="people__card__saved-icon" id="saved" src="./img/heart.png" alt="">
                 <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
@@ -338,6 +335,7 @@
               </li>
 
               <li>
+                <img class="people__card__saved-icon" id="saved" src="./img/heart.png" alt="">
                 <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
@@ -362,6 +360,32 @@
               </li>
 
               <li>
+                <img class="people__card__saved-icon" id="saved" src="./img/heart.png" alt="">
+                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+                <div class="people__card__name">Matteo Grasso</div>
+                <div class="people__level__area">
+                  <img src="./img/diamond.png" alt="">
+                  <div class="people__level">Top Rated</div>
+                </div>
+
+                <div class="expertise">
+                  Precision Pro
+                </div>
+
+                <div class="people__info">
+                  <div class="people__trusted__score">
+                    <div class="score">96</div>
+                    <div>Score</div>
+                  </div>
+                  <div class="people__jobs">
+                    <div class="jobs">21</div>
+                    Jobs
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <img class="people__card__saved-icon" id="saved" src="./img/heart.png" alt="">
                 <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
@@ -466,6 +490,18 @@
             all_content[index].classList.add('active');
           });
         });
+
+      //toggle like image
+      let displayImages = document.querySelectorAll(".people__card__saved-icon");
+      displayImages.forEach((displayImage) => {
+        displayImage.addEventListener("click", (e) => {
+          if (e.target.src.includes("/img/heart.png")) {
+            e.target.src = "./img/heart-filled.png";
+          } else {
+            e.target.src = "./img/heart.png";
+          }
+        });
+      });
     </script>
   </body>
 </html>
