@@ -1,18 +1,16 @@
 package com.example.beyondcurrency.controllers;
 
-import com.example.beyondcurrency.models.LoginModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("")
-public class DashboardController {
+public class RequestsController {
 
-    @GetMapping("/dashboard")
-    public String displayDashboard(Model model){
+    @GetMapping("/requests")
+    public String displayRequests(Model model){
 
-        return "dashboard";
+        return "request";
     }
 }
