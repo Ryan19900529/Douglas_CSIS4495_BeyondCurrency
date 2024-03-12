@@ -132,11 +132,10 @@
   gap: 50px;
   overflow: auto;
   align-items: start;
-  justify-content: space-evenly;
+  /*justify-content: space-evenly;*/
  }
  
  .request__content__box .request__content ul li{
-  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   border-radius: 15px;

@@ -132,7 +132,7 @@
   gap: 50px;
   overflow: auto;
   align-items: start;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
  }
  
  .request__content__box .request__content ul li{
