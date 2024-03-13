@@ -104,7 +104,7 @@
 }
 
 .main__title-button {
-  background-color: #055240;
+  background-color: #108A00;
   color: white;
   display: flex;
   width: 160px;
@@ -118,15 +118,12 @@
 }
 
 .main__title-button:hover{
-  background-color: #179a7b;
+  background-color: #14a800;
   animation: hover-gradient 15s ease infinite;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
 .main__title-button:active {
-  width: 155px;
-  height: 39px;
-  box-shadow: none;
+  scale: 0.95;
 }
 
 .main__title-button img {
