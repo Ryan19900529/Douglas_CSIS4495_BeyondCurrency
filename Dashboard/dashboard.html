@@ -44,11 +44,27 @@
     <main>
       <div class="main__container-dashboard">
         <div class="main__title">
-          <p>Workspace</p>
+          <p style="font-size: 2.5rem;">Workspace</p>
           <a href="" class="main__title-button">
             <img src="../Login/svg/add.svg" alt="" />
             Post a Request
           </a>
+        </div>
+        <div style="display: flex;margin-left: 120px;margin-top: 10px;">
+          <label class="main__title-filter-label" for="filter"
+            >Filter status</label
+          >
+          <select
+            name="filter"
+            id="filter"
+            class="main__title-filter--input"
+            required
+          >
+            <option value="all">All</option>
+            <option value="open">Open</option>
+            <option value="filled">Filled</option>
+            <option value="closed">Closed</option>
+          </select>
         </div>
         <div class="swiper mySwiper main__card-container--post">
           <div class="swiper-wrapper content">
@@ -57,7 +73,9 @@
                 ><img class="img-service" src="../Login/img/lawn.webp" alt=""
               /></a>
               <p class="p1">Cut grass in the garden. Cut grass in the garden. Cut grass in the garden. </p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-open">Open</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
             <div class="swiper-slide main__card">
               <a href="" style="cursor: pointer"
@@ -67,14 +85,18 @@
                   alt=""
               /></a>
               <p class="p1">Cut grass in the garden.</p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-filled">Filled</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
             <div class="swiper-slide main__card">
               <a href="" style="cursor: pointer"
                 ><img class="img-service" src="../Login/img/lawn.webp" alt=""
               /></a>
               <p class="p1">Cut grass in the garden.</p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-closed">Closed</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
             <div class="swiper-slide main__card">
               <a href="" style="cursor: pointer"
@@ -84,7 +106,9 @@
                   alt=""
               /></a>
               <p class="p1">Cut grass in the garden.</p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-open">Open</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
             <div class="swiper-slide main__card">
               <a href="" style="cursor: pointer"
@@ -94,7 +118,9 @@
                   alt=""
               /></a>
               <p class="p1">Cut grass in the garden.</p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-open">Open</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
             <div class="swiper-slide main__card">
               <a href="" style="cursor: pointer"
@@ -104,7 +130,9 @@
                   alt=""
               /></a>
               <p class="p1">Cut grass in the garden.</p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-open">Open</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
             <div class="swiper-slide main__card">
               <a href="" style="cursor: pointer"
@@ -114,7 +142,9 @@
                   alt=""
               /></a>
               <p class="p1">Cut grass in the garden.</p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-open">Open</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
             <div class="swiper-slide main__card">
               <a href="" style="cursor: pointer"
@@ -124,7 +154,9 @@
                   alt=""
               /></a>
               <p class="p1">Cut grass in the garden.</p>
-              <p class="p2">Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. Your details go here. </p>
+              <p class="status-open">Open</p>
+              <p class="applicant">You have 2 new applicants</p>
+              <a href="" class="review"><button class="review-btn">Review applicants</button></a>
             </div>
           </div>
           <div class="swiper-button-next swiper-navBtn"></div>
