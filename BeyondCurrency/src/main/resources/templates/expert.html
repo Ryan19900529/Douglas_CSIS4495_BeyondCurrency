@@ -10,35 +10,60 @@
     />
     <link rel="stylesheet" href="/css/base.css" />
     <link rel="stylesheet" href="/css/media.css" />
+    <!--  for header-->
     <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <!--  for header-->
     <link rel="stylesheet" href="/css/expert.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
   </head>
 
   <body>
-    <header class="header">
-      <div class="header__left">
-        <a th:href="@{/home}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
-        <p class="header__title">Beyond Currency</p>
-      </div>
+  <header class="header">
+    <div class="header__left">
+      <a th:href="@{/}" class="logo__link" href=""><img class="header__img" src="/img/logo.png" alt="logo" /></a>
+      <p class="header__title">Beyond Currency</p>
+    </div>
 
-      <div class="header__right">
-        <div class="header__searchbar">
-          <form action="" method="get">
-            <img class="header__searchbar-icon" src="/svg/search.svg" />
-            <input type="text" name="keyword" placeholder="Search" />
-          </form>
-        </div>
-        <a class="header__savedTalent" href=""
-        ><img
-                class="header__savedTalent-icon"
-                src="/svg/savedTalent.svg"
-        /></a>
-        <a class="header__protfolio" href=""
-        ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
-        /></a>
+    <div class="header__right">
+      <div class="header__searchbar">
+        <form action="" method="get">
+          <img class="header__searchbar-icon" src="/svg/search.svg" />
+          <input type="text" name="keyword" placeholder="Search" />
+        </form>
       </div>
-    </header>
+      <div class="header__notification">
+        <div class="notifi-dot"></div>
+        <div class="icon-bell">
+          <img class="icon-bell-image" id="bell" src="/img/bell.png" alt="">
+        </div>
+        <ul class="notifi-box" id="box">
+          <li class="notifi-item">
+            <img class="notifi-photo" src="/img/man.jpg" alt="">
+            <p>Matteo Grasso applied to your job "Seeking Assistance for House Painting Project".</p>
+            <div onclick="">
+              <img class="notifi-close" src="/svg/close-black.svg" alt="">
+            </div>
+          </li>
+          <li class="notifi-item">
+            <img class="notifi-photo" src="/img/man.jpg" alt="">
+            <p>Matteo Grasso applied to your job "Seeking Assistance for House Painting Project".</p>
+            <div onclick="">
+              <img class="notifi-close" src="/svg/close-black.svg" alt="">
+            </div>
+          </li>
+        </ul>
+      </div>
+      <a class="header__savedTalent" href=""
+      ><img
+              class="header__savedTalent-icon"
+              src="/svg/savedTalent.svg"
+      /></a>
+      <a class="header__protfolio" href=""
+      ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
+      /></a>
+    </div>
+  </header>
     <main>
       <dialog class="modal" id="modal">
         <div class="modal__top">
@@ -403,6 +428,7 @@
         </div>
       </div>
     </footer>
+    <script src="/js/base.js"></script>
     <script src="/js/expert.js"></script>
   </body>
 </html>

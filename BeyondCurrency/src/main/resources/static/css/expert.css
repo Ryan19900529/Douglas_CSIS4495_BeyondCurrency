@@ -12,7 +12,7 @@
 
 .header__left {
   display: flex;
-  align-items: center; 
+  align-items: center;
   width: 545px;
 }
 
@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 450px;
+  width: 480px;
   margin-right: 10px;
 }
 
@@ -53,7 +53,88 @@
 }
 
 .header__searchbar input[type="text"]:focus {
-  box-shadow: 0 0 8px #CBCBCB; 
+  box-shadow: 0 0 8px #CBCBCB;
+}
+
+.header__notification {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.notifi-dot {
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  top: 0px;
+  left: 14px;
+  border-radius: 50%;
+  background-color: #ff4b25;
+  border: 2px solid white;
+  z-index: 1;
+}
+
+.icon-bell img{
+  height: 1.5em;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.notifi-box::before {
+  content: '';
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  transform: translateX(-50%) rotate(135deg);
+  box-shadow: -2px 2px 10px rgba(57,73,76,.2);
+  z-index: -1;
+}
+
+.notifi-box {
+  background-color: white;
+  position: absolute;
+  top: 44px;
+  right: -26px;
+  width: 330px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.notifi-item {
+  display: flex;
+  padding: 15px 20px;
+  align-items: start;
+  border-bottom: 1px solid #A7A7A7;
+}
+
+.notifi-item:hover {
+  background-color: #F7FaF7;
+}
+
+.notifi-item:last-child {
+  border-bottom: none;
+}
+
+.notifi-photo {
+  height: 1.8em;
+  border-radius: 50px;
+  margin-top: 3px;
+}
+
+.notifi-item p {
+  margin-left: 15px;
+  font-size: 0.8rem;
+  line-height: 1.5em;
+  color: black;
+}
+
+.notifi-close {
+  height: 2em;
+  cursor: pointer;
 }
 
 .header__savedTalent-icon {
