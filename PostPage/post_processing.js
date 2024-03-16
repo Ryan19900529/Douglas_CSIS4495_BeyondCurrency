@@ -30,14 +30,13 @@ document.addEventListener("click", function (event) {
 
 //show contact info
 const modal = document.getElementById("modal");
-const openModals = document.querySelectorAll(".btn-accept");
+const openModal = document.querySelector(".complete-btn");
 const closeModal = document.querySelector(".modal__top-button");
 
-for (let i = 0; i < openModals.length; i++) {
-  openModals[i].addEventListener("click", () => {
-    modal.showModal();
-  });
-}
+openModal.addEventListener("click", () => {
+  modal.showModal();
+  console.log(openModals.length);
+});
 
 closeModal.addEventListener("click", () => {
   modal.close();
