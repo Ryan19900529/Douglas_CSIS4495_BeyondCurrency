@@ -62,37 +62,23 @@
     <main>
       <dialog class="modal" id="modal">
         <div class="modal__top">
-          <h1 class="modal__top-name">Matteo Grasso</h1>
+          <h1 class="modal__top-name">What would you offer for exchange?</h1>
           <button class="modal__top-button">
             <img src="./img/close.png" alt="">
           </button>
         </div>
-        <div class="modal__content">
-          <h2>Contact Info</h2>
-          <ul>
-            <li>
-              <img src="./img/phone.png" alt="">
-              <div>
-                <h3>Phone</h3>
-                <p>+1-604-719-2434</p>
-              </div>
-            </li>
-            <li>
-              <img src="./img/email.png" alt="">
-              <div>
-                <h3>Email</h3>
-                <p>fakeemail@example.com</p>
-              </div>
-            </li>
-            <li>
-              <img src="./img/website.png" alt="">
-              <div>
-                <h3>Website</h3>
-                <p>https://matteo-portfolio.onrender.com/</p>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <form class="modal__form" action="post">
+          <select name="exchangeSkill" id="modal__form-dropdown" required>
+            <option style="display: none"></option>
+            <option value="skill1">Mounting</option>
+            <option value="skill2">Landscaping</option>
+            <option value="skill3">Cleaning</option>
+            <option value="other">Other (please specify in the note)</option>
+          </select>
+          <label for="modal__form-note" id="modal__form-noteLabel">Note</label>
+          <textarea name="note" id="modal__form-note" cols="20" rows="10"></textarea>
+          <button type="submit" id="modal__form-submitBtn">Submit</button>
+        </form>
       </dialog>
       <div class="main__container-request">
         <div class="request__container-left">
