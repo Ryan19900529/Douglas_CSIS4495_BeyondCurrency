@@ -19,8 +19,13 @@ public class PostController {
         return "post_poster_view";
     }
 
+    @GetMapping("/post_processing")
+    public String displayProcessingPost1(Model model){
+        return "post_processing";
+    }
+
     @PostMapping("/post_processing")
-    public String displayProcessingPost(Model model){
+    public String displayProcessingPost2(Model model){
         return "post_processing";
     }
 
