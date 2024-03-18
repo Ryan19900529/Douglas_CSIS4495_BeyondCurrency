@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond Currency - Your Dashboard!</title>
+    <link rel="icon" type="image/png" href="../Login/img/logo.png" />
+
+    <link rel="stylesheet" href="../Login/base.css" />
+    <link rel="stylesheet" href="../Login/media.css" />
+    <link rel="stylesheet" href="../Login/login.css" />
+    <link rel="stylesheet" href="./postnewrequest.css" />
+    <link rel="stylesheet" href="../Main/font-awesome-4.7.0/css/font-awesome.min.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header__left">
+        <a class="logo__link" href=""><img class="header__img" src="../Login/img/logo.png" alt="logo" /></a>
+        <p class="header__title">Beyond Currency</p>
+      </div>
+
+      <div class="header__right">
+        <div class="header__searchbar">
+          <form action="" method="get">
+            <img class="header__searchbar-icon" src="../Login/svg/search.svg" />
+            <input type="text" name="keyword" placeholder="Search" />
+          </form>
+        </div>
+        <a class="header__savedTalent" href=""
+          ><img
+            class="header__savedTalent-icon"
+            src="../Login/svg/savedTalent.svg"
+        /></a>
+        <a class="header__protfolio" href=""
+          ><img class="header__protfolio-icon" src="../Login/svg/protfolio.svg"
+        /></a>
+      </div>
+    </header>
+    <main>
+      <div class="new__request__form">
+        <form action="">
+            <div class="form__title">Edit Request</div>
+            <div class="form__subtitles">Skill I need</div>
+            <select id="skillSelect" name="" id="" class="main__section__field-skill1-input" required>
+                    <option style="display: none;" value=""></option>
+                    <option value="assembly">Assembly</option>
+                    <option value="mounting">Mounting</option>
+                    <option value="moving">Moving</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="outdoorHelp">Outdoor Help</option>
+                    <option value="homeRepairs">Home Repairs</option>
+                    <option value="painting">Painting</option>   
+            </select>
+
+            <div id="selectedSkillsContainer"></div>
+
+            <div class="form__subtitles">Title</div>
+            <input type="text" name="" id="" placeholder="Add a title..." required>
+            
+            <div class="form__subtitles">Application Deadline</div>
+            <input type="date" name="" id="" required>
+
+            <div class="form__subtitles">Description</div>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Add descriptions here..." required></textarea>
+            
+            
+
+            <div class="form__subtitles">Upload Images (Optional)</div>
+            <button id="uploadImageBtn" class="upload__image__btn" type="button">
+                CHOOSE IMAGE
+            </button>
+            <p>Max upload size: 10MB.</p>
+            <div id="thumbnailContainer"></div>
+            <div class="line"></div>
+
+            <div class="request__bottom__btn">
+                <button id="request__form__cancle" type="button">DELETE</button>
+                <button id="request__form__submit" type="submit">UPDATE REQUEST</button>
+            </div>
+            
+        </form>
+      </div>
+    </main>
+
+    <script>  
+
+        document.getElementById('skillSelect').addEventListener('change', function() {
+        var selectedSkill = this.value;
+        if (!selectedSkill) return;
+
+        var selectedSkillsContainer = document.getElementById('selectedSkillsContainer');
+        var selectedSkillContainer = document.createElement('div');
+        selectedSkillContainer.className = 'selected-skill-container';
+
+        var selectedSkillElement = document.createElement('div');
+        selectedSkillElement.className = 'selected-skill';
+        selectedSkillElement.textContent = selectedSkill;
+
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'x';
+        deleteButton.className = 'delete-button';
+        deleteButton.addEventListener('click', function() {
+            // Add selected option back to select
+            var select = document.getElementById('skillSelect');
+            var option = document.createElement('option');
+            option.text = selectedSkill;
+            option.value = selectedSkill;
+            select.add(option);
+
+            selectedSkillsContainer.removeChild(selectedSkillContainer);
+        });
+
+        selectedSkillContainer.appendChild(selectedSkillElement);
+        selectedSkillContainer.appendChild(deleteButton);
+
+        selectedSkillsContainer.appendChild(selectedSkillContainer);
+
+        // Remove selected option from select
+        var selectedIndex = this.selectedIndex;
+        this.remove(selectedIndex);
+    });
+
+        // upload image locally 
+        document.getElementById('uploadImageBtn').addEventListener('click', function() {
+        var input = document.createElement('input');
+        input.type = 'file';
+        
+        input.accept = 'image/*';
+        
+        input.addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            
+            
+            if (file.size > 10 * 1024 * 1024) {
+                alert('The picture you choosed exceeds 10MB!');
+                return;
+            }
+            
+            
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var thumbnailContainer = document.getElementById('thumbnailContainer');
+                
+                
+                var container = document.createElement('div');
+                container.className = 'thumbnail-container';
+                
+               
+                var imgElement = document.createElement('img');
+                imgElement.src = event.target.result;
+                imgElement.alt = 'Thumbnail';
+                
+                
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = 'x';
+                deleteButton.className = 'image-delete-button';
+                deleteButton.addEventListener('click', function() {
+                   
+                    thumbnailContainer.removeChild(container);
+                });
+                
+                
+                container.appendChild(imgElement);
+                container.appendChild(deleteButton);
+                
+                
+                thumbnailContainer.appendChild(container);
+            };
+            reader.readAsDataURL(file);
+        });
+        
+        
+        input.click();
+    });
+    </script>
+  </body>
+
+  
+</html>
