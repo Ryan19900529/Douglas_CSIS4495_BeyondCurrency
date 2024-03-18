@@ -6,24 +6,20 @@
     <title>Beyond Currency</title>
     <link rel="icon" type="image/png" href="/img/logo.png" />
 
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
     <link rel="stylesheet" href="/css/base.css" />
     <link rel="stylesheet" href="/css/media.css" />
     <!--  for header-->
     <link rel="stylesheet" href="/css/login.css" />
     <link rel="stylesheet" href="/css/home.css" />
     <!--  for header-->
-    <link rel="stylesheet" href="/css/post.css" />
+    <link rel="stylesheet" href="/css/post_completed.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
   </head>
 
   <body>
     <header class="header">
       <div class="header__left">
-        <a th:href="@{/static}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
+        <a th:href="@{/}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
         <p class="header__title">Beyond Currency</p>
       </div>
 
@@ -85,22 +81,92 @@
               </div>
             </div>
           </div>
-          <div class="request__section-skill-lang">
+          <div class="request__section-skill-rate">
             <div class="skill">
               <p>Skills for exchange</p>
               <ul>
                 <li>Mounting</li>
-                <li>Landscaping</li>
-                <li>Cleaning</li>
               </ul>
             </div>
-            <div class="lang">
-              <p>Languages</p>
+            <div class="rate">
+              <p class="rate__feedback">Job feedback</p>
               <ul>
-                <li>English: <span>Fluent</span></li>
-                <li>Spanish: <span>Intermediate</span></li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <li>
+                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+                </li>
+                <p class="expert__section-history-li-starCount">8</p>
               </ul>
+              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
             </div>
+          </div>
+
+          <p class="request__container-left postedby" style="margin-top: 60px;">Taking by</p>
+          <div style="display: flex;">
+            <div class="request__container-left picgroup">
+              <div class="request__container-left picgroup__greendot"></div>
+              <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
+            </div>
+            <div class="request__section-title title__nameGroup">
+              <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
+              <div class="request__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
+              <div class="request__section-title title__rateGroup">
+                <div class="request__section-title title__rateGroup-score">
+                  <img src="/img/checkmark.png" alt="">
+                  <p>96 Trust Score</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="rate-taker">
+            <p class="rate__feedback" style="margin-top: 40px;">Feedback to the poster</p>
+            <ul>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <li>
+                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
+              </li>
+              <p class="expert__section-history-li-starCount">8</p>
+            </ul>
+            <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
           </div>
         </div>
         <div class="request__container-right"> 
@@ -109,11 +175,7 @@
               <p class="top__container-left-request">REQUEST</p>
               <p class="top__container-left-date">Offers will be considered until March 2, 2025.</p>
             </div>
-            <div class="top__container-right">
-              <button class="top__container-right-btn">Offer Help</button>
-              <div class="top__container-right-submitted">You made an offer to <span>Matteo Grasso</span>
-              </div>
-            </div>
+            
           </div>
           <p class="request__title">Seeking Assistance for House Painting Project</p>
           <img class="request__pic" src="/img/Painting.webp" alt="">
@@ -172,16 +234,7 @@
         </div>
       </div>
     </footer>
-    <script src="/js/base.js"></script>
-    <script>
-      //toggle btn
-      let offerBtn = document.querySelector(".top__container-right-btn");
-      let madeOffer = document.querySelector(".top__container-right-submitted");
-
-      offerBtn.addEventListener("click", () => {
-        offerBtn.style.display = "none";
-        madeOffer.style.display = "block";
-      });
+    <script src="/js/post_completed.js">
     </script>
   </body>
 </html>

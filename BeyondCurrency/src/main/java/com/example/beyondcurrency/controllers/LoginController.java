@@ -27,7 +27,7 @@ public class LoginController {
     @PostMapping("/home")
     public String loginValidation(Model model) {
 
-        return "main";
+        return "home";
     }
 
 }

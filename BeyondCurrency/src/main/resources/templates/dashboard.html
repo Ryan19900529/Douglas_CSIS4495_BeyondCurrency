@@ -23,7 +23,7 @@
 <body>
 <header class="header">
   <div class="header__left">
-    <a th:href="@{/}" class="logo__link" href=""><img class="header__img" src="/img/logo.png" alt="logo" /></a>
+    <a th:href="@{/}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
     <p class="header__title">Beyond Currency</p>
   </div>
 
@@ -56,12 +56,12 @@
         </li>
       </ul>
     </div>
-    <a class="header__savedTalent" href=""
+    <a class="header__savedTalent" th:href="@{/talent}"
     ><img
             class="header__savedTalent-icon"
             src="/svg/savedTalent.svg"
     /></a>
-    <a class="header__protfolio" href=""
+    <a class="header__protfolio" th:href="@{/dashboard}"
     ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
     /></a>
   </div>
@@ -94,90 +94,56 @@
     <div class="swiper mySwiper main__card-container--post">
       <div class="swiper-wrapper content">
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img class="img-service" src="/img/lawn.webp" alt=""
-          /></a>
+          <img class="img-service" src="/img/lawn.webp" alt=""/>
           <p class="p1">Cut grass in the garden. Cut grass in the garden. Cut grass in the garden. </p>
           <p class="status-open">Open</p>
           <p class="applicant">You have 2 new applicants</p>
-          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
+          <a th:href="@{/post_poster_view}" class="review"><button class="review-btn">Review applicants</button></a>
         </div>
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
           <p class="p1">Cut grass in the garden.</p>
           <p class="status-filled">Filled</p>
           <p class="applicant">You have 2 new applicants</p>
           <a href="" class="review"><button class="review-btn">Review applicants</button></a>
         </div>
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img class="img-service" src="/img/lawn.webp" alt=""
-          /></a>
+          <img class="img-service" src="/img/lawn.webp" alt=""/>
           <p class="p1">Cut grass in the garden.</p>
           <p class="status-closed">Closed</p>
           <p class="applicant">You have 2 new applicants</p>
           <a href="" class="review"><button class="review-btn">Review applicants</button></a>
         </div>
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
           <p class="p1">Cut grass in the garden.</p>
           <p class="status-open">Open</p>
           <p class="applicant">You have 2 new applicants</p>
           <a href="" class="review"><button class="review-btn">Review applicants</button></a>
         </div>
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
           <p class="p1">Cut grass in the garden.</p>
           <p class="status-open">Open</p>
           <p class="applicant">You have 2 new applicants</p>
           <a href="" class="review"><button class="review-btn">Review applicants</button></a>
         </div>
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
           <p class="p1">Cut grass in the garden.</p>
           <p class="status-open">Open</p>
           <p class="applicant">You have 2 new applicants</p>
           <a href="" class="review"><button class="review-btn">Review applicants</button></a>
         </div>
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
           <p class="p1">Cut grass in the garden.</p>
           <p class="status-open">Open</p>
           <p class="applicant">You have 2 new applicants</p>
           <a href="" class="review"><button class="review-btn">Review applicants</button></a>
         </div>
         <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
           <p class="p1">Cut grass in the garden.</p>
           <p class="status-open">Open</p>
           <p class="applicant">You have 2 new applicants</p>

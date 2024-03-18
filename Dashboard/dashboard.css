@@ -242,6 +242,7 @@
 .applicant {
   margin: 20px 20px;
   font-size: 1.2rem;
+  text-align: center;
 }
 
 .review {
@@ -257,6 +258,15 @@
   margin-bottom: 20px;
   cursor: pointer;
   font-weight: 600;
+}
+
+.review-btn:hover{
+  background-color: #faf7fa;
+  animation: hover-gradient 15s ease infinite;
+}
+
+.review-btn:active {
+  scale: 0.95;
 }
 
 /* .main__card .p2 {

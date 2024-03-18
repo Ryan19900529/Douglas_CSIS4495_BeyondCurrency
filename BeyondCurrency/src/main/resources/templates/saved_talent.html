@@ -4,62 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beyond Currency - Your Dashboard!</title>
-    <link rel="icon" type="image/png" href="../Login/img/logo.png" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
 
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
-    <link rel="stylesheet" href="../Login/base.css" />
-    <link rel="stylesheet" href="../Login/media.css" />
-    <link rel="stylesheet" href="../Login/login.css" />
-    <link rel="stylesheet" href="./saved_talent.css" />
-    <link rel="stylesheet" href="../Main/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/media.css" />
+    <!--  for header-->
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <!--  for header-->
+    <link rel="stylesheet" href="/css/saved_talent.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
   </head>
 
   <body>
     <header class="header">
       <div class="header__left">
-        <a class="logo__link" href=""><img class="header__img" src="../Login/img/logo.png" alt="logo" /></a>
+        <a th:href="@{/}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
         <p class="header__title">Beyond Currency</p>
       </div>
 
       <div class="header__right">
         <div class="header__searchbar">
           <form action="" method="get">
-            <img class="header__searchbar-icon" src="../Login/svg/search.svg" />
+            <img class="header__searchbar-icon" src="/svg/search.svg" />
             <input type="text" name="keyword" placeholder="Search" />
           </form>
         </div>
         <div class="header__notification">
           <div class="notifi-dot"></div>
           <div class="icon-bell">
-            <img class="icon-bell-image" id="bell" src="./img/bell.png" alt="">
+            <img class="icon-bell-image" id="bell" src="/img/bell.png" alt="">
           </div>
           <ul class="notifi-box" id="box">
             <li class="notifi-item">
-              <img class="notifi-photo" src="./img/man.jpg" alt="">
+              <img class="notifi-photo" src="/img/man.jpg" alt="">
               <p>Matteo Grasso applied to your job "Seeking Assistance for House Painting Project".</p>
               <div onclick="">
-                <img class="notifi-close" src="./svg/close-black.svg" alt="">
+                <img class="notifi-close" src="/svg/close-black.svg" alt="">
               </div>
             </li>
             <li class="notifi-item">
-              <img class="notifi-photo" src="./img/man.jpg" alt="">
+              <img class="notifi-photo" src="/img/man.jpg" alt="">
               <p>Matteo Grasso applied to your job "Seeking Assistance for House Painting Project".</p>
               <div onclick="">
-                <img class="notifi-close" src="./svg/close-black.svg" alt="">
+                <img class="notifi-close" src="/svg/close-black.svg" alt="">
               </div>
             </li>
           </ul>
         </div>
-        <a class="header__savedTalent" href=""
+        <a class="header__savedTalent" th:href="@{/talent}"
           ><img
             class="header__savedTalent-icon"
-            src="../Login/svg/savedTalent.svg"
+            src="/svg/savedTalent.svg"
         /></a>
-        <a class="header__protfolio" href=""
-          ><img class="header__protfolio-icon" src="../Login/svg/protfolio.svg"
+        <a class="header__protfolio" th:href="@{/dashboard}"
+          ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
         /></a>
       </div>
     </header>
@@ -73,11 +76,11 @@
         <div class="swiper mySwiper main__card-container--post">
           <div class="swiper-wrapper content">
             <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="./img/heart.png" alt="">
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
+              <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
+                  <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
 
@@ -97,11 +100,11 @@
                 </div>
             </div>
             <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="./img/heart.png" alt="">
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
+                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
+                  <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
 
@@ -121,11 +124,11 @@
                 </div>
             </div>
             <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="./img/heart.png" alt="">
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
+                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
+                  <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
 
@@ -145,11 +148,11 @@
                 </div>
             </div>
             <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="./img/heart.png" alt="">
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
+                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
+                  <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
 
@@ -169,11 +172,11 @@
                 </div>
             </div>
             <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="./img/heart.png" alt="">
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
+                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
+                  <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
 
@@ -193,11 +196,11 @@
                 </div>
             </div>
             <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="./img/heart.png" alt="">
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
+                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
+                  <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
 
@@ -217,11 +220,11 @@
                 </div>
             </div>
             <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="./img/heart.png" alt="">
-                <img class="people__card__pic" src="./img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
+                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
                 <div class="people__card__name">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="./img/diamond.png" alt="">
+                  <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
 
@@ -283,10 +286,10 @@
               <p>Sorry for your inconvenience, our apps<br>are developing.</p>
               <div class="ios__google__badge">
                 <a href="">
-                  <img src="../Main/svg/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="">
+                  <img src="/svg/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="">
                 </a>
                 <a href="">
-                  <img id="google__badge" src="../Main/img/google-play-badge.png" alt="">
+                  <img id="google__badge" src="/img/google-play-badge.png" alt="">
                 </a>
               </div>
 
@@ -296,6 +299,6 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="./saved_talent.js"></script>
+    <script src="/js/saved_talent.js"></script>
   </body>
 </html>

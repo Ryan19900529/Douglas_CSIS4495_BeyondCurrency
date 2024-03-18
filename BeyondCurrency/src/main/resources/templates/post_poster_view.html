@@ -6,24 +6,20 @@
     <title>Beyond Currency</title>
     <link rel="icon" type="image/png" href="/img/logo.png" />
 
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
     <link rel="stylesheet" href="/css/base.css" />
     <link rel="stylesheet" href="/css/media.css" />
     <!--  for header-->
     <link rel="stylesheet" href="/css/login.css" />
     <link rel="stylesheet" href="/css/home.css" />
     <!--  for header-->
-    <link rel="stylesheet" href="/css/post.css" />
+    <link rel="stylesheet" href="/css/post_poster_view.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
   </head>
 
   <body>
     <header class="header">
       <div class="header__left">
-        <a th:href="@{/static}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
+        <a th:href="@{/}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
         <p class="header__title">Beyond Currency</p>
       </div>
 
@@ -67,41 +63,70 @@
       </div>
     </header>
     <main>
+      <dialog class="modal" id="modal">
+        <div class="modal__top">
+          <h1 class="modal__top-name">What would you offer for exchange?</h1>
+          <button class="modal__top-button">
+            <img src="/img/close.png" alt="">
+          </button>
+        </div>
+        <form class="modal__form" th:action="@{/post_processing}" method="post">
+          <select name="exchangeSkill" id="modal__form-dropdown" required>
+            <option style="display: none"></option>
+            <option value="skill1">Mounting</option>
+            <option value="skill2">Landscaping</option>
+            <option value="skill3">Cleaning</option>
+            <option value="other">Other (please specify in the Note)</option>
+          </select>
+          <label for="modal__form-note" id="modal__form-noteLabel">Note:</label>
+          <textarea name="note" id="modal__form-note" cols="20" rows="10"></textarea>
+          <button type="submit" id="modal__form-submitBtn">Submit</button>
+        </form>
+      </dialog>
       <div class="main__container-request">
         <div class="request__container-left">
-          <p class="request__container-left postedby">Posted by</p>
-          <div style="display: flex;">
-            <div class="request__container-left picgroup">
-              <div class="request__container-left picgroup__greendot"></div>
-              <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
-            </div>
-            <div class="request__section-title title__nameGroup">
-              <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
-              <div class="request__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
-              <div class="request__section-title title__rateGroup">
-                <div class="request__section-title title__rateGroup-score">
-                  <img src="/img/checkmark.png" alt="">
-                  <p>96 Trust Score</p></div>
+          <p class="request__container-left postedby">APPLICANTS</p>
+          <ul class="applicants">
+            <li style="display: flex;">
+              <div class="request__container-left picgroup">
+                <div class="request__container-left picgroup__greendot"></div>
+                <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
               </div>
-            </div>
-          </div>
-          <div class="request__section-skill-lang">
-            <div class="skill">
-              <p>Skills for exchange</p>
-              <ul>
-                <li>Mounting</li>
-                <li>Landscaping</li>
-                <li>Cleaning</li>
-              </ul>
-            </div>
-            <div class="lang">
-              <p>Languages</p>
-              <ul>
-                <li>English: <span>Fluent</span></li>
-                <li>Spanish: <span>Intermediate</span></li>
-              </ul>
-            </div>
-          </div>
+              <div class="request__section-title title__nameGroup">
+                <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
+                <div style="display: flex;gap: 10px;">
+                  <button class="btn-accept">Accept</button>
+                  <button class="btn-reject">Reject</button>
+                </div>
+              </div>
+            </li>
+            <li style="display: flex;">
+              <div class="request__container-left picgroup">
+                <div class="request__container-left picgroup__greendot"></div>
+                <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
+              </div>
+              <div class="request__section-title title__nameGroup">
+                <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
+                <div style="display: flex;gap: 10px;">
+                  <button class="btn-accept">Accept</button>
+                  <button class="btn-reject">Reject</button>
+                </div>
+              </div>
+            </li>
+            <li style="display: flex;">
+              <div class="request__container-left picgroup">
+                <div class="request__container-left picgroup__greendot"></div>
+                <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
+              </div>
+              <div class="request__section-title title__nameGroup">
+                <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
+                <div style="display: flex;gap: 10px;">
+                  <button class="btn-accept">Accept</button>
+                  <button class="btn-reject">Reject</button>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
         <div class="request__container-right"> 
           <div class="top__container">
@@ -110,7 +135,9 @@
               <p class="top__container-left-date">Offers will be considered until March 2, 2025.</p>
             </div>
             <div class="top__container-right">
-              <button class="top__container-right-btn">Offer Help</button>
+              <a href="">
+                <button class="top__container-right-btn">Edit Post</button>
+              </a>
               <div class="top__container-right-submitted">You made an offer to <span>Matteo Grasso</span>
               </div>
             </div>
@@ -172,16 +199,7 @@
         </div>
       </div>
     </footer>
-    <script src="/js/base.js"></script>
-    <script>
-      //toggle btn
-      let offerBtn = document.querySelector(".top__container-right-btn");
-      let madeOffer = document.querySelector(".top__container-right-submitted");
-
-      offerBtn.addEventListener("click", () => {
-        offerBtn.style.display = "none";
-        madeOffer.style.display = "block";
-      });
+    <script src="/js/post_poster_view.js">
     </script>
   </body>
 </html>
