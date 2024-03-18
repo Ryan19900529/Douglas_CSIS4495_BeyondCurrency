@@ -144,6 +144,7 @@
   height: 400px;
   background-color: #ffffff;
   position: relative;
+  height: 420px;
  }
 
 .people__card__saved-icon {
@@ -156,7 +157,9 @@
 
  .request__content__box .request__content ul li .request__card__pic{
   border-radius: 15px 15px 0 0;
-  height: 40%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
  }
 
