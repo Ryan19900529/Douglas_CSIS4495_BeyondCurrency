@@ -107,8 +107,8 @@
   .new__request__form .form__subtitles{
     font-size: 23px;
     font-weight: 500;
-    margin-top:50px;
-    margin-bottom: 20px;
+    margin-top:20px;
+    margin-bottom: 10px;
   }
 
   select{
@@ -117,6 +117,39 @@
     border: 1px solid rgb(230, 230, 230);
     border-radius: 5px;
     padding: 5px;
+  }
+
+  .selected-skill-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 3px;
+}
+
+.selected-skill {
+    padding: 5px 10px;
+    background-color: rgba(5, 82, 64, 0.5);
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 10px 15px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.delete-button {
+    position: absolute;
+    top: -8px;
+    right: 11px;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+  .new__request__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
 .new__request__form form input{
@@ -155,12 +188,37 @@
 }
 
 .new__request__form .upload__image__btn:hover{
+    cursor: pointer;
     background-color: rgba(5, 82, 54, 0.1);
 }
 
 .new__request__form .upload__image__btn:active{
     background-color: rgba(5, 82, 64, 0.2);
 }
+
+
+.thumbnail-container {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.thumbnail-container img {
+  max-width: 200px;
+  display: block;
+}
+
+.image-delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #f00;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
 
 .new__request__form p{
     font-size: 14px;
@@ -188,6 +246,10 @@
     font-weight: 600;
     color: white;
     letter-spacing: 1px;
+}
+
+.request__bottom__btn button:hover{
+  cursor: pointer;
 }
 
 
