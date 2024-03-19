@@ -24,6 +24,16 @@ public class PostController {
         return "post_processing";
     }
 
+    @GetMapping("/post_edit")
+    public String displayEditPost(Model model){
+        return "post_edit";
+    }
+
+    @GetMapping("/post_new")
+    public String displayNewPost(Model model){
+        return "post_new";
+    }
+
     @PostMapping("/post_processing")
     public String displayProcessingPost2(Model model){
         return "post_processing";
