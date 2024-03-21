@@ -192,6 +192,15 @@
               <option value="painting">Painting</option>
             </select>
           </div>
+          <div style="margin-top: 20px" class="form__subtitles">
+            Upload Images (Optional)
+          </div>
+          <button id="uploadImageBtn" class="upload__image__btn" type="button">
+            CHOOSE IMAGE
+          </button>
+          <p class="sizeText">Max upload size: 10MB.</p>
+          <div id="thumbnailContainer"></div>
+
           <div class="buttonWrap">
             <a href="" class="button register__button register__button--yet">
               Not yet
@@ -207,6 +216,53 @@
       </section>
     </main>
     <footer></footer>
-    <script></script>
+    <script>
+      // upload image locally
+      document
+        .getElementById("uploadImageBtn")
+        .addEventListener("click", function () {
+          var input = document.createElement("input");
+          input.type = "file";
+
+          input.accept = "image/*";
+
+          input.addEventListener("change", function (event) {
+            var file = event.target.files[0];
+
+            if (file.size > 10 * 1024 * 1024) {
+              alert("The picture you choosed exceeds 10MB!");
+              return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function (event) {
+              var thumbnailContainer =
+                document.getElementById("thumbnailContainer");
+
+              var container = document.createElement("div");
+              container.className = "thumbnail-container";
+
+              var imgElement = document.createElement("img");
+              imgElement.src = event.target.result;
+              imgElement.alt = "Thumbnail";
+
+              var deleteButton = document.createElement("button");
+              deleteButton.textContent = "x";
+              deleteButton.className = "image-delete-button";
+              deleteButton.addEventListener("click", function () {
+                thumbnailContainer.removeChild(container);
+              });
+
+              container.appendChild(imgElement);
+              container.appendChild(deleteButton);
+
+              thumbnailContainer.appendChild(container);
+            };
+            reader.readAsDataURL(file);
+          });
+
+          input.click();
+        });
+    </script>
   </body>
 </html>

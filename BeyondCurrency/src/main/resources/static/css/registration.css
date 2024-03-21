@@ -65,7 +65,8 @@
 .main__section__field-website-label,
 .main__section__field-skill1-label,
 .main__section__field-skill2-label,
-.main__section__field-skill3-label
+.main__section__field-skill3-label,
+.form__subtitles
 {
   color: #055240;
   font-weight: bold;
@@ -166,3 +167,53 @@
   box-shadow: none; 
 }
 
+
+.upload__image__btn{
+  width: 230px;
+  height: 80px;
+  border: 2px solid rgba(5, 82, 64, 0.3);
+  font-weight: 500;
+  color: rgba(5, 82, 64, 1);
+  letter-spacing: 1px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.upload__image__btn:hover{
+  cursor: pointer;
+  background-color: rgba(5, 82, 54, 0.1);
+}
+
+.upload__image__btn:active{
+  background-color: rgba(5, 82, 64, 0.2);
+}
+
+
+.thumbnail-container {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.thumbnail-container img {
+  max-width: 200px;
+  display: block;
+}
+
+.image-delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #f00;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.sizeText {
+  font-size: 14px;
+  font-weight: 400;
+  color: #b1b9c3;
+}
