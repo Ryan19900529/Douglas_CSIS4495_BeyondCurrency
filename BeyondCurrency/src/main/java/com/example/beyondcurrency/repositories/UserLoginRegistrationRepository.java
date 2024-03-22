@@ -29,4 +29,47 @@ public class UserLoginRegistrationRepository {
 
         return results;
     }
+
+    public long addOne(UserModel newUser) {
+        long result = 0;
+
+        if(newUser.getImageUrl()==null){
+            result = jdbcTemplate.update(
+                    "INSERT INTO users (first_name, last_name, password, phone, date_of_birth, email, language_1, language_2, website_url, skill_1, skill_2, skill_3) " +
+                            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                    newUser.getFirstName(),
+                    newUser.getLastName(),
+                    newUser.getPassword(),
+                    newUser.getPhone(),
+                    newUser.getDob(),
+                    newUser.getEmail(),
+                    newUser.getLanguage1(),
+                    (newUser.getLanguage2() != null) ? newUser.getLanguage2() : null,
+                    (newUser.getWebsite() != null) ? newUser.getWebsite() : null,
+                    newUser.getSkill1(),
+                    (newUser.getSkill2() != "a") ? newUser.getSkill2() : null,
+                    (newUser.getSkill3() != "a") ? newUser.getSkill3() : null
+            );
+        } else {
+            result = jdbcTemplate.update(
+                    "INSERT INTO users (first_name, last_name, password, phone, date_of_birth, email, language_1, language_2, website_url, image_url, skill_1, skill_2, skill_3) " +
+                            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    newUser.getFirstName(),
+                    newUser.getLastName(),
+                    newUser.getPassword(),
+                    newUser.getPhone(),
+                    newUser.getDob(),
+                    newUser.getEmail(),
+                    newUser.getLanguage1(),
+                    (newUser.getLanguage2() != null) ? newUser.getLanguage2() : null,
+                    (newUser.getWebsite() != null) ? newUser.getWebsite() : null,
+                    (newUser.getImageUrl() != null) ? newUser.getImageUrl() : null,
+                    newUser.getSkill1(),
+                    (newUser.getSkill2() != null) ? newUser.getSkill2() : null,
+                    (newUser.getSkill3() != null) ? newUser.getSkill3() : null
+            );
+        }
+
+        return result;
+    }
 }

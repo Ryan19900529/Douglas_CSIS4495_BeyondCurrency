@@ -17,7 +17,7 @@
     <main class="main main--registration">
       <section class="main__section-register">
         <div class="main__section__field-title">Finish signing up</div>
-        <form action="" method="POST" class="main__section-registerForm">
+        <form action="#" method="POST" class="main__section-registerForm" th:action="@{/registration/home}" th:object="${NewRegUser}" enctype="multipart/form-data">
           <div class="main__section__field-fullName">
             <div class="main__section__field-firstName">
               <label
@@ -26,6 +26,7 @@
                 >First Name</label
               >
               <input
+                th:field="*{firstName}"
                 type="text"
                 class="main__section__field-firstName-input"
                 name="firstName"
@@ -39,6 +40,7 @@
                 >Last Name</label
               >
               <input
+                th:field="*{lastName}"
                 type="text"
                 class="main__section__field-lastName-input"
                 name="lastName"
@@ -52,6 +54,7 @@
             <label class="main__section__field-DOB-label" for="dob"
               >Date of Birth</label
             ><input
+              th:field="*{dob}"
               type="date"
               class="main__section__field-DOB-input"
               name="dob"
@@ -59,23 +62,24 @@
               required
             />
           </div>
-          <div class="main__section__field-address">
-            <label class="main__section__field-address-label" for="address"
-              >Address</label
-            >
-            <input
-              type="text"
-              class="main__section__field-address-input"
-              name="address"
-              id="address"
-              required
-            />
-          </div>
+<!--          <div class="main__section__field-address">-->
+<!--            <label class="main__section__field-address-label" for="address"-->
+<!--              >Address</label-->
+<!--            >-->
+<!--            <input-->
+<!--              type="text"-->
+<!--              class="main__section__field-address-input"-->
+<!--              name="address"-->
+<!--              id="address"-->
+<!--              required-->
+<!--            />-->
+<!--          </div>-->
           <div class="main__section__field-email">
             <label class="main__section__field-email-label" for="email"
             >Email</label
             >
             <input
+                    th:field="*{email}"
                     type="email"
                     class="main__section__field-email-input"
                     name="email"
@@ -88,6 +92,7 @@
             >Phone Number</label
             >
             <input
+                    th:field="*{phone}"
                     type="text"
                     class="main__section__field-phone-input"
                     name="phone"
@@ -100,6 +105,7 @@
             >Password</label
             >
             <input
+                    th:field="*{password}"
                     type="password"
                     class="main__section__field-password-input"
                     name="password"
@@ -107,23 +113,24 @@
                     required
             />
           </div>
-          <div class="main__section__field-ConPass">
-            <label class="main__section__field-ConPass-label" for="conPass"
-            >Confirm Password</label
-            >
-            <input
-                    type="password"
-                    class="form-control main__section__field-ConPass-input"
-                    name="conPass"
-                    id="conPass"
-                    required
-            />
-          </div>
+<!--          <div class="main__section__field-ConPass">-->
+<!--            <label class="main__section__field-ConPass-label" for="conPass"-->
+<!--            >Confirm Password</label-->
+<!--            >-->
+<!--            <input-->
+<!--                    type="password"-->
+<!--                    class="form-control main__section__field-ConPass-input"-->
+<!--                    name="conPass"-->
+<!--                    id="conPass"-->
+<!--                    required-->
+<!--            />-->
+<!--          </div>-->
           <div class="main__section__field-website">
             <label class="main__section__field-website-label" for="website"
             >Website (Optional)</label
             >
             <input
+                    th:field="*{website}"
                     type="text"
                     class="main__section__field-website-input"
                     name="website"
@@ -135,6 +142,7 @@
             >First Language</label
             >
             <input
+                    th:field="*{language1}"
                     type="text"
                     class="main__section__field-language1-input"
                     name="language1"
@@ -147,6 +155,7 @@
             >Second Language (Optional)</label
             >
             <input
+                    th:field="*{language2}"
                     type="text"
                     class="main__section__field-language2-input"
                     name="language2"
@@ -158,12 +167,13 @@
               >Skill 1</label
             >
             <select
+                    th:field="*{skill1}"
               name="skill1"
               id="skill1"
               class="main__section__field-skill1-input"
               required
             >
-              <option style="display: none"></option>
+              <option style="display: none" value=""></option>
               <option value="assembly">Assembly</option>
               <option value="mounting">Mounting</option>
               <option value="moving">Moving</option>
@@ -179,11 +189,12 @@
               >Skill 2</label
             >
             <select
+                    th:field="*{skill2}"
               name="skill2"
               id="skill2"
               class="main__section__field-skill2-input"
             >
-              <option style="display: none"></option>
+              <option style="display: none" value=""></option>
               <option value="assembly">Assembly</option>
               <option value="mounting">Mounting</option>
               <option value="moving">Moving</option>
@@ -198,11 +209,12 @@
               >Skill 3</label
             >
             <select
+                    th:field="*{skill3}"
               name="skill3"
               id="skill3"
               class="main__section__field-skill3-input"
             >
-              <option style="display: none"></option>
+              <option style="display: none" value=""></option>
               <option value="assembly">Assembly</option>
               <option value="mounting">Mounting</option>
               <option value="moving">Moving</option>
@@ -222,7 +234,7 @@
           <div id="thumbnailContainer"></div>
 
           <div class="buttonWrap">
-            <a href="" class="button register__button register__button--yet">
+            <a th:href="@{/login}" class="button register__button register__button--yet">
               Not yet
             </a>
             <button
@@ -241,32 +253,33 @@
       document
               .getElementById("uploadImageBtn")
               .addEventListener("click", function () {
-                var input = document.createElement("input");
+                let input = document.createElement("input");
                 input.type = "file";
-
+                input.name = "imageUrl";
                 input.accept = "image/*";
+                input.setAttribute("data-th-field", "*{imageUrl}"); // Custom attribute to hold Thymeleaf field expression
 
                 input.addEventListener("change", function (event) {
-                  var file = event.target.files[0];
+                  let file = event.target.files[0];
 
                   if (file.size > 10 * 1024 * 1024) {
                     alert("The picture you choosed exceeds 10MB!");
                     return;
                   }
 
-                  var reader = new FileReader();
+                  let reader = new FileReader();
                   reader.onload = function (event) {
-                    var thumbnailContainer =
+                    let thumbnailContainer =
                             document.getElementById("thumbnailContainer");
 
-                    var container = document.createElement("div");
+                    let container = document.createElement("div");
                     container.className = "thumbnail-container";
 
-                    var imgElement = document.createElement("img");
+                    let imgElement = document.createElement("img");
                     imgElement.src = event.target.result;
                     imgElement.alt = "Thumbnail";
 
-                    var deleteButton = document.createElement("button");
+                    let deleteButton = document.createElement("button");
                     deleteButton.textContent = "x";
                     deleteButton.className = "image-delete-button";
                     deleteButton.addEventListener("click", function () {

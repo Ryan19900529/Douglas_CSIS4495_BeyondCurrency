@@ -1,5 +1,7 @@
 package com.example.beyondcurrency.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class UserModel {
@@ -9,6 +11,7 @@ public class UserModel {
     private String lastName;
     private String password;
     private String phone;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
     private String email;
     private String language1;
