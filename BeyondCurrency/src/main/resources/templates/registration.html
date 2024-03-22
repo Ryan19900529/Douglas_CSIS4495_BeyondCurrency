@@ -11,7 +11,7 @@
   </head>
   <body>
     <header class="header">
-      <a th:href="@{/main}" class="logo__link"><img class="header__img" src="./img/logo.png" alt="logo" /></a>
+      <a th:href="@{/main}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
       <p class="header__title">Beyond Currency</p>
     </header>
     <main class="main main--registration">
@@ -128,6 +128,29 @@
                     class="main__section__field-website-input"
                     name="website"
                     id="website"
+            />
+          </div>
+          <div class="main__section__field-language1">
+            <label class="main__section__field-language1-label" for="language1"
+            >First Language</label
+            >
+            <input
+                    type="text"
+                    class="main__section__field-language1-input"
+                    name="language1"
+                    id="language1"
+                    required
+            />
+          </div>
+          <div class="main__section__field-language2">
+            <label class="main__section__field-language2-label" for="language2"
+            >Second Language (Optional)</label
+            >
+            <input
+                    type="text"
+                    class="main__section__field-language2-input"
+                    name="language2"
+                    id="language2"
             />
           </div>
           <div class="main__section__field-skill1">
