@@ -17,7 +17,7 @@
     <main class="main main--registration">
       <section class="main__section-register">
         <div class="main__section__field-title">Finish signing up</div>
-        <form action="#" method="POST" class="main__section-registerForm" th:action="@{/registration/home}" th:object="${NewRegUser}" enctype="multipart/form-data">
+        <form action="#" method="POST" class="main__section-registerForm" th:action="@{/registration/home}" th:object="${NewRegUser}">
           <div class="main__section__field-fullName">
             <div class="main__section__field-firstName">
               <label
@@ -257,7 +257,8 @@
                 input.type = "file";
                 input.name = "imageUrl";
                 input.accept = "image/*";
-                input.setAttribute("data-th-field", "*{imageUrl}"); // Custom attribute to hold Thymeleaf field expression
+                // Custom attribute to hold Thymeleaf field expression
+                // input.setAttribute("data-th-field", "*{imageUrl}");
 
                 input.addEventListener("change", function (event) {
                   let file = event.target.files[0];
