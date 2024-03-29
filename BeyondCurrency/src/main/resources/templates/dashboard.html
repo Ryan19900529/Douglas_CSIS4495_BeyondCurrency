@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyond Currency - Your Dashboard!</title>
+  <link rel="icon" type="image/png" href="/img/logo.png" />
+
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/media.css" />
+<!--  for header-->
+  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <!--  for header-->
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/font-awesome.min.css" />
+</head>
+
+<body>
+<header class="header">
+  <div class="header__left">
+    <a th:href="@{/}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
+    <p class="header__title">Beyond Currency</p>
+  </div>
+
+  <div class="header__right">
+    <div class="header__searchbar">
+      <form action="" method="get">
+        <img class="header__searchbar-icon" src="/svg/search.svg" />
+        <input type="text" name="keyword" placeholder="Search" />
+      </form>
+    </div>
+    <div class="header__notification">
+      <div class="notifi-dot"></div>
+      <div class="icon-bell">
+        <img class="icon-bell-image" id="bell" src="/img/bell.png" alt="">
+      </div>
+      <ul class="notifi-box" id="box">
+        <li class="notifi-item">
+          <img class="notifi-photo" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
+          <p>James applied to your job "Seeking Assistance for House Painting Project".</p>
+          <div onclick="">
+            <img class="notifi-close" src="/svg/close-black.svg" alt="">
+          </div>
+        </li>
+        <li class="notifi-item">
+          <img class="notifi-photo" src="/img/women.jpg" alt="">
+          <p>Amber applied to your job "Seeking Assistance for House Painting Project".</p>
+          <div onclick="">
+            <img class="notifi-close" src="/svg/close-black.svg" alt="">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <a class="header__savedTalent" th:href="@{/talent}"
+    ><img
+            class="header__savedTalent-icon"
+            src="/svg/savedTalent.svg"
+    /></a>
+    <a class="header__protfolio" th:href="@{/dashboard}"
+    ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
+    /></a>
+  </div>
+</header>
+<main>
+  <div class="main__container-dashboard">
+    <div class="main__title">
+      <p style="font-size: 2.5rem;">Workspace</p>
+      <a th:href="@{/post_new}" class="main__title-button">
+        <img src="/svg/add.svg" alt="" />
+        Post a Request
+      </a>
+    </div>
+    <div style="display: flex;margin-left: 120px;margin-top: 10px;">
+      <label class="main__title-filter-label" for="filter"
+      >Filter status</label
+      >
+      <select
+              name="filter"
+              id="filter"
+              class="main__title-filter--input"
+              required
+      >
+        <option value="all">All</option>
+        <option value="open">Open</option>
+        <option value="filled">Filled</option>
+        <option value="closed">Closed</option>
+      </select>
+    </div>
+    <div class="swiper mySwiper main__card-container--post">
+      <div class="swiper-wrapper content">
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/Painting.webp" alt=""/>
+          <p class="p1">Seeking Assistance for House Painting Project.</p>
+          <p class="status-open">Open</p>
+          <p class="applicant">You have 2 new applicants</p>
+          <a th:href="@{/post_poster_view}" class="review"><button class="review-btn">Review applicants</button></a>
+        </div>
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
+          <p class="p1">Cut grass in the garden.</p>
+          <p class="status-filled">Filled</p>
+          <p class="applicant">You have 2 new applicants</p>
+        </div>
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/lawn.webp" alt=""/>
+          <p class="p1">Cut grass in the garden.</p>
+          <p class="status-closed">Closed</p>
+          <p class="applicant">You have 2 new applicants</p>
+        </div>
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
+          <p class="p1">Cut grass in the garden.</p>
+          <p class="status-open">Open</p>
+          <p class="applicant">You have 2 new applicants</p>
+          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
+        </div>
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
+          <p class="p1">Cut grass in the garden.</p>
+          <p class="status-open">Open</p>
+          <p class="applicant">You have 2 new applicants</p>
+          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
+        </div>
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
+          <p class="p1">Cut grass in the garden.</p>
+          <p class="status-open">Open</p>
+          <p class="applicant">You have 2 new applicants</p>
+          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
+        </div>
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
+          <p class="p1">Cut grass in the garden.</p>
+          <p class="status-open">Open</p>
+          <p class="applicant">You have 2 new applicants</p>
+          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
+        </div>
+        <div class="swiper-slide main__card">
+          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
+          <p class="p1">Cut grass in the garden.</p>
+          <p class="status-open">Open</p>
+          <p class="applicant">You have 2 new applicants</p>
+          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
+        </div>
+      </div>
+      <div class="swiper-button-next swiper-navBtn"></div>
+      <div class="swiper-button-prev swiper-navBtn"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="swiper mySwiper main__card-container--demand">
+      <div class="swiper-wrapper content">
+        <div class="swiper-slide main__card">
+          <a th:href="@{/post_processing}" style="cursor: pointer"
+          ><img class="img-service" src="/img/lawn.webp" alt=""
+          /></a>
+          <p class="p1">Cut grass in the garden.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/man.jpg" alt="" />
+            <a href="">Matteo Grasso</a>
+          </div>
+        </div>
+        <div class="swiper-slide main__card">
+          <a href="" style="cursor: pointer"
+          ><img
+                  class="img-service"
+                  src="/img/plumbing.jpg"
+                  alt=""
+          /></a>
+          <p class="p1">Drains leaking.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/women.jpg" alt="" />
+            <a href="">Sofia Grassini</a>
+          </div>
+        </div>
+        <div class="swiper-slide main__card">
+          <a href="" style="cursor: pointer"
+          ><img class="img-service" src="/img/lawn.webp" alt=""
+          /></a>
+          <p class="p1">Cut grass in the garden.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/man.jpg" alt="" />
+            <a href="">Matteo Grasso</a>
+          </div>
+        </div>
+        <div class="swiper-slide main__card">
+          <a href="" style="cursor: pointer"
+          ><img
+                  class="img-service"
+                  src="/img/plumbing.jpg"
+                  alt=""
+          /></a>
+          <p class="p1">Drains leaking.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/women.jpg" alt="" />
+            <a href="">Sofia Grassini</a>
+          </div>
+        </div>
+        <div class="swiper-slide main__card">
+          <a href="" style="cursor: pointer"
+          ><img
+                  class="img-service"
+                  src="/img/plumbing.jpg"
+                  alt=""
+          /></a>
+          <p class="p1">Drains leaking.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/women.jpg" alt="" />
+            <a href="">Sofia Grassini</a>
+          </div>
+        </div>
+        <div class="swiper-slide main__card">
+          <a href="" style="cursor: pointer"
+          ><img
+                  class="img-service"
+                  src="/img/plumbing.jpg"
+                  alt=""
+          /></a>
+          <p class="p1">Drains leaking.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/women.jpg" alt="" />
+            <a href="">Sofia Grassini</a>
+          </div>
+        </div>
+        <div class="swiper-slide main__card">
+          <a href="" style="cursor: pointer"
+          ><img
+                  class="img-service"
+                  src="/img/plumbing.jpg"
+                  alt=""
+          /></a>
+          <p class="p1">Drains leaking.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/women.jpg" alt="" />
+            <a href="">Sofia Grassini</a>
+          </div>
+        </div>
+        <div class="swiper-slide main__card">
+          <a href="" style="cursor: pointer"
+          ><img
+                  class="img-service"
+                  src="/img/plumbing.jpg"
+                  alt=""
+          /></a>
+          <p class="p1">Drains leaking.</p>
+          <div class="main__card-poster">
+            <img class="img-poster" src="/img/women.jpg" alt="" />
+            <a href="">Sofia Grassini</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next swiper-navBtn"></div>
+      <div class="swiper-button-prev swiper-navBtn"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer__display__area">
+    <div class="footer__follow__link">Follow us on:
+      <a href=""><i class="fa fa-instagram"></i></a>
+      <i>|</i>
+      <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+      <i>|</i>
+      <a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+    </div>
+    <div class="footer__info">
+      <div class="footer__info__discover">Discover
+        <ul>
+          <li><a href="">Become a Tasker</a></li>
+          <li><a href="">Service By City</a></li>
+          <li><a href="">All Services</a></li>
+          <li><a href="">Elite Taskers</a></li>
+          <li><a href="">Help</a></li>
+        </ul>
+      </div>
+      <div class="footer__info__company">Company
+        <ul>
+          <li><a href="">About Us</a></li>
+          <li><a href="">Careers</a></li>
+          <li><a href="">Press</a></li>
+          <li><a href="">Beyond Currency for Good</a></li>
+          <li><a href="">Blog</a></li>
+          <li><a href="">Terms & Privacy</a></li>
+          <li><a href="">About Our Ads</a></li>
+        </ul>
+      </div>
+      <div class="footer__info__download">Apps coming soon
+        <p>Sorry for your inconvenience, our apps<br>are developing.</p>
+        <div class="ios__google__badge">
+          <a href="">
+            <img src="/svg/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="">
+          </a>
+          <a href="">
+            <img id="google__badge" src="/img/google-play-badge.png" alt="">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</footer>
+<script src="/js/base.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

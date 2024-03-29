@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond Currency - Welcome!</title>
+    
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/media.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header__left">
+        <a th:href="@{/main}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
+        <p class="header__title">Beyond Currency</p>
+      </div>
+
+      <div class="header__right">
+        <a class="header__login" th:href="@{/login}">Log in</a>
+        <a class="header__button" th:href="@{/registration}">Become a tasker</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="main__container">
+        <div class="main__slogan">
+          Book trusted help<br />
+          for home tasks
+        </div>
+        <div class="main__searchbar">
+          <form action="" method="GET" style="display: flex">
+            <input type="text" placeholder="What do you need help with?" />
+            <button type="submit">
+              <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                      class="bi bi-search"
+                      viewBox="0 0 16 16"
+              >
+                <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="nav__container">
+        <div class="tab__box">
+          <ul>
+
+            <li class="tab_btn"><img src="/svg/handyman_FILL0_wght200_GRAD0_opsz24.svg" alt="">Assembly</li>
+            <li class="tab_btn"><img src="/svg/tools_power_drill_FILL0_wght200_GRAD0_opsz24.svg" alt="">Mounting</li>
+            <li class="tab_btn"><img src="/svg/local_shipping_FILL0_wght200_GRAD0_opsz24.svg" alt="">Moving</li>
+            <li class="tab_btn"><img src="/svg/cleaning_services_FILL0_wght200_GRAD0_opsz24.svg" alt="">Cleaning</li>
+            <li class="tab_btn"><img src="/svg/nature_FILL0_wght200_GRAD0_opsz24.svg" alt="">Outdoor Help</li>
+            <li class="tab_btn"><img src="/svg/build_FILL0_wght200_GRAD0_opsz24.svg" alt="">Home Repairs</li>
+            <li class="tab_btn"><img src="/svg/format_paint_FILL0_wght200_GRAD0_opsz24.svg" alt="">Painting</li>
+          </ul>
+          <div class="line"></div>
+        </div>
+
+        <div class="content__box">
+          <div class="content">
+            <div class="content__btn">
+              <a>General Furniture Assembly</a>
+              <a>Electrical Appliances Assembly</a>
+            </div>
+            <div class="content__intro">
+              <div class="intro__card">
+                <div class="intro__title">Assembly</div>
+                <div class="intro__points">Assemble or disassemble furniture items by unboxing, building, and any cleanup.</div>
+                <div class="intro__points">Now Trending: Curved sofas, computer desks, and sustainable materials.</div>
+              </div>
+              <div class="intro__img">
+                <img src="/img/assembly.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content__box">
+          <div class="content">
+            <div class="content__btn">
+              <a>General Mounting</a>
+              <a>TV Mounting</a>
+            </div>
+            <div class="content__intro">
+              <div class="intro__card">
+                <div class="intro__title">Mounting</div>
+                <div class="intro__points">Securely mount your TV, shelves, art, mirrors, dressers, and more.</div>
+                <div class="intro__points">Now Trending: Gallery walls, art TVs, and wraparound bookcases.</div>
+              </div>
+              <div class="intro__img">
+                <img src="/img/mounting.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content__box">
+          <div class="content">
+            <div class="content__btn">
+              <a>Help Moving</a>
+              <a>Trash & Furniture Removal</a>
+              <a>Heavy Lifting & Loading</a>
+            </div>
+            <div class="content__intro">
+              <div class="intro__card">
+                <div class="intro__title">Moving</div>
+                <div class="intro__points">Moving help such as packing/unpacking, loading, and lifting heavy items.</div>
+                <div class="intro__points">Now Trending: Single-item moves, apartment moves, and junk removal.</div>
+              </div>
+              <div class="intro__img">
+                <img src="/img/moving.jpeg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content__box">
+          <div class="content">
+            <div class="content__btn">
+              <a>Kitchen Cleaning</a>
+              <a>Bathroom Cleaning</a>
+            </div>
+            <div class="content__intro">
+              <div class="intro__card">
+                <div class="intro__title">Cleaning</div>
+                <div class="intro__points">Clean your home or office; deep clean appliances and other spaces.</div>
+                <div class="intro__points">Now Trending: Eco-friendly products, spring cleaning checklists, and cleaning hacks.</div>
+              </div>
+              <div class="intro__img">
+                <img src="/img/cleaning.jpeg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content__box">
+          <div class="content">
+            <div class="content__btn">
+              <a>Yard Work</a>
+              <a>Lawn Care</a>
+              <a>Snow Removal</a>
+            </div>
+            <div class="content__intro">
+              <div class="intro__card">
+                <div class="intro__title">Outdoor Help</div>
+                <div class="intro__points">Outdoor help like gardening, weeding, gutter cleaning, and snow removal.</div>
+                <div class="intro__points">Now Trending: Native plants, enhanced walkways, and outdoor lighting installation.</div>
+              </div>
+              <div class="intro__img">
+                <img src="/img/lawn.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content__box">
+          <div class="content">
+            <div class="content__btn">
+              <a>Electrical Help</a>
+              <a>Plumbing Help</a>
+              <a>Minor Home Repairs</a>
+              <a>Light Carpentry</a>
+            </div>
+            <div class="content__intro">
+              <div class="intro__card">
+                <div class="intro__title">Home Repairs</div>
+                <div class="intro__points">Home improvements like plumbing, electrical, and appliance installation.</div>
+                <div class="intro__points">Now Trending: Chandeliers, brass faucets, and smart toilets.</div>
+              </div>
+              <div class="intro__img">
+                <img src="/img/home-repairs.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content__box">
+          <div class="content">
+            <div class="content__btn">
+              <a>Indoor Painting</a>
+              <a>Outdoor Painting</a>
+            </div>
+            <div class="content__intro">
+              <div class="intro__card">
+                <div class="intro__title">Painting</div>
+                <div class="intro__points">Paint walls, ceilings, molding, and doors; includes prep and cleanup.</div>
+                <div class="intro__points">Now Trending: Color blocking, stripe details, and statement colors.</div>
+              </div>
+              <div class="intro__img">
+                <img src="/img/painting.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="slogan">
+        <div class="slogan__title">
+          <div class="slogan__title__1">Your satisfaction,&nbsp;</div>
+          <div class="slogan__title__2">guranteed!</div>
+        </div>
+        <div class="slogan__content">
+          <ul>
+            <li>
+              <div class="slogan__subtitle">Happiness Pledge</div>
+              <div class="point">
+                If you’re not satisfied, we’ll work to <br />make it right.
+              </div>
+              <div class="confirmed__mark">
+                <img
+                        src="/svg/verified_user_FILL0_wght200_GRAD0_opsz24.svg"
+                        alt=""
+                />
+                <div class="confirmed__mark__text">Happiness Pledge</div>
+              </div>
+            </li>
+            <li>
+              <div class="slogan__subtitle">Vetted Taskers</div>
+              <div class="point">
+                Taskers are always background <br />checked before joining the
+                platform.
+              </div>
+            </li>
+            <li>
+              <div class="slogan__subtitle">Dedicated Support</div>
+              <div class="point">
+                Friendly service when you need us –<br />
+                every day of the week.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer__display__area">
+        <div class="footer__follow__link">Follow us on:
+          <a href=""><i class="fa fa-instagram"></i></a>
+          <i>|</i>
+          <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+          <i>|</i>
+          <a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+        </div>
+        <div class="footer__info">
+          <div class="footer__info__discover">Discover
+            <ul>
+              <li><a href="">Become a Tasker</a></li>
+              <li><a href="">Service By City</a></li>
+              <li><a href="">All Services</a></li>
+              <li><a href="">Elite Taskers</a></li>
+              <li><a href="">Help</a></li>
+            </ul>
+          </div>
+          <div class="footer__info__company">Company
+            <ul>
+              <li><a href="">About Us</a></li>
+              <li><a href="">Careers</a></li>
+              <li><a href="">Press</a></li>
+              <li><a href="">Beyond Currency for Good</a></li>
+              <li><a href="">Blog</a></li>
+              <li><a href="">Terms & Privacy</a></li>
+              <li><a href="">About Our Ads</a></li>
+            </ul>
+          </div>
+          <div class="footer__info__download">Apps coming soon
+            <p>Sorry for your inconvenience, our apps<br>are developing.</p>
+            <div class="ios__google__badge">
+              <a href="">
+                <img src="/svg/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="">
+              </a>
+              <a href="">
+                <img id="google__badge" src="/img/google-play-badge.png" alt="">
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      </div>
+    </footer>
+    <script src="/js/base.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var firstTab = document.querySelector('.tab_btn');
+        firstTab.click();
+      });
+
+      const tabs = document.querySelectorAll('.tab_btn');
+      const all_content = document.querySelectorAll('.content');
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', (e) => {
+          // Use closest to find the closest ancestor with the class .tab_btn
+          const clickedTab = e.target.closest('.tab_btn');
+          if (!clickedTab) return; // Do nothing if not clicking on .tab_btn
+
+          tabs.forEach((tab) => {
+            tab.classList.remove('active');
+          });
+          clickedTab.classList.add('active');
+
+          var line = document.querySelector('.line');
+          line.style.width = clickedTab.offsetWidth + 'px';
+          line.style.left = clickedTab.offsetLeft + 'px';
+
+          all_content.forEach((content) => {
+            content.classList.remove('active');
+          });
+          all_content[index].classList.add('active');
+        });
+      });
+    </script>
+  </body>
+</html>

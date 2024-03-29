@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond Currency - Registration</title>
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/media.css" />
+    <link rel="stylesheet" href="/css/registration.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a th:href="@{/main}" class="logo__link"><img class="header__img" src="/img/logo.png" alt="logo" /></a>
+      <p class="header__title">Beyond Currency</p>
+    </header>
+    <main class="main main--registration">
+      <section class="main__section-register">
+        <div class="main__section__field-title">Finish signing up</div>
+        <form action="#" method="POST" class="main__section-registerForm" th:action="@{/registration/home}" th:object="${NewRegUser}">
+          <div class="main__section__field-fullName">
+            <div class="main__section__field-firstName">
+              <label
+                class="main__section__field-firstName-label"
+                for="firstName"
+                >First Name</label
+              >
+              <input
+                th:field="*{firstName}"
+                type="text"
+                class="main__section__field-firstName-input"
+                name="firstName"
+                id="firstName"
+                placeholder="John"
+                required
+              />
+            </div>
+            <div class="main__section__field-lastName">
+              <label class="main__section__field-lastName-label" for="firstName"
+                >Last Name</label
+              >
+              <input
+                th:field="*{lastName}"
+                type="text"
+                class="main__section__field-lastName-input"
+                name="lastName"
+                id="lastName"
+                placeholder="Doe"
+                required
+              />
+            </div>
+          </div>
+          <div class="main__section__field-DOB">
+            <label class="main__section__field-DOB-label" for="dob"
+              >Date of Birth</label
+            ><input
+              th:field="*{dob}"
+              type="date"
+              class="main__section__field-DOB-input"
+              name="dob"
+              id="dob"
+              required
+            />
+          </div>
+<!--          <div class="main__section__field-address">-->
+<!--            <label class="main__section__field-address-label" for="address"-->
+<!--              >Address</label-->
+<!--            >-->
+<!--            <input-->
+<!--              type="text"-->
+<!--              class="main__section__field-address-input"-->
+<!--              name="address"-->
+<!--              id="address"-->
+<!--              required-->
+<!--            />-->
+<!--          </div>-->
+          <div class="main__section__field-email">
+            <label class="main__section__field-email-label" for="email"
+            >Email</label
+            >
+            <input
+                    th:field="*{email}"
+                    type="email"
+                    class="main__section__field-email-input"
+                    name="email"
+                    id="email"
+                    required
+            />
+          </div>
+          <div class="main__section__field-phone">
+            <label class="main__section__field-phone-label" for="phone"
+            >Phone Number</label
+            >
+            <input
+                    th:field="*{phone}"
+                    type="text"
+                    class="main__section__field-phone-input"
+                    name="phone"
+                    id="phone"
+                    required
+            />
+          </div>
+          <div class="main__section__field-password">
+            <label class="main__section__field-password-label" for="password"
+            >Password</label
+            >
+            <input
+                    th:field="*{password}"
+                    type="password"
+                    class="main__section__field-password-input"
+                    name="password"
+                    id="password"
+                    required
+            />
+          </div>
+<!--          <div class="main__section__field-ConPass">-->
+<!--            <label class="main__section__field-ConPass-label" for="conPass"-->
+<!--            >Confirm Password</label-->
+<!--            >-->
+<!--            <input-->
+<!--                    type="password"-->
+<!--                    class="form-control main__section__field-ConPass-input"-->
+<!--                    name="conPass"-->
+<!--                    id="conPass"-->
+<!--                    required-->
+<!--            />-->
+<!--          </div>-->
+          <div class="main__section__field-website">
+            <label class="main__section__field-website-label" for="website"
+            >Website (Optional)</label
+            >
+            <input
+                    th:field="*{website}"
+                    type="text"
+                    class="main__section__field-website-input"
+                    name="website"
+                    id="website"
+            />
+          </div>
+          <div class="main__section__field-language1">
+            <label class="main__section__field-language1-label" for="language1"
+            >First Language</label
+            >
+            <input
+                    th:field="*{language1}"
+                    type="text"
+                    class="main__section__field-language1-input"
+                    name="language1"
+                    id="language1"
+                    required
+            />
+          </div>
+          <div class="main__section__field-language2">
+            <label class="main__section__field-language2-label" for="language2"
+            >Second Language (Optional)</label
+            >
+            <input
+                    th:field="*{language2}"
+                    type="text"
+                    class="main__section__field-language2-input"
+                    name="language2"
+                    id="language2"
+            />
+          </div>
+          <div class="main__section__field-skill1">
+            <label class="main__section__field-skill1-label" for="skill1"
+              >Skill 1</label
+            >
+            <select
+                    th:field="*{skill1}"
+              name="skill1"
+              id="skill1"
+              class="main__section__field-skill1-input"
+              required
+            >
+              <option style="display: none" value=""></option>
+              <option value="General Furniture Assembly">General Furniture Assembly</option>
+              <option value="Electrical Appliances Assembly">Electrical Appliances Assembly</option>
+              <option value="General Mounting">General Mounting</option>
+              <option value="TV Mounting">TV Mounting</option>
+              <option value="Help Moving">Help Moving</option>
+              <option value="Trash & Furniture Removal">Trash & Furniture Removal</option>
+              <option value="Heavy Lifting & Loading">Heavy Lifting & Loading</option>
+              <option value="Kitchen Cleaning">Kitchen Cleaning</option>
+              <option value="Bathroom Cleaning">Bathroom Cleaning</option>
+              <option value="Yard Work">Yard Work</option>
+              <option value="Lawn Care">Lawn Care</option>
+              <option value="Snow Removal">Snow Removal</option>
+              <option value="Electrical Help">Electrical Help</option>
+              <option value="Plumbing Help">Plumbing Help</option>
+              <option value="Minor Home Repairs">Minor Home Repairs</option>
+              <option value="Light Carpentry">Light Carpentry</option>
+              <option value="Indoor Painting">Indoor Painting</option>
+              <option value="Outdoor Painting">Outdoor Painting</option>
+            </select>
+          </div>
+
+          <div class="main__section__field-skill2">
+            <label class="main__section__field-skill2-label" for="skill2"
+              >Skill 2</label
+            >
+            <select
+                    th:field="*{skill2}"
+              name="skill2"
+              id="skill2"
+              class="main__section__field-skill2-input"
+            >
+              <option style="display: none" value=""></option>
+              <option value="General Furniture Assembly">General Furniture Assembly</option>
+              <option value="Electrical Appliances Assembly">Electrical Appliances Assembly</option>
+              <option value="General Mounting">General Mounting</option>
+              <option value="TV Mounting">TV Mounting</option>
+              <option value="Help Moving">Help Moving</option>
+              <option value="Trash & Furniture Removal">Trash & Furniture Removal</option>
+              <option value="Heavy Lifting & Loading">Heavy Lifting & Loading</option>
+              <option value="Kitchen Cleaning">Kitchen Cleaning</option>
+              <option value="Bathroom Cleaning">Bathroom Cleaning</option>
+              <option value="Yard Work">Yard Work</option>
+              <option value="Lawn Care">Lawn Care</option>
+              <option value="Snow Removal">Snow Removal</option>
+              <option value="Electrical Help">Electrical Help</option>
+              <option value="Plumbing Help">Plumbing Help</option>
+              <option value="Minor Home Repairs">Minor Home Repairs</option>
+              <option value="Light Carpentry">Light Carpentry</option>
+              <option value="Indoor Painting">Indoor Painting</option>
+              <option value="Outdoor Painting">Outdoor Painting</option>
+            </select>
+          </div>
+          <div class="main__section__field-skill3">
+            <label class="main__section__field-skill3-label" for="skill3"
+              >Skill 3</label
+            >
+            <select
+                    th:field="*{skill3}"
+              name="skill3"
+              id="skill3"
+              class="main__section__field-skill3-input"
+            >
+              <option style="display: none" value=""></option>
+              <option value="General Furniture Assembly">General Furniture Assembly</option>
+              <option value="Electrical Appliances Assembly">Electrical Appliances Assembly</option>
+              <option value="General Mounting">General Mounting</option>
+              <option value="TV Mounting">TV Mounting</option>
+              <option value="Help Moving">Help Moving</option>
+              <option value="Trash & Furniture Removal">Trash & Furniture Removal</option>
+              <option value="Heavy Lifting & Loading">Heavy Lifting & Loading</option>
+              <option value="Kitchen Cleaning">Kitchen Cleaning</option>
+              <option value="Bathroom Cleaning">Bathroom Cleaning</option>
+              <option value="Yard Work">Yard Work</option>
+              <option value="Lawn Care">Lawn Care</option>
+              <option value="Snow Removal">Snow Removal</option>
+              <option value="Electrical Help">Electrical Help</option>
+              <option value="Plumbing Help">Plumbing Help</option>
+              <option value="Minor Home Repairs">Minor Home Repairs</option>
+              <option value="Light Carpentry">Light Carpentry</option>
+              <option value="Indoor Painting">Indoor Painting</option>
+              <option value="Outdoor Painting">Outdoor Painting</option>
+            </select>
+          </div>
+          <div style="margin-top: 20px" class="form__subtitles">
+            Upload Images (Optional)
+          </div>
+          <button id="uploadImageBtn" class="upload__image__btn" type="button">
+            CHOOSE IMAGE
+          </button>
+          <p class="sizeText">Max upload size: 10MB.</p>
+          <div id="thumbnailContainer"></div>
+
+          <div class="buttonWrap">
+            <a th:href="@{/login}" class="button register__button register__button--yet">
+              Not yet
+            </a>
+            <button
+              type="submit"
+              class="button register__button register__button--done"
+            >
+              I am ready!
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer></footer>
+    <script>
+      // upload image locally
+      document
+              .getElementById("uploadImageBtn")
+              .addEventListener("click", function () {
+                let input = document.createElement("input");
+                input.type = "file";
+                input.name = "imageUrl";
+                input.accept = "image/*";
+                // Custom attribute to hold Thymeleaf field expression
+                // input.setAttribute("data-th-field", "*{imageUrl}");
+
+                input.addEventListener("change", function (event) {
+                  let file = event.target.files[0];
+
+                  if (file.size > 10 * 1024 * 1024) {
+                    alert("The picture you choosed exceeds 10MB!");
+                    return;
+                  }
+
+                  let reader = new FileReader();
+                  reader.onload = function (event) {
+                    let thumbnailContainer =
+                            document.getElementById("thumbnailContainer");
+
+                    let container = document.createElement("div");
+                    container.className = "thumbnail-container";
+
+                    let imgElement = document.createElement("img");
+                    imgElement.src = event.target.result;
+                    imgElement.alt = "Thumbnail";
+
+                    let deleteButton = document.createElement("button");
+                    deleteButton.textContent = "x";
+                    deleteButton.className = "image-delete-button";
+                    deleteButton.addEventListener("click", function () {
+                      thumbnailContainer.removeChild(container);
+                    });
+
+                    container.appendChild(imgElement);
+                    container.appendChild(deleteButton);
+
+                    thumbnailContainer.appendChild(container);
+                  };
+                  reader.readAsDataURL(file);
+                });
+
+                input.click();
+              });
+    </script>
+  </body>
+</html>

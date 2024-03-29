@@ -1,0 +1,85 @@
+/*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
+
+/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property */
+@import url("https://fonts.googleapis.com/css?family=Chango");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
+
+*:where(:not(iframe, canvas, img, svg, video):not(svg *):not(dialog)) {
+  all: unset;
+  display: revert;
+}
+
+body {
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+  Remove list styles (bullets/numbers)
+  in case you use it with normalize.css
+*/
+ol, ul {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-width: 100%;
+}
+
+/* Removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* change placeholder  */
+::placeholder {
+  color: #9F9F9F; /* Set the desired text color */
+}
+
+input[type="date"] { 
+  position: relative;
+  /* padding-right: 35px; */
+  background: url(img/calendar.png) no-repeat right -0.5px;
+} 
+input[type="date"]::-webkit-clear-button, 
+input[type="date"]::-webkit-inner-spin-button {display: none;} 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+}
+input[type="date"]::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+input[type="date"]:valid::before {
+  display: none;
+}
+input[data-placeholder]::before {
+  color: #9F9F9F;
+}
+
+/* chang dropdown style */
+select {
+  cursor: pointer;
+  background: url(./img/dropdown.png) no-repeat right;
+  background-size: 20px;
+}
+
