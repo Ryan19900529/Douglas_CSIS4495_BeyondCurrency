@@ -68,7 +68,9 @@
 .main__section__field-skill3-label,
 .form__subtitles,
 .main__section__field-language1-label,
-.main__section__field-language2-label
+.main__section__field-language2-label,
+.main__section__field-title2-label,
+.main__section__field-about-label
 {
   color: #055240;
   font-weight: bold;
@@ -89,7 +91,9 @@
 .main__section__field-skill2-input,
 .main__section__field-skill3-input,
 .main__section__field-language1-input,
-.main__section__field-language2-input
+.main__section__field-language2-input,
+.main__section__field-title2-input,
+.main__section__field-about-input
  {
   padding-bottom: 5px;
   border-bottom: 2px solid #055240;
@@ -107,7 +111,9 @@
 .main__section__field-skill2,
 .main__section__field-skill3,
 .main__section__field-language1,
-.main__section__field-language2
+.main__section__field-language2,
+.main__section__field-title2,
+.main__section__field-about
  {
   width: 100%;
   display: flex;

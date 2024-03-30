@@ -1,5 +1,7 @@
 package com.example.beyondcurrency.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ServiceModel {
@@ -9,7 +11,9 @@ public class ServiceModel {
     private String imageUrl;
     private int categoryId;
     private String status;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
     private int posterId;
     private int takerId;

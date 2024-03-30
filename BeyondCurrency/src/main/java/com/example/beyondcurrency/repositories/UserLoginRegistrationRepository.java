@@ -30,6 +30,17 @@ public class UserLoginRegistrationRepository {
         return results;
     }
 
+    public UserModel getUserById(int id) {
+        List<UserModel> users = jdbcTemplate.query("SELECT * FROM users WHERE user_id = ?", new UserMapper(false), id);
+
+        if(users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
+
+
     public long addOne(UserModel newUser) {
         long result = 0;
 
@@ -42,8 +53,8 @@ public class UserLoginRegistrationRepository {
         if(newUser.getImageUrl()==null){
             //user didn't upload image
             result = jdbcTemplate.update(
-                    "INSERT INTO users (first_name, last_name, password, phone, date_of_birth, email, language_1, language_2, website_url, skill_1, category_1_id, skill_2, category_2_id, skill_3, category_3_id) " +
-                            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    "INSERT INTO users (first_name, last_name, password, phone, date_of_birth, email, language_1, language_2, website_url, skill_1, category_1_id, skill_2, category_2_id, skill_3, category_3_id, title, about) " +
+                            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     newUser.getFirstName(),
                     newUser.getLastName(),
                     newUser.getPassword(),
@@ -58,12 +69,14 @@ public class UserLoginRegistrationRepository {
                     (newUser.getSkill2() != null) ? newUser.getSkill2() : null,
                     (newUser.getSkill2() != null) ? categoryIds[1] : 0,
                     (newUser.getSkill3() != null) ? newUser.getSkill3() : null,
-                    (newUser.getSkill3() != null) ? categoryIds[2] : 0
+                    (newUser.getSkill3() != null) ? categoryIds[2] : 0,
+                    (newUser.getTitle() != null) ? newUser.getTitle() : null,
+                    (newUser.getAbout() != null) ? newUser.getAbout() : null
             );
         } else {
             result = jdbcTemplate.update(
-                    "INSERT INTO users (first_name, last_name, password, phone, date_of_birth, email, language_1, language_2, website_url, image_url, skill_1, category_1_id, skill_2, category_2_id, skill_3, category_3_id) " +
-                            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    "INSERT INTO users (first_name, last_name, password, phone, date_of_birth, email, language_1, language_2, website_url, image_url, skill_1, category_1_id, skill_2, category_2_id, skill_3, category_3_id, title, about) " +
+                            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     newUser.getFirstName(),
                     newUser.getLastName(),
                     newUser.getPassword(),
@@ -79,7 +92,9 @@ public class UserLoginRegistrationRepository {
                     (newUser.getSkill2() != null) ? newUser.getSkill2() : null,
                     (newUser.getSkill2() != null) ? categoryIds[1] : 0,
                     (newUser.getSkill3() != null) ? newUser.getSkill3() : null,
-                    (newUser.getSkill3() != null) ? categoryIds[2] : 0
+                    (newUser.getSkill3() != null) ? categoryIds[2] : 0,
+                    (newUser.getTitle() != null) ? newUser.getTitle() : null,
+                    (newUser.getAbout() != null) ? newUser.getAbout() : null
             );
         }
 

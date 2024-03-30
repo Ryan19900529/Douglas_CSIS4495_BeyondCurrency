@@ -162,6 +162,30 @@
                     id="language2"
             />
           </div>
+          <div class="main__section__field-title2">
+            <label class="main__section__field-title2-label" for="title"
+            >Make your title (Optional)</label
+            >
+            <input
+                    th:field="*{title}"
+                    type="text"
+                    class="main__section__field-title2-input"
+                    name="title"
+                    id="title"
+            />
+          </div>
+          <div class="main__section__field-about">
+            <label class="main__section__field-about-label" for="about"
+            >Write something about yourself (Optional)</label
+            >
+            <textarea
+                    th:field="*{about}"
+                    class="main__section__field-about-input"
+                    name="about"
+                    id="about">
+
+            </textarea>
+          </div>
           <div class="main__section__field-skill1">
             <label class="main__section__field-skill1-label" for="skill1"
               >Skill 1</label

@@ -42,7 +42,10 @@ public class UserMapper implements RowMapper<UserModel> {
                     rs.getString("skill_3"),
                     rs.getInt("category_3_id"),
                     rs.getString("trust_score"),
-                    rs.getBoolean("new_notification")
+                    rs.getBoolean("new_notification"),
+                    rs.getString("title"),
+                    rs.getString("about"),
+                    rs.getInt("work_done")
             );
         }
 

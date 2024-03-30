@@ -64,7 +64,7 @@
   </header>
     
     <main>
-      <div class="request__route">
+      <div class="request__route" th:text="${path}">
         Painting -> Indoor Painting
       </div>
 
@@ -80,145 +80,21 @@
         <div class="request__content__box">
           <div class="request__content">
             <ul>
-              <li>
-                <a class="post_link" th:href="@{/post}"><img class="request__card__pic" src="/img/Painting.webp" alt=""></a>
+              <li th:each="card : ${cards}">
+                <a class="post_link" th:href="@{/post}"><img class="request__card__pic" th:src="${card.getImageUrl()}" src="/img/Painting.webp" alt=""></a>
                 <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
+                  <div class="card__title" th:text="${card.getServiceTitle()}"></div>
                   <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
+                    <div class="card__tag" th:text="${card.getSkill1()?: ''}" th:class="${card.getSkill1() == null ? 'hidden' : 'card__tag'}"></div>
+                    <div class="card__tag" th:text="${card.getSkill2()?: ''}" th:class="${card.getSkill2() == null ? 'hidden' : 'card__tag'}"></div>
+                    <div class="card__tag" th:text="${card.getSkill3()?: ''}" th:class="${card.getSkill3() == null ? 'hidden' : 'card__tag'}"></div>
                   </div>
 
                   <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
-                  </div>
-                </div>
-              </li>
 
-              <li>
-                <a class="post_link"><img class="request__card__pic" src="/img/painting.jpg" alt=""></a>
-                <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
-                  <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
-                  </div>
+                    <img class="request__user__pic" th:src="${card.getPosterImageUrl()}" src="/img/man.jpg" alt="">
 
-                  <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a class="post_link"><img class="request__card__pic" src="/img/Painting.webp" alt=""></a>
-                <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
-                  <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
-                  </div>
-
-                  <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a class="post_link"><img class="request__card__pic" src="/img/Painting.webp" alt=""></a>
-                <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
-                  <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
-                  </div>
-
-                  <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a class="post_link"><img class="request__card__pic" src="/img/Painting.webp" alt=""></a>
-                <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
-                  <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
-                  </div>
-
-                  <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a class="post_link"><img class="request__card__pic" src="/img/Painting.webp" alt=""></a>
-                <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
-                  <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
-                  </div>
-
-                  <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a class="post_link"><img class="request__card__pic" src="/img/Painting.webp" alt=""></a>
-                <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
-                  <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
-                  </div>
-
-                  <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a class="post_link"><img class="request__card__pic" src="/img/Painting.webp" alt=""></a>
-                <div class="request__card__content">
-                  <div class="card__title">Seeking Assistance for House Painting Project.</div>
-                  <div class="card__tag__box">
-                    <div class="card__tag">Skilled offered</div>
-                    <div class="card__tag">Painting</div>
-                  </div>
-
-                  <div class="request__user">
-                    
-                    <img class="request__user__pic" src="/img/man.jpg" alt="">
-                    
-                    <div class="request__user__name">Matteo Grasso</div>
+                    <div class="request__user__name" th:text="${card.getFullName()}">Matteo Grasso</div>
                   </div>
                 </div>
               </li>
@@ -232,201 +108,24 @@
           <div class="request__content">
             <div class=""></div>
             <ul class="people__tab">
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
+              <li th:each="user : ${users}">
+                <img class="people__card__saved-icon" src="/img/heart.png" alt="">
+                <a th:href="@{/user/expert}" ><img class="people__card__pic"  th:src="${user.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
+                <div class="people__card__name" th:text="${user.getFirstName() +' '+ user.getLastName()}">Matteo Grasso</div>
                 <div class="people__level__area">
                   <img src="/img/diamond.png" alt="">
                   <div class="people__level">Top Rated</div>
                 </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
+<!--                <div class="expertise" th:text="${user.getTitle()}">-->
+<!--                  Precision Pro-->
+<!--                </div>-->
                 <div class="people__info">
                   <div class="people__trusted__score">
-                    <div class="score">96</div>
+                    <div class="score" th:text="${user.getTrustScore()}">96</div>
                     <div>Score</div>
                   </div>
                   <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <img class="people__card__saved-icon"  src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
+                    <div class="jobs" th:text="${user.getWork_done()}">21</div>
                     Jobs
                   </div>
                 </div>
@@ -486,7 +185,7 @@
     <script src="/js/base.js"></script>
     <script> 
       document.addEventListener('DOMContentLoaded', function () {
-          var firstTab = document.querySelector('.request__tab');
+          let firstTab = document.querySelector('.request__tab');
           firstTab.click();
         });
   
@@ -504,7 +203,7 @@
             });
             clickedTab.classList.add('active');
   
-            var line = document.querySelector('.square');
+            let line = document.querySelector('.square');
             line.style.left = (clickedTab.offsetLeft + 58) + 'px';
   
             all_content.forEach((content) => {
@@ -519,9 +218,9 @@
       displayImages.forEach((displayImage) => {
         displayImage.addEventListener("click", (e) => {
           if (e.target.src.includes("/img/heart.png")) {
-            e.target.src = "./img/heart-filled.png";
+            e.target.src = "/img/heart-filled.png";
           } else {
-            e.target.src = "./img/heart.png";
+            e.target.src = "/img/heart.png";
           }
         });
       });

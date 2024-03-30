@@ -27,11 +27,14 @@ public class UserModel {
     private int category3Id;
     private String trustScore;
     private boolean newNotification;
+    private String title;
+    private String about;
+    private int work_done;
 
     public UserModel() {
     }
 
-    public UserModel(int userId, String firstName, String lastName, String password, String phone, Date dob, String email, String language1, String language2, Date signUpDate, String website, String imageUrl, String skill1, int category1Id, String skill2, int category2Id, String skill3, int category3Id, String trustScore, boolean newNotification) {
+    public UserModel(int userId, String firstName, String lastName, String password, String phone, Date dob, String email, String language1, String language2, Date signUpDate, String website, String imageUrl, String skill1, int category1Id, String skill2, int category2Id, String skill3, int category3Id, String trustScore, boolean newNotification, String title, String about, int work_done) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,6 +55,9 @@ public class UserModel {
         this.category3Id = category3Id;
         this.trustScore = trustScore;
         this.newNotification = newNotification;
+        this.title = title;
+        this.about = about;
+        this.work_done = work_done;
     }
 
     //for login
@@ -220,6 +226,30 @@ public class UserModel {
         this.trustScore = trustScore;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public int getWork_done() {
+        return work_done;
+    }
+
+    public void setWork_done(int work_done) {
+        this.work_done = work_done;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
@@ -243,6 +273,9 @@ public class UserModel {
                 ", category3Id=" + category3Id +
                 ", trustScore='" + trustScore + '\'' +
                 ", newNotification=" + newNotification +
+                ", title='" + title + '\'' +
+                ", about='" + about + '\'' +
+                ", work_done=" + work_done +
                 '}';
     }
 }
