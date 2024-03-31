@@ -38,7 +38,7 @@ public class RequestsController {
         for (ServiceModel service : services){
             if (service.getStatus().equals("open")){
                 UserModel user = userLoginRegistrationRepository.getUserById(service.getPosterId());
-                RequestCardModel card = new RequestCardModel(service.getServiceTitle(), service.getImageUrl(), user.getUserId(), user.getSkill1(), user.getSkill2(), user.getSkill3(), user.getFirstName(), user.getLastName(), user.getImageUrl());
+                RequestCardModel card = new RequestCardModel(service.getServiceId(), service.getServiceTitle(), service.getImageUrl(), user.getUserId(), user.getSkill1(), user.getSkill2(), user.getSkill3(), user.getFirstName(), user.getLastName(), user.getImageUrl());
                 requestCards.add(card);
             }
         }

@@ -1,11 +1,14 @@
 //load more work history
 const loadMore = document.querySelector(".expert__section-history-more");
+const historyItems = document.querySelectorAll(".expert__section-history-contents-li");
 
 let currentItems = 3;
+if (historyItems.length <= currentItems) {
+  loadMore.style.display = "none";
+}
+
 loadMore.addEventListener("click", (e) => {
-  const elementList = [
-    ...document.querySelectorAll(".expert__section-history-contents-li"),
-  ];
+  const elementList = [...historyItems];
   e.target.classList.add("show-loader");
 
   for (let i = currentItems; i < currentItems + 3; i++) {

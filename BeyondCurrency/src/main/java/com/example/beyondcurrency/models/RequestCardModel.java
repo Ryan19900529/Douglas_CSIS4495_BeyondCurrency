@@ -1,8 +1,7 @@
 package com.example.beyondcurrency.models;
 
-import java.util.Date;
-
 public class RequestCardModel {
+    private int serviceId;
     private String serviceTitle;
     private String imageUrl;
     private int posterId;
@@ -12,10 +11,10 @@ public class RequestCardModel {
     private String posterFirstName;
     private String posterLastName;
     private String posterImageUrl;
-    private String fullName;
 
 
-    public RequestCardModel(String serviceTitle, String imageUrl, int posterId, String skill1, String skill2, String skill3, String posterFirstName, String posterLastName, String posterImageUrl) {
+    public RequestCardModel(int serviceId, String serviceTitle, String imageUrl, int posterId, String skill1, String skill2, String skill3, String posterFirstName, String posterLastName, String posterImageUrl) {
+        this.serviceId = serviceId;
         this.serviceTitle = serviceTitle;
         this.imageUrl = imageUrl;
         this.posterId = posterId;
@@ -25,15 +24,6 @@ public class RequestCardModel {
         this.posterFirstName = posterFirstName;
         this.posterLastName = posterLastName;
         this.posterImageUrl = posterImageUrl;
-        this.fullName = this.posterFirstName + " " + this.posterLastName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public String getPosterImageUrl() {
@@ -108,10 +98,19 @@ public class RequestCardModel {
         this.posterLastName = posterLastName;
     }
 
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
+    }
+
     @Override
     public String toString() {
         return "RequestCardModel{" +
-                "serviceTitle='" + serviceTitle + '\'' +
+                "serviceId=" + serviceId +
+                ", serviceTitle='" + serviceTitle + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", posterId=" + posterId +
                 ", skill1='" + skill1 + '\'' +
@@ -119,6 +118,7 @@ public class RequestCardModel {
                 ", skill3='" + skill3 + '\'' +
                 ", posterFirstName='" + posterFirstName + '\'' +
                 ", posterLastName='" + posterLastName + '\'' +
+                ", posterImageUrl='" + posterImageUrl + '\'' +
                 '}';
     }
 }

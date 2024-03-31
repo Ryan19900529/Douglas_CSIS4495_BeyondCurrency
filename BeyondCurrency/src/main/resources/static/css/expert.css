@@ -392,6 +392,7 @@ main {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
+  margin-right: 10px;
 }
 
 .expert__section-skill-lang .skill li {
@@ -410,10 +411,11 @@ main {
 .expert__section-skill-lang .lang li {
   font-weight: 600;
   margin-bottom: 8px;
+  color: #5E6D55;
 }
 
 .expert__section-skill-lang .lang li span{
-  color: #5E6D55;
+  color: black;
 }
 
 .expert__section-about {
@@ -432,7 +434,7 @@ main {
 
 .expert__section-about-p2 {
   line-height: 1.5em;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .expert__section-history {

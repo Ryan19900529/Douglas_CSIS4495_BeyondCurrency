@@ -2,6 +2,7 @@ package com.example.beyondcurrency.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ServiceModel {
@@ -22,6 +23,7 @@ public class ServiceModel {
     private String commentToPoster;
     private int rateToTaker;
     private int rateToPoster;
+    private String historyDate;
 
     public ServiceModel() {
     }
@@ -42,6 +44,16 @@ public class ServiceModel {
         this.commentToPoster = commentToPoster;
         this.rateToTaker = rateToTaker;
         this.rateToPoster = rateToPoster;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+        this.historyDate = dateFormat.format(createDate) + " - " + dateFormat.format(deadline);
+    }
+
+    public String getHistoryDate() {
+        return historyDate;
+    }
+
+    public void setHistoryDate(String historyDate) {
+        this.historyDate = historyDate;
     }
 
     public int getServiceId() {

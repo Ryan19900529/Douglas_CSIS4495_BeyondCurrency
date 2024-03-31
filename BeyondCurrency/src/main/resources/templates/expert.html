@@ -68,7 +68,7 @@
     <main>
       <dialog class="modal" id="modal">
         <div class="modal__top">
-          <h1 class="modal__top-name">Matteo Grasso</h1>
+          <h1 class="modal__top-name" th:text="${expert.getFirstName() + ' ' + expert.getLastName()}">Matteo Grasso</h1>
           <button class="modal__top-button">
             <img src="/img/close.png" alt="">
           </button>
@@ -80,21 +80,21 @@
               <img src="/img/phone.png" alt="">
               <div>
                 <h3>Phone</h3>
-                <p>+1-604-719-2434</p>
+                <p th:text="${expert.getPhone()}">+1-604-719-2434</p>
               </div>
             </li>
             <li>
               <img src="/img/email.png" alt="">
               <div>
                 <h3>Email</h3>
-                <p>fakeemail@example.com</p>
+                <p th:text="${expert.getEmail()}">fakeemail@example.com</p>
               </div>
             </li>
-            <li>
+            <li th:class="${expert.getWebsite() == null ? 'hidden' : ''}">
               <img src="/img/website.png" alt="">
               <div>
                 <h3>Website</h3>
-                <p>https://matteo-portfolio.onrender.com/</p>
+                <p th:text="${expert.getWebsite()}">https://matteo-portfolio.onrender.com/</p>
               </div>
             </li>
           </ul>
@@ -104,279 +104,111 @@
         <div class="expert__section-title-container">
           <div class="expert__section-title title__picGroup">
             <div class="expert__section-title green_dot"></div>
-            <img src="/img/photo-1592334873219-42ca023e48ce.avif" class="expert__section-title title__pic" alt="">
+            <img th:src="${expert.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" class="expert__section-title title__pic" alt="">
           </div>
           <div class="expert__section-title title__nameGroup">
-            <p class="expert__section-title title__nameGroup-name">James White</p>
+            <p class="expert__section-title title__nameGroup-name" th:text="${expert.getFirstName() + ' ' + expert.getLastName()}">James White</p>
             <div class="expert__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
             <div class="expert__section-title title__rateGroup">
               <div class="expert__section-title title__rateGroup-score">
                 <img src="/img/checkmark.png" alt="">
-                <p>96 Trust Score</p></div>
+                <p th:text="${expert.getTrustScore() + ' Trust Score'}">96 Trust Score</p></div>
               <div class="expert__section-title title__rateGroup-rate">
                 <img src="/img/diamond.png" alt=""><p>Top Rated</p></div>
             </div>
           </div>
-          <p class="expert__section-title title__title">Precision Pro | Mounting Maven <br> Green Tasker | Mounting Magician</p>
+          <p class="expert__section-title title__title" th:text="${expert.getTitle()}">Precision Pro | Mounting Maven <br> Green Tasker | Mounting Magician</p>
           <img class="expert__section-title love__icon" id="love__icon" src="/img/love-circled.png" alt="">
-          <button class="expert__section-title contactInfo" id="contactInfo" href="">Contact Info</button>
+          <button class="expert__section-title contactInfo" id="contactInfo">Contact Info</button>
         </div>
         <div class="expert__section-middle-container">
           <div class="expert__section-skill-lang">
             <div class="skill">
               <p>Skills</p>
               <ul>
-                <li>Mounting</li>
-                <li>Landscaping</li>
-                <li>Cleaning</li>
+                <li th:text="${expert.getSkill1()?: ''}">Mounting</li>
+                <li th:text="${expert.getSkill2() != null and #strings.trim(expert.getSkill2()) != '' ? expert.getSkill2() : ''}" th:class="${expert.getSkill2() == null or #strings.trim(expert.getSkill2()) == '' ? 'hidden' : ''}">Landscaping</li>
+                <li th:text="${expert.getSkill3() != null and #strings.trim(expert.getSkill3()) != '' ? expert.getSkill3() : ''}" th:class="${expert.getSkill3() == null or #strings.trim(expert.getSkill3()) == '' ? 'hidden' : ''}">Landscaping</li>
               </ul>
             </div>
             <div class="lang">
               <p>Languages</p>
               <ul>
-                <li>English: <span>Fluent</span></li>
-                <li>Spanish: <span>Intermediate</span></li>
+                <li>
+                  <span th:text="${(expert.getLanguage1()?: '') + ': '}">English: </span>
+                  Fluent
+                </li>
+                <li th:if="${expert.getLanguage2() != null and #strings.trim(expert.getLanguage2()) != ''}">
+                  <span th:text="${expert.getLanguage2()} + ': '"></span>
+                  Intermediate
+                </li>
+<!--                <li th:text="${expert.getLanguage1()?: ''}">English: <span>Fluent</span></li>-->
+<!--                <li th:text="${expert.getLanguage2()?: ''}" th:class="${expert.getLanguage2() == null ? 'hidden' : ''}">Spanish: <span>Intermediate</span></li>-->
               </ul>
             </div>
           </div>
           <div class="expert__section-about">
             <p class="expert__section-about-p1">About</p>
-            <p class="expert__section-about-p2">Meet Matteo Grasso, your all-in-one solution for home improvement needs! As a Mounting Maestro, I bring precision and expertise to every installation project. From mounting shelves and artwork to assembling furniture, I ensure that your belongings are securely in place.
-            <br><br>
-            But that's not all—I'm also a Cleaning Connoisseur, dedicated to creating pristine and organized spaces. Whether it's a thorough deep clean or regular maintenance, I take care of every nook and cranny, leaving your home spotless.
-            <br><br>
-            As a Landscape Lifter, I transform outdoor spaces into beautiful havens. From garden maintenance and lawn care to designing and implementing landscaping projects, I bring a green thumb and creative flair to enhance your property's curb appeal.
-            <br><br>
-            With years of experience and a passion for perfection, I've earned the title of Task Titan. Your satisfaction is my priority, and I pride myself on delivering top-notch service in mounting, cleaning, and landscaping. Choose Matteo Grasso for a reliable and skilled partner in elevating your home environment.</p>
+            <ul th:each="p : ${paragraphList}">
+              <li>
+                <p class="expert__section-about-p2" th:text="${p}" style="margin-bottom: 30px;"></p>
+              </li>
+            </ul>
+<!--            <p class="expert__section-about-p2" th:each="p : ${paragraphList}">Meet Matteo Grasso, your all-in-one solution for home improvement needs! As a Mounting Maestro, I bring precision and expertise to every installation project. From mounting shelves and artwork to assembling furniture, I ensure that your belongings are securely in place.-->
+<!--            <br><br>-->
+<!--            But that's not all—I'm also a Cleaning Connoisseur, dedicated to creating pristine and organized spaces. Whether it's a thorough deep clean or regular maintenance, I take care of every nook and cranny, leaving your home spotless.-->
+<!--            <br><br>-->
+<!--            As a Landscape Lifter, I transform outdoor spaces into beautiful havens. From garden maintenance and lawn care to designing and implementing landscaping projects, I bring a green thumb and creative flair to enhance your property's curb appeal.-->
+<!--            <br><br>-->
+<!--            With years of experience and a passion for perfection, I've earned the title of Task Titan. Your satisfaction is my priority, and I pride myself on delivering top-notch service in mounting, cleaning, and landscaping. Choose Matteo Grasso for a reliable and skilled partner in elevating your home environment.</p>-->
           </div>
         </div>
         <div class="expert__section-history">
           <p class="expert__section-history-title">Work History</p>
           <ul class="expert__section-history-contents">
-            <li class="expert__section-history-contents-li">
-              <p class="expert__section-history-li-title">Yard Work</p>
-              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>
+            <li class="expert__section-history-contents-li" th:each="h : ${history}">
+              <p class="expert__section-history-li-title" th:text="${h.getServiceTitle()}">Yard Work</p>
+              <p class="expert__section-history-li-date" th:text="${h.getHistoryDate()}">Feb 23, 2024 - Feb 25, 2024</p>
               <ul>
-                <li>
+                <li th:each="i : ${#numbers.sequence(1, (expert.getUserId()== h.getPosterId()? h.getRateToPoster() : h.getRateToTaker()))}">
                   <img class="expert__section-history-li-star" src="/img/star.png" alt="">
                 </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
+                <p class="expert__section-history-li-starCount" th:text="${expert.getUserId()== h.getPosterId()? h.getRateToPoster() : h.getRateToTaker()}">8</p>
               </ul>
-              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
+              <p class="expert__section-history-li-comments" th:text="${expert.getUserId()== h.getPosterId()? h.getCommentToPoster() : h.getCommentToTaker()}">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
             </li>
-            <li class="expert__section-history-contents-li">
-              <p class="expert__section-history-li-title">Yard Work</p>
-              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>
-              <ul>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
-              </ul>
-              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
-            </li>
-            <li class="expert__section-history-contents-li">
-              <p class="expert__section-history-li-title">Yard Work</p>
-              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>
-              <ul>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
-              </ul>
-              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
-            </li>
-            <li class="expert__section-history-contents-li">
-              <p class="expert__section-history-li-title">Yard Work</p>
-              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>
-              <ul>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
-              </ul>
-              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
-            </li>
-            <li class="expert__section-history-contents-li">
-              <p class="expert__section-history-li-title">Yard Work</p>
-              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>
-              <ul>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
-              </ul>
-              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
-            </li>
-            <li class="expert__section-history-contents-li">
-              <p class="expert__section-history-li-title">Yard Work</p>
-              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>
-              <ul>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
-              </ul>
-              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
-            </li>
-            <li class="expert__section-history-contents-li">
-              <p class="expert__section-history-li-title">Yard Work</p>
-              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>
-              <ul>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
-              </ul>
-              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
-            </li>
+<!--            <li class="expert__section-history-contents-li">-->
+<!--              <p class="expert__section-history-li-title">Yard Work</p>-->
+<!--              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>-->
+<!--              <ul>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
+<!--                </li>-->
+<!--                <p class="expert__section-history-li-starCount">8</p>-->
+<!--              </ul>-->
+<!--              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>-->
+<!--            </li>-->
           </ul>
           <p class="expert__section-history-more">more</p>
         </div>
