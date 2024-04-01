@@ -18,6 +18,7 @@
     <!--  for header-->
     <link rel="stylesheet" href="/css/post.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
 
   <body>
@@ -73,15 +74,15 @@
           <div style="display: flex;">
             <div class="request__container-left picgroup">
               <div class="request__container-left picgroup__greendot"></div>
-              <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
+              <img src="/img/man.jpg" th:src="${poster.getImageUrl()}" class="request__container-left picgroup__pic" alt="">
             </div>
             <div class="request__section-title title__nameGroup">
-              <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
+              <p class="request__section-title title__nameGroup-name" th:text="${poster.getFirstName() + ' ' + poster.getLastName()}">Matteo Grasso</p>
               <div class="request__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
               <div class="request__section-title title__rateGroup">
                 <div class="request__section-title title__rateGroup-score">
                   <img src="/img/checkmark.png" alt="">
-                  <p>96 Trust Score</p></div>
+                  <p th:text="${poster.getTrustScore() + ' Trust Score'}">96 Trust Score</p></div>
               </div>
             </div>
           </div>
@@ -89,16 +90,22 @@
             <div class="skill">
               <p>Skills for exchange</p>
               <ul>
-                <li>Mounting</li>
-                <li>Landscaping</li>
-                <li>Cleaning</li>
+                <li th:text="${poster.getSkill1()}">Mounting</li>
+                <li th:text="${poster.getSkill2() != null and #strings.trim(poster.getSkill2()) != '' ? poster.getSkill2() : ''}" th:class="${poster.getSkill2() == null or #strings.trim(poster.getSkill2()) == '' ? 'hidden' : ''}">Landscaping</li>
+                <li th:text="${poster.getSkill3() != null and #strings.trim(poster.getSkill3()) != '' ? poster.getSkill3() : ''}" th:class="${poster.getSkill3() == null or #strings.trim(poster.getSkill3()) == '' ? 'hidden' : ''}">Cleaning</li>
               </ul>
             </div>
             <div class="lang">
               <p>Languages</p>
               <ul>
-                <li>English: <span>Fluent</span></li>
-                <li>Spanish: <span>Intermediate</span></li>
+                <li>
+                  <span th:text="${(poster.getLanguage1()?: '') + ': '}">English: </span>
+                  Fluent
+                </li>
+                <li th:if="${poster.getLanguage2() != null and #strings.trim(poster.getLanguage2()) != ''}">
+                  <span th:text="${poster.getLanguage2()} + ': '"></span>
+                  Intermediate
+                </li>
               </ul>
             </div>
           </div>
@@ -107,21 +114,30 @@
           <div class="top__container">
             <div class="top__container-left">
               <p class="top__container-left-request">REQUEST</p>
-              <p class="top__container-left-date">Offers will be considered until March 2, 2025.</p>
+              <p class="top__container-left-date" th:text="${'Offers will be considered until ' + post.getDeadlineStr()}">Offers will be considered until March 2, 2025.</p>
             </div>
             <div class="top__container-right">
-              <button class="top__container-right-btn">Offer Help</button>
-              <div class="top__container-right-submitted">You made an offer to <span>Matteo Grasso</span>
+              <input class="hidden" id="applicant_id" type="number" th:value="${session.loginUser.getUserId()}"/>
+              <input class="hidden" id="service_id" type="number" th:value="${post.getServiceId()}"/>
+              <input class="hidden" id="poster_id" type="number" th:value="${post.getPosterId()}"/>
+              <input class="hidden" id="is_applied" type="text" th:value="${isApplied}"/>
+              <button class="top__container-right-btn" type="submit">Offer Help</button>
+              <div class="top__container-right-submitted">You made an offer to <span th:text="${poster.getFirstName() + ' ' + poster.getLastName()}">Matteo Grasso</span>
               </div>
             </div>
           </div>
-          <p class="request__title">Seeking Assistance for House Painting Project</p>
-          <img class="request__pic" src="/img/Painting.webp" alt="">
-          <p class="request__content">I'm reaching out because I'm gearing up for a house painting project, and I could really use some helping hands. If you have any experience with painting or just enjoy getting your hands dirty with a bit of DIY, I would be extremely grateful for your assistance.
-          <br><br>
-          The plan is to tackle this project on [specific date and time], and your expertise or company would make the task not only more enjoyable but also much more efficient. I've got all the necessary supplies and paint ready; all we need is a bit of teamwork to transform my house into something fresh and vibrant.
-          <br><br>
-          If you're available or interested, please let me know so we can coordinate the details. Whether it's for an hour or the entire day, any help you can provide will make a huge difference. Of course, I'll make sure there's plenty of refreshments and snacks to keep us energized throughout the day.</p>
+          <p class="request__title" th:text="${post.getServiceTitle()}">Seeking Assistance for House Painting Project</p>
+          <img class="request__pic" th:src="${post.getImageUrl()}" src="/img/Painting.webp" alt="">
+          <ul th:each="p : ${paragraphList}">
+            <li>
+              <p class="request__content" th:text="${p}"></p>
+            </li>
+          </ul>
+<!--          <p class="request__content">I'm reaching out because I'm gearing up for a house painting project, and I could really use some helping hands. If you have any experience with painting or just enjoy getting your hands dirty with a bit of DIY, I would be extremely grateful for your assistance.-->
+<!--          <br><br>-->
+<!--          The plan is to tackle this project on [specific date and time], and your expertise or company would make the task not only more enjoyable but also much more efficient. I've got all the necessary supplies and paint ready; all we need is a bit of teamwork to transform my house into something fresh and vibrant.-->
+<!--          <br><br>-->
+<!--          If you're available or interested, please let me know so we can coordinate the details. Whether it's for an hour or the entire day, any help you can provide will make a huge difference. Of course, I'll make sure there's plenty of refreshments and snacks to keep us energized throughout the day.</p>-->
         </div>
       </div>
     </main>
@@ -173,14 +189,56 @@
       </div>
     </footer>
     <script src="/js/base.js"></script>
+
     <script>
       //toggle btn
-      let offerBtn = document.querySelector(".top__container-right-btn");
-      let madeOffer = document.querySelector(".top__container-right-submitted");
+      // let offerBtn = document.querySelector(".top__container-right-btn");
+      // let madeOffer = document.querySelector(".top__container-right-submitted");
 
-      offerBtn.addEventListener("click", () => {
-        offerBtn.style.display = "none";
-        madeOffer.style.display = "block";
+      // offerBtn.addEventListener("click", (e) => {
+      //   e.preventDefault();
+      //   offerBtn.style.display = "none";
+      //   madeOffer.style.display = "block";
+      // });
+
+      //check if user already applied
+      let isAppliedStr = $('#is_applied').val(); // Retrieve the value as a string
+      let isApplied = JSON.parse(isAppliedStr); // Convert the string to a boolean
+      if(isApplied) {
+        $('.top__container-right-btn').css('display', 'none');
+        $('.top__container-right-submitted').css('display', 'block');
+      }
+
+      $('.top__container-right-btn').click(function (e){
+        e.preventDefault();
+
+        let applicantId = $('#applicant_id').val();
+        let serviceId = $('#service_id').val();
+        let posterId = $('#poster_id').val();
+
+        $.ajax({
+          type: "POST",                      // Request type (POST)
+          url: "/newApplication",           // URL to send the request
+          data: {                           // Data to be sent in the request body
+            applicantId: applicantId,
+            serviceId: serviceId,
+            posterId: posterId
+          },
+          success: function () {            // Callback function for successful request
+            $('.top__container-right-btn').css('display', 'none');
+            $('.top__container-right-submitted').css('display', 'block');
+          },
+          error: function (xhr, status, error) {  // Callback function for error handling
+            console.error("Error:", error);
+          }
+        });
+
+        //the other way
+        // $.post("/newApplication", {applicantId: applicantId, serviceId: serviceId, posterId: posterId}).
+        // done(function (){
+        //   $('.top__container-right-btn').css('display','none');
+        //   $('.top__container-right-submitted').css('display', 'block');
+        // })
       });
     </script>
   </body>

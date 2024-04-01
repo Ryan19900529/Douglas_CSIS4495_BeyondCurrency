@@ -81,7 +81,7 @@
           <div class="request__content">
             <ul>
               <li th:each="card : ${cards}">
-                <a class="post_link" th:href="@{/post/{id}(id=${card.getServiceId()})}"><img class="request__card__pic" th:src="${card.getImageUrl()}" src="/img/Painting.webp" alt=""></a>
+                <a class="post_link" th:href="@{/post/{id}(id=${card.getServiceId()})}" target="_blank"><img class="request__card__pic" th:src="${card.getImageUrl()}" src="/img/Painting.webp" alt=""></a>
                 <div class="request__card__content">
                   <div class="card__title" th:text="${card.getServiceTitle()}"></div>
                   <div class="card__tag__box">
@@ -110,7 +110,7 @@
             <ul class="people__tab">
               <li th:each="user : ${users}">
                 <img class="people__card__saved-icon" src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert/{id}(id=${user.getUserId()})}" ><img class="people__card__pic"  th:src="${user.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
+                <a th:href="@{/user/expert/{id}(id=${user.getUserId()})}" target="_blank"><img class="people__card__pic" th:src="${user.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
                 <div class="people__card__name" th:text="${user.getFirstName() + ' ' + user.getLastName()}">Matteo Grasso</div>
                 <div class="people__level__area">
                   <img src="/img/diamond.png" alt="">

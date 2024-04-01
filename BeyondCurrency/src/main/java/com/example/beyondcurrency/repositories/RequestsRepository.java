@@ -14,8 +14,8 @@ import java.util.List;
 
 @Repository
 public class RequestsRepository {
-    @Resource
-    DataSource dataSource;
+//    @Resource
+//    DataSource dataSource;
     @Resource
     JdbcTemplate jdbcTemplate;
 
@@ -37,16 +37,6 @@ public class RequestsRepository {
         return results;
     }
 
-    public List<UserModel> getUsersByCategoryId(int id) {
-        List<UserModel> results1 = jdbcTemplate.query("SELECT * FROM users WHERE category_1_id = ?", new UserMapper(false), id);
-        List<UserModel> results2 = jdbcTemplate.query("SELECT * FROM users WHERE category_2_id = ?", new UserMapper(false), id);
-        List<UserModel> results3 = jdbcTemplate.query("SELECT * FROM users WHERE category_3_id = ?", new UserMapper(false), id);
-        List<UserModel> results = new ArrayList<>();
-        results.addAll(results1);
-        results.addAll(results2);
-        results.addAll(results3);
 
-        return results;
-    }
 
 }

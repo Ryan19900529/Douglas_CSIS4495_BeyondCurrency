@@ -24,6 +24,7 @@ public class ServiceModel {
     private int rateToTaker;
     private int rateToPoster;
     private String historyDate;
+    private String deadlineStr;
 
     public ServiceModel() {
     }
@@ -46,6 +47,15 @@ public class ServiceModel {
         this.rateToPoster = rateToPoster;
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         this.historyDate = dateFormat.format(createDate) + " - " + dateFormat.format(deadline);
+        this.deadlineStr = dateFormat.format(deadline);
+    }
+
+    public String getDeadlineStr() {
+        return deadlineStr;
+    }
+
+    public void setDeadlineStr(String deadlineStr) {
+        this.deadlineStr = deadlineStr;
     }
 
     public String getHistoryDate() {
@@ -192,8 +202,10 @@ public class ServiceModel {
                 ", exchangeService='" + exchangeService + '\'' +
                 ", commentToTaker='" + commentToTaker + '\'' +
                 ", commentToPoster='" + commentToPoster + '\'' +
-                ", rateToTaker='" + rateToTaker + '\'' +
-                ", rateToPoster='" + rateToPoster + '\'' +
+                ", rateToTaker=" + rateToTaker +
+                ", rateToPoster=" + rateToPoster +
+                ", historyDate='" + historyDate + '\'' +
+                ", deadlineStr='" + deadlineStr + '\'' +
                 '}';
     }
 }

@@ -127,10 +127,11 @@
 .request__section-skill-lang .lang li {
   font-weight: 600;
   margin-bottom: 8px;
+  color: #5E6D55;
 }
 
 .request__section-skill-lang .lang li span{
-  color: #5E6D55;
+  color: black;
 }
 
 

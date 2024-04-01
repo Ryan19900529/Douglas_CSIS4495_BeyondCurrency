@@ -3,18 +3,15 @@ package com.example.beyondcurrency.repositories;
 import com.example.beyondcurrency.models.UserMapper;
 import com.example.beyondcurrency.models.UserModel;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class UserLoginRegistrationRepository {
-    @Resource
-    DataSource dataSource;
+
     @Resource
     JdbcTemplate jdbcTemplate;
 
@@ -39,6 +36,17 @@ public class UserLoginRegistrationRepository {
             return null;
         }
     }
+    public List<UserModel> getUsersByCategoryId(int id) {
+        List<UserModel> results1 = jdbcTemplate.query("SELECT * FROM users WHERE category_1_id = ?", new UserMapper(false), id);
+        List<UserModel> results2 = jdbcTemplate.query("SELECT * FROM users WHERE category_2_id = ?", new UserMapper(false), id);
+        List<UserModel> results3 = jdbcTemplate.query("SELECT * FROM users WHERE category_3_id = ?", new UserMapper(false), id);
+        List<UserModel> results = new ArrayList<>();
+        results.addAll(results1);
+        results.addAll(results2);
+        results.addAll(results3);
+
+        return results;
+    }
 
 
     public long addOne(UserModel newUser) {
@@ -46,10 +54,10 @@ public class UserLoginRegistrationRepository {
 
         int[] categoryIds = getCategoryId(newUser);
 
-        System.out.println(newUser.toString());
-        System.out.println(categoryIds[0]); // Print the first element
-        System.out.println(categoryIds[1]); // Print the second element
-        System.out.println(categoryIds[2]);
+//        System.out.println(newUser.toString());
+//        System.out.println(categoryIds[0]); // Print the first element
+//        System.out.println(categoryIds[1]); // Print the second element
+//        System.out.println(categoryIds[2]);
         if(newUser.getImageUrl()==null){
             //user didn't upload image
             result = jdbcTemplate.update(
@@ -100,6 +108,7 @@ public class UserLoginRegistrationRepository {
 
         return result;
     }
+
 
     public int[] getCategoryId(UserModel userModel){
 

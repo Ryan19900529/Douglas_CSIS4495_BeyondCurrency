@@ -43,7 +43,7 @@ public class RequestsController {
             }
         }
 
-        List<UserModel> users = requestsRepository.getUsersByCategoryId(category);
+        List<UserModel> users = userLoginRegistrationRepository.getUsersByCategoryId(category);
 
         //create path wording
         String path = "";

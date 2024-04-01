@@ -128,7 +128,7 @@
               <ul>
                 <li th:text="${expert.getSkill1()?: ''}">Mounting</li>
                 <li th:text="${expert.getSkill2() != null and #strings.trim(expert.getSkill2()) != '' ? expert.getSkill2() : ''}" th:class="${expert.getSkill2() == null or #strings.trim(expert.getSkill2()) == '' ? 'hidden' : ''}">Landscaping</li>
-                <li th:text="${expert.getSkill3() != null and #strings.trim(expert.getSkill3()) != '' ? expert.getSkill3() : ''}" th:class="${expert.getSkill3() == null or #strings.trim(expert.getSkill3()) == '' ? 'hidden' : ''}">Landscaping</li>
+                <li th:text="${expert.getSkill3() != null and #strings.trim(expert.getSkill3()) != '' ? expert.getSkill3() : ''}" th:class="${expert.getSkill3() == null or #strings.trim(expert.getSkill3()) == '' ? 'hidden' : ''}">Cleaning</li>
               </ul>
             </div>
             <div class="lang">
