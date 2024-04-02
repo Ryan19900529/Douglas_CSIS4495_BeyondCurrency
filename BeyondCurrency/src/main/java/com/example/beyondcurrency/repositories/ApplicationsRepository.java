@@ -31,4 +31,8 @@ public class ApplicationsRepository {
 
         return results;
     }
+
+    public void updateApplicationStatus(int applicationId, int serviceId, String newStatus) {
+        jdbcTemplate.update("UPDATE applications SET status = ? WHERE application_id = ? AND service_id = ?", newStatus, applicationId,serviceId);
+    }
 }

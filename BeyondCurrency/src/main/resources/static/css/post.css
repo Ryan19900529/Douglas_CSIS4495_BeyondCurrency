@@ -216,6 +216,11 @@
   font-size: 1.2rem;
 }
 
+ul:last-child li:last-child .request__content {
+  border-bottom: 1px solid #A7A7A7;
+  padding-bottom: 80px;
+}
+
 footer{
   background: #67727e;
   padding: 25px 0 25px 0;

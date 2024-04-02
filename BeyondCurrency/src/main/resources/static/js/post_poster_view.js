@@ -28,17 +28,28 @@ document.addEventListener("click", function (event) {
   }
 });
 
-//show contact info
+
+// when btn-accept clicked
 const modal = document.getElementById("modal");
-const openModals = document.querySelectorAll(".btn-accept");
+// const openModals = document.querySelectorAll(".btn-accept");
 const closeModal = document.querySelector(".modal__top-button");
 
-for (let i = 0; i < openModals.length; i++) {
-  openModals[i].addEventListener("click", () => {
-    modal.showModal();
-  });
-}
+// for (let i = 0; i < openModals.length; i++) {
+//   openModals[i].addEventListener("click", () => {
+//     modal.showModal();
+//   });
+// }
 
+ $(document).ready(function() {
+   $('.btn-accept').click(function() {
+     let applicantElement = $(this).closest('.applicants li');
+     let applicantId = applicantElement.attr('abbr');
+
+     // Store selected applicant id in hidden form fields
+     $('#selectedApplicantId').val(applicantId);
+     modal.showModal();
+   });
+ });
 closeModal.addEventListener("click", () => {
   modal.close();
 });

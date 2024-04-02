@@ -479,7 +479,10 @@
   margin-top: 30px;
   line-height: 1.5em;
   font-size: 1.2rem;
-  border-bottom: 1px solid  #A7A7A7;
+}
+
+ul:last-child li:last-child .request__content {
+  border-bottom: 1px solid #A7A7A7;
   padding-bottom: 80px;
 }
 

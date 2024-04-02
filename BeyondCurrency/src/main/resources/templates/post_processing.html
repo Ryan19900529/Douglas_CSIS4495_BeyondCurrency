@@ -98,12 +98,12 @@
               <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
             </div>
             <div class="request__section-title title__nameGroup">
-              <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
+              <p class="request__section-title title__nameGroup-name" th:text="${poster.getFirstName() + ' ' + poster.getLastName()}">Matteo Grasso</p>
               <div class="request__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
               <div class="request__section-title title__rateGroup">
                 <div class="request__section-title title__rateGroup-score">
                   <img src="/img/checkmark.png" alt="">
-                  <p>96 Trust Score</p></div>
+                  <p th:text="${poster.getTrustScore() + ' Trust Score'}">96 Trust Score</p></div>
               </div>
             </div>
           </div>
@@ -130,12 +130,12 @@
               <img src="/img/photo-1592334873219-42ca023e48ce.avif" class="request__container-left picgroup__pic" alt="">
             </div>
             <div class="request__section-title title__nameGroup">
-              <p class="request__section-title title__nameGroup-name">James</p>
+              <p class="request__section-title title__nameGroup-name" th:text="${taker.getFirstName() + ' ' + taker.getLastName()}">James</p>
               <div class="request__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
               <div class="request__section-title title__rateGroup">
                 <div class="request__section-title title__rateGroup-score">
                   <img src="/img/checkmark.png" alt="">
-                  <p>96 Trust Score</p></div>
+                  <p th:text="${taker.getTrustScore() + ' Trust Score'}">96 Trust Score</p></div>
               </div>
             </div>
           </div>

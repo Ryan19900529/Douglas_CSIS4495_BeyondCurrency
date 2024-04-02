@@ -14,6 +14,7 @@
     <!--  for header-->
     <link rel="stylesheet" href="/css/post_poster_view.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
 
   <body>
@@ -71,12 +72,14 @@
           </button>
         </div>
         <form class="modal__form" th:action="@{/post_processing}" method="post">
+          <input class="hidden" name="selectedApplicantId" id="selectedApplicantId" type="number"/>
+          <input class="hidden" name="post_id" id="post_id" type="number" th:value="${post.getServiceId()}"/>
           <select name="exchangeSkill" id="modal__form-dropdown" required>
             <option style="display: none"></option>
-            <option value="skill1">Mounting</option>
-            <option value="skill2">Landscaping</option>
-            <option value="skill3">Cleaning</option>
-            <option value="other">Other (please specify in the Note)</option>
+            <option value="skill1" th:value="${poster.getSkill1()}" th:text="${poster.getSkill1()}">Mounting</option>
+            <option value="skill2" th:value="${poster.getSkill2()}" th:text="${poster.getSkill2()}" th:class="${(poster.getSkill2() == null or #strings.trim(poster.getSkill2()) == '') ? 'hidden' : ''}">Landscaping</option>
+            <option value="skill3" th:value="${poster.getSkill3()}" th:text="${poster.getSkill3()}" th:class="${(poster.getSkill3() == null or #strings.trim(poster.getSkill3()) == '') ? 'hidden' : ''}">Cleaning</option>
+<!--            <option value="other">Other (please specify in the Note)</option>-->
           </select>
           <label for="modal__form-note" id="modal__form-noteLabel">Note:</label>
           <textarea name="note" id="modal__form-note" cols="20" rows="10"></textarea>
@@ -87,27 +90,14 @@
         <div class="request__container-left">
           <p class="request__container-left postedby">APPLICANTS</p>
           <ul class="applicants">
-            <li style="display: flex;">
-              <a th:href="@{/user/expert}" style="cursor: pointer"><div class="request__container-left picgroup">
+            <li style="display: flex;" th:each="a: ${relatedApp}" th:abbr="${a.getApplicantId()}">
+              <a th:href="@{/user/expert/{id}(id=${a.getApplicantId()})}" style="cursor: pointer"><div class="request__container-left picgroup">
                 <div class="request__container-left picgroup__greendot"></div>
-                <img src="/img/photo-1592334873219-42ca023e48ce.avif" class="request__container-left picgroup__pic" alt="">
+                <img th:src="${a.getApplicantImage()}" src="/img/photo-1592334873219-42ca023e48ce.avif" class="request__container-left picgroup__pic" alt="">
               </div>
               </a>
               <div class="request__section-title title__nameGroup">
-                <p class="request__section-title title__nameGroup-name">James</p>
-                <div style="display: flex;gap: 10px;">
-                  <button class="btn-accept">Accept</button>
-                  <button class="btn-reject">Reject</button>
-                </div>
-              </div>
-            </li>
-            <li style="display: flex;">
-              <div class="request__container-left picgroup">
-                <div class="request__container-left picgroup__greendot"></div>
-                <img src="/img/women.jpg" class="request__container-left picgroup__pic" alt="">
-              </div>
-              <div class="request__section-title title__nameGroup">
-                <p class="request__section-title title__nameGroup-name">Amber</p>
+                <p class="request__section-title title__nameGroup-name" th:text="${a.getApplicantFirstName() + ' ' + a.getApplicantLastName()}">James</p>
                 <div style="display: flex;gap: 10px;">
                   <button class="btn-accept">Accept</button>
                   <button class="btn-reject">Reject</button>
@@ -120,7 +110,7 @@
           <div class="top__container">
             <div class="top__container-left">
               <p class="top__container-left-request">REQUEST</p>
-              <p class="top__container-left-date">Offers will be considered until March 2, 2025.</p>
+              <p class="top__container-left-date" th:text="${'Offers will be considered until ' + post.getDeadlineStr()}">Offers will be considered until March 2, 2025.</p>
             </div>
             <div class="top__container-right">
               <a th:href="@{/post_edit}">
@@ -130,13 +120,13 @@
               </div>
             </div>
           </div>
-          <p class="request__title">Seeking Assistance for House Painting Project</p>
-          <img class="request__pic" src="/img/Painting.webp" alt="">
-          <p class="request__content">I'm reaching out because I'm gearing up for a house painting project, and I could really use some helping hands. If you have any experience with painting or just enjoy getting your hands dirty with a bit of DIY, I would be extremely grateful for your assistance.
-          <br><br>
-          The plan is to tackle this project on [specific date and time], and your expertise or company would make the task not only more enjoyable but also much more efficient. I've got all the necessary supplies and paint ready; all we need is a bit of teamwork to transform my house into something fresh and vibrant.
-          <br><br>
-          If you're available or interested, please let me know so we can coordinate the details. Whether it's for an hour or the entire day, any help you can provide will make a huge difference. Of course, I'll make sure there's plenty of refreshments and snacks to keep us energized throughout the day.</p>
+          <p class="request__title" th:text="${post.getServiceTitle()}">Seeking Assistance for House Painting Project</p>
+          <img class="request__pic" th:src="${post.getImageUrl()}" src="/img/Painting.webp" alt="">
+          <ul th:each="p : ${paragraphList}">
+            <li>
+              <p class="request__content" th:text="${p}"></p>
+            </li>
+          </ul>
         </div>
       </div>
     </main>

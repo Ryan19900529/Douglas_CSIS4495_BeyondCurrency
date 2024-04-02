@@ -40,4 +40,8 @@ public class PostRepository {
 
         return result;
     }
+
+    public void updateTakerToPost(ServiceModel post, int applicantId, String exchangeSkill, String status) {
+        jdbcTemplate.update("UPDATE services SET taker_id = ?, exchange_service = ?, status = ? WHERE service_id = ?",applicantId, exchangeSkill, status, post.getServiceId());
+    }
 }
