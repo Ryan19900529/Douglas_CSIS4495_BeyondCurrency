@@ -72,12 +72,12 @@
               <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
             </div>
             <div class="request__section-title title__nameGroup">
-              <p class="request__section-title title__nameGroup-name">Matteo Grasso</p>
+              <p class="request__section-title title__nameGroup-name" th:text="${poster.getFirstName() + ' ' + poster.getLastName()}">Matteo Grasso</p>
               <div class="request__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
               <div class="request__section-title title__rateGroup">
                 <div class="request__section-title title__rateGroup-score">
                   <img src="/img/checkmark.png" alt="">
-                  <p>96 Trust Score</p></div>
+                  <p th:text="${poster.getTrustScore() + ' Trust Score'}">96 Trust Score</p></div>
               </div>
             </div>
           </div>
@@ -85,39 +85,18 @@
             <div class="skill">
               <p>Skills for exchange</p>
               <ul>
-                <li>Mounting</li>
+                <li th:text="${post.getExchangeService()}">Mounting</li>
               </ul>
             </div>
             <div class="rate">
               <p class="rate__feedback">Job feedback</p>
               <ul>
-                <li>
+                <li th:each="i : ${#numbers.sequence(1, (post.getRateToTaker() != 0 ? post.getRateToTaker() : 0))}" th:class="${post.getRateToTaker() == 0 ? 'hidden' : ''}">
                   <img class="expert__section-history-li-star" src="/img/star.png" alt="">
                 </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <li>
-                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-                </li>
-                <p class="expert__section-history-li-starCount">8</p>
+                <p class="expert__section-history-li-starCount" th:text="${post.getRateToTaker() != 0 ? post.getRateToTaker() : ''}" th:class="${post.getRateToTaker() == 0 ? 'hidden' : 'expert__section-history-li-starCount'}"></p>
               </ul>
-              <p class="expert__section-history-li-comments">"James did a good job!!"</p>
+              <p class="expert__section-history-li-comments" th:text="${post.getCommentToTaker() != null ? post.getCommentToTaker() : ''}" th:class="${post.getCommentToTaker() == null ? 'hidden' : 'expert__section-history-li-comments'}"></p>
             </div>
           </div>
 
@@ -128,62 +107,41 @@
               <img src="/img/photo-1592334873219-42ca023e48ce.avif" class="request__container-left picgroup__pic" alt="">
             </div>
             <div class="request__section-title title__nameGroup">
-              <p class="request__section-title title__nameGroup-name">James</p>
+              <p class="request__section-title title__nameGroup-name" th:text="${taker.getFirstName() + ' ' + taker.getLastName()}">James</p>
               <div class="request__section-title title__addressGroup"><img src="/img/location.png" alt=""><p>Vancouver, BC V6Z 3G8</p></div>
               <div class="request__section-title title__rateGroup">
                 <div class="request__section-title title__rateGroup-score">
                   <img src="/img/checkmark.png" alt="">
-                  <p>96 Trust Score</p></div>
+                  <p th:text="${taker.getTrustScore() + ' Trust Score'}">96 Trust Score</p></div>
               </div>
             </div>
           </div>
           <div class="rate-taker">
             <p class="rate__feedback" style="margin-top: 40px;">Feedback to the poster</p>
             <ul>
-              <li>
+              <li th:each="i : ${#numbers.sequence(1, (post.getRateToPoster() != 0 ? post.getRateToPoster() : 0))}" th:class="${post.getRateToPoster() == 0 ? 'hidden' : ''}">
                 <img class="expert__section-history-li-star" src="/img/star.png" alt="">
               </li>
-              <li>
-                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-              </li>
-              <li>
-                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-              </li>
-              <li>
-                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-              </li>
-              <li>
-                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-              </li>
-              <li>
-                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-              </li>
-              <li>
-                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-              </li>
-              <li>
-                <img class="expert__section-history-li-star" src="/img/star.png" alt="">
-              </li>
-              <p class="expert__section-history-li-starCount">8</p>
+              <p class="expert__section-history-li-starCount" th:text="${post.getRateToPoster() != 0 ? post.getRateToPoster() : ''}" th:class="${post.getRateToPoster() == 0 ? 'hidden' : 'expert__section-history-li-starCount'}"></p>
             </ul>
-            <p class="expert__section-history-li-comments">"Matteo perfectly finished his mounting service."</p>
+            <p class="expert__section-history-li-comments" th:text="${post.getCommentToPoster() != null ? post.getCommentToPoster() : ''}" th:class="${post.getCommentToPoster() == null ? 'hidden' : 'expert__section-history-li-comments'}"></p>
           </div>
         </div>
         <div class="request__container-right"> 
           <div class="top__container">
             <div class="top__container-left">
               <p class="top__container-left-request">REQUEST</p>
-              <p class="top__container-left-date">Offers will be considered until March 2, 2025.</p>
+              <p class="top__container-left-date" th:text="${'Offers will be considered until ' + post.getDeadlineStr()}">Offers will be considered until March 2, 2025.</p>
             </div>
             
           </div>
-          <p class="request__title">Seeking Assistance for House Painting Project</p>
-          <img class="request__pic" src="/img/Painting.webp" alt="">
-          <p class="request__content">I'm reaching out because I'm gearing up for a house painting project, and I could really use some helping hands. If you have any experience with painting or just enjoy getting your hands dirty with a bit of DIY, I would be extremely grateful for your assistance.
-          <br><br>
-          The plan is to tackle this project on [specific date and time], and your expertise or company would make the task not only more enjoyable but also much more efficient. I've got all the necessary supplies and paint ready; all we need is a bit of teamwork to transform my house into something fresh and vibrant.
-          <br><br>
-          If you're available or interested, please let me know so we can coordinate the details. Whether it's for an hour or the entire day, any help you can provide will make a huge difference. Of course, I'll make sure there's plenty of refreshments and snacks to keep us energized throughout the day.</p>
+          <p class="request__title" th:text="${post.getServiceTitle()}">Seeking Assistance for House Painting Project</p>
+          <img class="request__pic" th:src="${post.getImageUrl()}" src="/img/Painting.webp" alt="">
+          <ul th:each="p : ${paragraphList}">
+            <li>
+              <p class="request__content" th:text="${p}"></p>
+            </li>
+          </ul>
         </div>
       </div>
     </main>

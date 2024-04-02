@@ -71,7 +71,10 @@
           </button>
         </div>
         <form class="modal__form" th:action="@{/post_completed}" method="post">
-          <select name="exchangeSkill" id="modal__form-dropdown" required>
+          <input class="hidden" id="post_id" name="post_id" type="number" th:value="${post.getServiceId()}"/>
+          <input class="hidden" id="taker_id" name="taker_id" type="number" th:value="${post.getTakerId()}"/>
+          <input class="hidden" id="poster_id" name="poster_id" type="number" th:value="${post.getPosterId()}"/>
+          <select name="rate" id="modal__form-dropdown" required>
             <option style="display: none"></option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -111,7 +114,7 @@
             <div class="skill">
               <p>Skills for exchange</p>
               <ul>
-                <li>Mounting</li>
+                <li th:text="${post.getExchangeService()}">Mounting</li>
               </ul>
             </div>
             <div class="rate">
@@ -147,17 +150,17 @@
           <div class="top__container">
             <div class="top__container-left">
               <p class="top__container-left-request">REQUEST</p>
-              <p class="top__container-left-date">Offers will be considered until March 2, 2025.</p>
+              <p class="top__container-left-date" th:text="${'Offers will be considered until ' + post.getDeadlineStr()}">Offers will be considered until March 2, 2025.</p>
             </div>
             
           </div>
-          <p class="request__title">Seeking Assistance for House Painting Project</p>
-          <img class="request__pic" src="/img/Painting.webp" alt="">
-          <p class="request__content">I'm reaching out because I'm gearing up for a house painting project, and I could really use some helping hands. If you have any experience with painting or just enjoy getting your hands dirty with a bit of DIY, I would be extremely grateful for your assistance.
-          <br><br>
-          The plan is to tackle this project on [specific date and time], and your expertise or company would make the task not only more enjoyable but also much more efficient. I've got all the necessary supplies and paint ready; all we need is a bit of teamwork to transform my house into something fresh and vibrant.
-          <br><br>
-          If you're available or interested, please let me know so we can coordinate the details. Whether it's for an hour or the entire day, any help you can provide will make a huge difference. Of course, I'll make sure there's plenty of refreshments and snacks to keep us energized throughout the day.</p>
+          <p class="request__title" th:text="${post.getServiceTitle()}">Seeking Assistance for House Painting Project</p>
+          <img class="request__pic" th:src="${post.getImageUrl()}" src="/img/Painting.webp" alt="">
+          <ul th:each="p : ${paragraphList}">
+            <li>
+              <p class="request__content" th:text="${p}"></p>
+            </li>
+          </ul>
         </div>
       </div>
     </main>

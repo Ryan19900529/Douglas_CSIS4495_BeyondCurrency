@@ -72,17 +72,18 @@ public class PostController {
         }
         model.addAttribute("isApplied", isApplied);
 
+        //check if the user already rate the service
+        Integer rateToPoster = post.getRateToPoster();
+        Integer rateToTaker = post.getRateToTaker();
 
-
-//        System.out.println(loginUser.getUserId());
         if (loginUser != null) {
             if (post.getPosterId() == loginUser.getUserId()) {
                 // Logic for when the logged-in user is the poster of the post
                 if(post.getStatus().equals("open")) {
                     return "post_poster_view";
-                } else if (post.getStatus().equals("filled")){
+                } else if (post.getStatus().equals("filled") && rateToTaker == 0){
                     return "post_processing";
-                } else if (post.getStatus().equals("closed")){
+                } else {
                     return "post_completed";
                 }
             } else if (post.getPosterId() != loginUser.getUserId()){
@@ -90,12 +91,10 @@ public class PostController {
                 if (post.getTakerId() == loginUser.getUserId()) {
                     // Logic for when the logged-in user is the taker of the post
                     if(post.getStatus().equals("open")) {
-                        model.addAttribute("post", post);
-                        model.addAttribute("poster", poster);
                         return "post";
-                    } else if (post.getStatus().equals("filled")){
+                    } else if (post.getStatus().equals("filled") && rateToPoster == 0){
                         return "post_processing";
-                    } else if (post.getStatus().equals("closed")){
+                    } else {
                         return "post_completed";
                     }
                 } else {
@@ -112,12 +111,6 @@ public class PostController {
             return "post_completed";
         }
         return null;
-    }
-
-    @GetMapping("/post_poster_view")
-    public String displayApplicant(Model model){
-
-        return "post_poster_view";
     }
 
     @PostMapping("/post_processing")
@@ -138,10 +131,98 @@ public class PostController {
         ServiceModel updatedPost = postRepository.getPostByServiceId(postId);
         UserModel poster = userLoginRegistrationRepository.getUserById(updatedPost.getPosterId());
         UserModel taker = userLoginRegistrationRepository.getUserById(updatedPost.getTakerId());
+
+        //sent description content to a list
+        String description = updatedPost.getDescription();
+        String[] paragraphs = description.split("\\r?\\n");
+        List<String> paragraphList = Arrays.asList(paragraphs);
+        model.addAttribute("paragraphList", paragraphList);
+
         model.addAttribute("post", updatedPost);
         model.addAttribute("poster", poster);
         model.addAttribute("taker", taker);
         return "post_processing";
+    }
+
+    @PostMapping("/post_completed")
+    public String displayCompletedPost(@RequestParam("post_id") int postId, @RequestParam("taker_id") int takerId, @RequestParam("poster_id") int posterId, @RequestParam("rate") int rate, @RequestParam("comment") String comment, Model model, HttpSession session){
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        ServiceModel post = postRepository.getPostByServiceId(postId);
+        UserModel poster = userLoginRegistrationRepository.getUserById(post.getPosterId());
+        UserModel taker = userLoginRegistrationRepository.getUserById(post.getTakerId());
+
+        // update rate and comment
+        if(loginUser.getUserId() == posterId) {
+            postRepository.updatePosterRateToTaker(post, comment, rate);
+            int modifiedScore = modifyTrustScore(rate, taker.getTrustScore());
+            userLoginRegistrationRepository.updateUserTrustScore(taker, modifiedScore, taker.getWork_done()+1);
+
+
+        } else if(loginUser.getUserId() == takerId) {
+            postRepository.updateTakerRateToPoster(post, comment, rate);
+            int modifiedScore = modifyTrustScore(rate, poster.getTrustScore());
+            userLoginRegistrationRepository.updateUserTrustScore(poster, modifiedScore, poster.getWork_done()+1);
+        }
+
+
+        // update post status
+        ServiceModel updatedPost1 = postRepository.getPostByServiceId(postId);
+        Integer rateToPoster = updatedPost1.getRateToPoster();
+        Integer rateToTaker = updatedPost1.getRateToTaker();
+        if (rateToPoster != 0 && rateToTaker != 0) {
+            postRepository.updatePostStatus(updatedPost1, "closed");
+        }
+
+        ServiceModel updatedPost2 = postRepository.getPostByServiceId(postId);
+        UserModel updatedPoster = userLoginRegistrationRepository.getUserById(updatedPost2.getPosterId());
+        UserModel updatedTaker = userLoginRegistrationRepository.getUserById(updatedPost2.getTakerId());
+        //sent description content to a list
+        String description = updatedPost2.getDescription();
+        String[] paragraphs = description.split("\\r?\\n");
+        List<String> paragraphList = Arrays.asList(paragraphs);
+        model.addAttribute("paragraphList", paragraphList);
+
+        model.addAttribute("post", updatedPost2);
+        model.addAttribute("poster", updatedPoster);
+        model.addAttribute("taker", updatedTaker);
+        return "post_completed";
+    }
+
+    public int modifyTrustScore(int rate, int trustScore){
+        int score = trustScore;
+        switch (rate) {
+            case 1:
+                score -= 8;
+                break;
+            case 2:
+                score -= 4;
+                break;
+            case 3:
+                score -= 3;
+                break;
+            case 4:
+                score -= 2;
+                break;
+            case 5:
+                score -= 1;
+                break;
+            case 7:
+                score += 1;
+                break;
+            case 8:
+                score += 2;
+                break;
+            case 9:
+                score += 3;
+                break;
+            case 10:
+                score += 4;
+                break;
+            default:
+                break;
+        }
+
+        return score;
     }
 
     @GetMapping("/post_edit")
@@ -154,9 +235,4 @@ public class PostController {
         return "post_new";
     }
 
-
-    @PostMapping("/post_completed")
-    public String displayCompletedPost(Model model){
-        return "post_completed";
-    }
 }

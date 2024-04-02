@@ -44,4 +44,17 @@ public class PostRepository {
     public void updateTakerToPost(ServiceModel post, int applicantId, String exchangeSkill, String status) {
         jdbcTemplate.update("UPDATE services SET taker_id = ?, exchange_service = ?, status = ? WHERE service_id = ?",applicantId, exchangeSkill, status, post.getServiceId());
     }
+
+    public void updatePosterRateToTaker(ServiceModel post, String comment, int rate) {
+        jdbcTemplate.update("UPDATE services SET comment_to_taker = ?, rate_to_taker = ? WHERE service_id = ?",comment, rate, post.getServiceId());
+    }
+
+    public void updateTakerRateToPoster(ServiceModel post, String comment, int rate) {
+        jdbcTemplate.update("UPDATE services SET comment_to_poster = ?, rate_to_poster = ? WHERE service_id = ?",comment, rate, post.getServiceId());
+    }
+
+    public void updatePostStatus(ServiceModel post, String status) {
+        jdbcTemplate.update("UPDATE services SET status = ? WHERE service_id = ?", status, post.getServiceId());
+
+    }
 }

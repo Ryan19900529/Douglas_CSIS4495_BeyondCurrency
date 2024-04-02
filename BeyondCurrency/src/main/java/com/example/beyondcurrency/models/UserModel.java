@@ -25,7 +25,7 @@ public class UserModel {
     private int category2Id;
     private String skill3;
     private int category3Id;
-    private String trustScore;
+    private int trustScore;
     private boolean newNotification;
     private String title;
     private String about;
@@ -34,7 +34,7 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(int userId, String firstName, String lastName, String password, String phone, Date dob, String email, String language1, String language2, Date signUpDate, String website, String imageUrl, String skill1, int category1Id, String skill2, int category2Id, String skill3, int category3Id, String trustScore, boolean newNotification, String title, String about, int work_done) {
+    public UserModel(int userId, String firstName, String lastName, String password, String phone, Date dob, String email, String language1, String language2, Date signUpDate, String website, String imageUrl, String skill1, int category1Id, String skill2, int category2Id, String skill3, int category3Id, int trustScore, boolean newNotification, String title, String about, int work_done) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -218,11 +218,11 @@ public class UserModel {
         this.skill3 = skill3;
     }
 
-    public String getTrustScore() {
+    public int getTrustScore() {
         return trustScore;
     }
 
-    public void setTrustScore(String trustScore) {
+    public void setTrustScore(int trustScore) {
         this.trustScore = trustScore;
     }
 

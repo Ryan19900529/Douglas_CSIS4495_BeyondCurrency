@@ -1,5 +1,6 @@
 package com.example.beyondcurrency.repositories;
 
+import com.example.beyondcurrency.models.ServiceModel;
 import com.example.beyondcurrency.models.UserMapper;
 import com.example.beyondcurrency.models.UserModel;
 import jakarta.annotation.Resource;
@@ -29,7 +30,7 @@ public class UserLoginRegistrationRepository {
 
     public UserModel getUserById(int id) {
         List<UserModel> users = jdbcTemplate.query("SELECT * FROM users WHERE user_id = ?", new UserMapper(false), id);
-
+//        System.out.println(users.size());
         if(users.size() > 0) {
             return users.get(0);
         } else {
@@ -48,6 +49,9 @@ public class UserLoginRegistrationRepository {
         return results;
     }
 
+    public void updateUserTrustScore(UserModel user, int modifiedScore, int workDown) {
+        jdbcTemplate.update("UPDATE users SET trust_score = ?, work_done = ? WHERE user_id = ?",modifiedScore, workDown, user.getUserId());
+    }
 
     public long addOne(UserModel newUser) {
         long result = 0;

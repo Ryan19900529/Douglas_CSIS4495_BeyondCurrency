@@ -117,10 +117,10 @@
               <p class="top__container-left-date" th:text="${'Offers will be considered until ' + post.getDeadlineStr()}">Offers will be considered until March 2, 2025.</p>
             </div>
             <div class="top__container-right">
-              <input class="hidden" id="applicant_id" type="number" th:value="${session.loginUser.getUserId()}"/>
-              <input class="hidden" id="service_id" type="number" th:value="${post.getServiceId()}"/>
-              <input class="hidden" id="poster_id" type="number" th:value="${post.getPosterId()}"/>
-              <input class="hidden" id="is_applied" type="text" th:value="${isApplied}"/>
+              <input class="hidden" id="applicant_id" name="applicant_id" type="number" th:value="${session.loginUser.getUserId()}"/>
+              <input class="hidden" id="service_id" name="service_id" type="number" th:value="${post.getServiceId()}"/>
+              <input class="hidden" id="poster_id" name="poster_id" type="number" th:value="${post.getPosterId()}"/>
+              <input class="hidden" id="is_applied" name="is_applied" type="text" th:value="${isApplied}"/>
               <button class="top__container-right-btn" type="submit">Offer Help</button>
               <div class="top__container-right-submitted">You made an offer to <span th:text="${poster.getFirstName() + ' ' + poster.getLastName()}">Matteo Grasso</span>
               </div>
