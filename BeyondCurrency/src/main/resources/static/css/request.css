@@ -170,20 +170,20 @@ cursor: pointer;
 
  }
 
- .people__level__area{
+ .people__level__area, .peoplelevelarea{
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
   align-items: center;
  }
 
- .people__level__area img{
+ .people__level__area img, .peoplelevelarea img{
   width: 20px;
   height: 20px;
   margin-right: 5px;
  }
 
- .people__level__area .people__level{
+ .people__level__area .people__level, .peoplelevelarea .people__level{
   font-weight: 600;
   font-size: 14px;
 

@@ -114,7 +114,7 @@
                 <img src="/img/checkmark.png" alt="">
                 <p th:text="${expert.getTrustScore() + ' Trust Score'}">96 Trust Score</p></div>
               <div class="expert__section-title title__rateGroup-rate">
-                <img src="/img/diamond.png" alt=""><p>Top Rated</p></div>
+                <img src="/img/diamond.png" th:class="${expert.getTrustScore() >= 90 ? '' : 'hidden'}" alt=""><p th:text="${expert.getTrustScore() >= 90 ? 'Top Rated' : ''}">Top Rated</p></div>
             </div>
           </div>
           <p class="expert__section-title title__title" th:text="${expert.getTitle()}">Precision Pro | Mounting Maven <br> Green Tasker | Mounting Magician</p>

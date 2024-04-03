@@ -17,7 +17,7 @@
     <main class="main main--registration">
       <section class="main__section-register">
         <div class="main__section__field-title">Finish signing up</div>
-        <form action="#" method="POST" class="main__section-registerForm" th:action="@{/registration/home}" th:object="${NewRegUser}">
+        <form action="#" method="POST" class="main__section-registerForm" th:action="@{/registration/home}" th:object="${NewRegUser}" enctype="multipart/form-data">
           <div class="main__section__field-fullName">
             <div class="main__section__field-firstName">
               <label
@@ -288,6 +288,7 @@
             CHOOSE IMAGE
           </button>
           <p class="sizeText">Max upload size: 10MB.</p>
+          <div id="fileInputContainer" style="display: none"></div>
           <div id="thumbnailContainer"></div>
 
           <div class="buttonWrap">
@@ -307,53 +308,55 @@
     <footer></footer>
     <script>
       // upload image locally
-      document
-              .getElementById("uploadImageBtn")
-              .addEventListener("click", function () {
-                let input = document.createElement("input");
-                input.type = "file";
-                input.name = "imageUrl";
-                input.accept = "image/*";
-                // Custom attribute to hold Thymeleaf field expression
-                // input.setAttribute("data-th-field", "*{imageUrl}");
+      document.getElementById("uploadImageBtn").addEventListener("click", function () {
+        let fileInputContainer = document.getElementById("fileInputContainer");
 
-                input.addEventListener("change", function (event) {
-                  let file = event.target.files[0];
+        // Create the file input element
+        let input = document.createElement("input");
+        input.type = "file";
+        input.name = "imageFile";
+        input.accept = "image/*";
 
-                  if (file.size > 10 * 1024 * 1024) {
-                    alert("The picture you choosed exceeds 10MB!");
-                    return;
-                  }
+        input.addEventListener("change", function (event) {
+          let file = event.target.files[0];
 
-                  let reader = new FileReader();
-                  reader.onload = function (event) {
-                    let thumbnailContainer =
-                            document.getElementById("thumbnailContainer");
+          if (file.size > 10 * 1024 * 1024) {
+            alert("The picture you choose exceeds 10MB!");
+            return;
+          }
 
-                    let container = document.createElement("div");
-                    container.className = "thumbnail-container";
+          let reader = new FileReader();
+          reader.onload = function (event) {
+            let thumbnailContainer = document.getElementById("thumbnailContainer");
 
-                    let imgElement = document.createElement("img");
-                    imgElement.src = event.target.result;
-                    imgElement.alt = "Thumbnail";
+            let container = document.createElement("div");
+            container.className = "thumbnail-container";
 
-                    let deleteButton = document.createElement("button");
-                    deleteButton.textContent = "x";
-                    deleteButton.className = "image-delete-button";
-                    deleteButton.addEventListener("click", function () {
-                      thumbnailContainer.removeChild(container);
-                    });
+            let imgElement = document.createElement("img");
+            imgElement.src = event.target.result;
+            imgElement.alt = "Thumbnail";
 
-                    container.appendChild(imgElement);
-                    container.appendChild(deleteButton);
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "x";
+            deleteButton.className = "image-delete-button";
+            deleteButton.addEventListener("click", function () {
+              thumbnailContainer.removeChild(container);
+            });
 
-                    thumbnailContainer.appendChild(container);
-                  };
-                  reader.readAsDataURL(file);
-                });
+            container.appendChild(imgElement);
+            container.appendChild(deleteButton);
 
-                input.click();
-              });
+            thumbnailContainer.appendChild(container);
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // Append the file input to the container
+        fileInputContainer.appendChild(input);
+
+        // Programmatically trigger a click on the file input to open the file picker dialog
+        input.click();
+      });
     </script>
   </body>
 </html>
