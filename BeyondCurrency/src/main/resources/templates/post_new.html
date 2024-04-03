@@ -58,29 +58,40 @@
               src="/svg/savedTalent.svg"
       /></a>
       <a class="header__protfolio" th:href="@{/dashboard}"
-      ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
+      ><img class="header__protfolio-icon" src="/svg/protfolio.svg" th:src="${session.loginUser.getImageUrl()}"
       /></a>
     </div>
   </header>
     <main>
       <div class="new__request__form">
-        <form action="">
+        <form action="" th:action="@{/add_new_post}" method="post" enctype="multipart/form-data">
           <div class="form__title">New Request</div>
           <div class="form__subtitles">Skill I need</div>
           <select
             id="skillSelect"
-            name="skillSelected[]"
+            name="skillSelected"
             class="main__section__field-skill1-input"
             required
           >
             <option style="display: none" value=""></option>
-            <option value="assembly">Assembly</option>
-            <option value="mounting">Mounting</option>
-            <option value="moving">Moving</option>
-            <option value="cleaning">Cleaning</option>
-            <option value="outdoorHelp">Outdoor Help</option>
-            <option value="homeRepairs">Home Repairs</option>
-            <option value="painting">Painting</option>
+            <option value="General Furniture Assembly">General Furniture Assembly</option>
+            <option value="Electrical Appliances Assembly">Electrical Appliances Assembly</option>
+            <option value="General Mounting">General Mounting</option>
+            <option value="TV Mounting">TV Mounting</option>
+            <option value="Help Moving">Help Moving</option>
+            <option value="Trash & Furniture Removal">Trash & Furniture Removal</option>
+            <option value="Heavy Lifting & Loading">Heavy Lifting & Loading</option>
+            <option value="Kitchen Cleaning">Kitchen Cleaning</option>
+            <option value="Bathroom Cleaning">Bathroom Cleaning</option>
+            <option value="Yard Work">Yard Work</option>
+            <option value="Lawn Care">Lawn Care</option>
+            <option value="Snow Removal">Snow Removal</option>
+            <option value="Electrical Help">Electrical Help</option>
+            <option value="Plumbing Help">Plumbing Help</option>
+            <option value="Minor Home Repairs">Minor Home Repairs</option>
+            <option value="Light Carpentry">Light Carpentry</option>
+            <option value="Indoor Painting">Indoor Painting</option>
+            <option value="Outdoor Painting">Outdoor Painting</option>
           </select>
 
           <div id="selectedSkillsContainer"></div>
@@ -88,17 +99,17 @@
           <div class="form__subtitles">Title</div>
           <input
             type="text"
-            name=""
+            name="title"
             placeholder="Add a title..."
             required
           />
 
           <div class="form__subtitles">Application Deadline</div>
-          <input type="date" name="" required />
+          <input type="date" name="deadline" required />
 
           <div class="form__subtitles">Description</div>
           <textarea
-            name=""
+            name="description"
             cols="30"
             rows="10"
             placeholder="Add descriptions here..."
@@ -110,11 +121,12 @@
             CHOOSE IMAGE
           </button>
           <p>Max upload size: 10MB.</p>
+          <div id="fileInputContainer" style="display: none"></div>
           <div id="thumbnailContainer"></div>
           <div class="line__post"></div>
 
           <div class="request__bottom__btn">
-            <button id="request__form__cancle" type="button">CANCLE</button>
+            <button id="request__form__cancle" type="button">CANCEL</button>
             <button id="request__form__submit" type="submit">
               POST REQUEST
             </button>
@@ -171,92 +183,148 @@
     </footer> -->
 
     <script>
-      document
-        .getElementById("skillSelect")
-        .addEventListener("change", function () {
-          let selectedSkill = this.value;
-          if (!selectedSkill) return;
-
-          let selectedSkillsContainer = document.getElementById(
-            "selectedSkillsContainer"
-          );
-          let selectedSkillContainer = document.createElement("div");
-          selectedSkillContainer.className = "selected-skill-container";
-
-          let selectedSkillElement = document.createElement("div");
-          selectedSkillElement.className = "selected-skill";
-          selectedSkillElement.textContent = selectedSkill;
-
-          let deleteButton = document.createElement("button");
-          deleteButton.textContent = "x";
-          deleteButton.className = "delete-button";
-          deleteButton.addEventListener("click", function () {
-            // Add selected option back to select
-            let select = document.getElementById("skillSelect");
-            let option = document.createElement("option");
-            option.text = selectedSkill;
-            option.value = selectedSkill;
-            select.add(option);
-
-            selectedSkillsContainer.removeChild(selectedSkillContainer);
-          });
-
-          selectedSkillContainer.appendChild(selectedSkillElement);
-          selectedSkillContainer.appendChild(deleteButton);
-
-          selectedSkillsContainer.appendChild(selectedSkillContainer);
-
-          // Remove selected option from select
-          let selectedIndex = this.selectedIndex;
-          this.remove(selectedIndex);
-        });
+      // document
+      //   .getElementById("skillSelect")
+      //   .addEventListener("change", function () {
+      //     let selectedSkill = this.value;
+      //     if (!selectedSkill) return;
+      //
+      //     let selectedSkillsContainer = document.getElementById(
+      //       "selectedSkillsContainer"
+      //     );
+      //     let selectedSkillContainer = document.createElement("div");
+      //     selectedSkillContainer.className = "selected-skill-container";
+      //
+      //     let selectedSkillElement = document.createElement("div");
+      //     selectedSkillElement.className = "selected-skill";
+      //     selectedSkillElement.textContent = selectedSkill;
+      //
+      //     let deleteButton = document.createElement("button");
+      //     deleteButton.textContent = "x";
+      //     deleteButton.className = "delete-button";
+      //     deleteButton.addEventListener("click", function () {
+      //       // Add selected option back to select
+      //       let select = document.getElementById("skillSelect");
+      //       let option = document.createElement("option");
+      //       option.text = selectedSkill;
+      //       option.value = selectedSkill;
+      //       select.add(option);
+      //
+      //       selectedSkillsContainer.removeChild(selectedSkillContainer);
+      //     });
+      //
+      //     selectedSkillContainer.appendChild(selectedSkillElement);
+      //     selectedSkillContainer.appendChild(deleteButton);
+      //
+      //     selectedSkillsContainer.appendChild(selectedSkillContainer);
+      //
+      //     // Remove selected option from select
+      //     let selectedIndex = this.selectedIndex;
+      //     this.remove(selectedIndex);
+      //   });
 
       // upload image locally
-      document
-        .getElementById("uploadImageBtn")
-        .addEventListener("click", function () {
-          let input = document.createElement("input");
-          input.type = "file";
+      // document
+      //   .getElementById("uploadImageBtn")
+      //   .addEventListener("click", function () {
+      //     let input = document.createElement("input");
+      //     input.type = "file";
+      //     input.name = "imageFile";
+      //     input.accept = "image/*";
+      //
+      //     input.addEventListener("change", function (event) {
+      //       let file = event.target.files[0];
+      //
+      //       if (file.size > 10 * 1024 * 1024) {
+      //         alert("The picture you choose exceeds 10MB!");
+      //         return;
+      //       }
+      //
+      //       let reader = new FileReader();
+      //       reader.onload = function (event) {
+      //         let thumbnailContainer =
+      //           document.getElementById("thumbnailContainer");
+      //
+      //         let container = document.createElement("div");
+      //         container.className = "thumbnail-container";
+      //
+      //         let imgElement = document.createElement("img");
+      //         imgElement.src = event.target.result;
+      //         imgElement.alt = "Thumbnail";
+      //
+      //
+      //         let deleteButton = document.createElement("button");
+      //         deleteButton.textContent = "x";
+      //         deleteButton.className = "image-delete-button";
+      //         deleteButton.addEventListener("click", function () {
+      //           thumbnailContainer.removeChild(container);
+      //         });
+      //
+      //         container.appendChild(imgElement);
+      //         container.appendChild(deleteButton);
+      //
+      //         thumbnailContainer.appendChild(container);
+      //       };
+      //       reader.readAsDataURL(file);
+      //     });
+      //
+      //     input.click();
+      //   });
 
-          input.accept = "image/*";
+      document.getElementById("uploadImageBtn").addEventListener("click", function () {
+        let fileInputContainer = document.getElementById("fileInputContainer");
 
-          input.addEventListener("change", function (event) {
-            let file = event.target.files[0];
+        // Create the file input element
+        let input = document.createElement("input");
+        input.type = "file";
+        input.name = "imageFile";
+        input.accept = "image/*";
 
-            if (file.size > 10 * 1024 * 1024) {
-              alert("The picture you choosed exceeds 10MB!");
-              return;
-            }
+        input.addEventListener("change", function (event) {
+          let file = event.target.files[0];
 
-            let reader = new FileReader();
-            reader.onload = function (event) {
-              let thumbnailContainer =
-                document.getElementById("thumbnailContainer");
+          if (file.size > 10 * 1024 * 1024) {
+            alert("The picture you choose exceeds 10MB!");
+            return;
+          }
 
-              let container = document.createElement("div");
-              container.className = "thumbnail-container";
+          let reader = new FileReader();
+          reader.onload = function (event) {
+            let thumbnailContainer = document.getElementById("thumbnailContainer");
 
-              let imgElement = document.createElement("img");
-              imgElement.src = event.target.result;
-              imgElement.alt = "Thumbnail";
+            let container = document.createElement("div");
+            container.className = "thumbnail-container";
 
-              let deleteButton = document.createElement("button");
-              deleteButton.textContent = "x";
-              deleteButton.className = "image-delete-button";
-              deleteButton.addEventListener("click", function () {
-                thumbnailContainer.removeChild(container);
-              });
+            let imgElement = document.createElement("img");
+            imgElement.src = event.target.result;
+            imgElement.alt = "Thumbnail";
 
-              container.appendChild(imgElement);
-              container.appendChild(deleteButton);
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "x";
+            deleteButton.className = "image-delete-button";
+            deleteButton.addEventListener("click", function () {
+              thumbnailContainer.removeChild(container);
+            });
 
-              thumbnailContainer.appendChild(container);
-            };
-            reader.readAsDataURL(file);
-          });
+            container.appendChild(imgElement);
+            container.appendChild(deleteButton);
 
-          input.click();
+            thumbnailContainer.appendChild(container);
+          };
+          reader.readAsDataURL(file);
         });
+
+        // Append the file input to the container
+        fileInputContainer.appendChild(input);
+
+        // Programmatically trigger a click on the file input to open the file picker dialog
+        input.click();
+      });
+
+      document.getElementById("request__form__cancle").addEventListener("click", function() {
+        history.back();
+      });
+
       let bell = document.getElementById("bell");
       let box = document.querySelector(".notifi-box");
       let dot = document.querySelector(".notifi-dot");

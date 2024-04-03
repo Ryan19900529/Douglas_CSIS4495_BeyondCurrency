@@ -18,6 +18,7 @@
   <!--  for header-->
   <link rel="stylesheet" href="/css/dashboard.css" />
   <link rel="stylesheet" href="/css/font-awesome.min.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -62,7 +63,7 @@
             src="/svg/savedTalent.svg"
     /></a>
     <a class="header__protfolio" th:href="@{/dashboard}"
-    ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
+    ><img class="header__protfolio-icon" src="/svg/protfolio.svg" th:src="${session.loginUser.getImageUrl()}"
     /></a>
   </div>
 </header>
@@ -93,59 +94,11 @@
     </div>
     <div class="swiper mySwiper main__card-container--post">
       <div class="swiper-wrapper content">
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/Painting.webp" alt=""/>
-          <p class="p1">Seeking Assistance for House Painting Project.</p>
-          <p class="status-open">Open</p>
-          <p class="applicant">You have 2 new applicants</p>
-          <a th:href="@{/post_poster_view}" class="review"><button class="review-btn">Review applicants</button></a>
-        </div>
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
-          <p class="p1">Cut grass in the garden.</p>
-          <p class="status-filled">Filled</p>
-          <p class="applicant">You have 2 new applicants</p>
-        </div>
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/lawn.webp" alt=""/>
-          <p class="p1">Cut grass in the garden.</p>
-          <p class="status-closed">Closed</p>
-          <p class="applicant">You have 2 new applicants</p>
-        </div>
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
-          <p class="p1">Cut grass in the garden.</p>
-          <p class="status-open">Open</p>
-          <p class="applicant">You have 2 new applicants</p>
-          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
-        </div>
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
-          <p class="p1">Cut grass in the garden.</p>
-          <p class="status-open">Open</p>
-          <p class="applicant">You have 2 new applicants</p>
-          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
-        </div>
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
-          <p class="p1">Cut grass in the garden.</p>
-          <p class="status-open">Open</p>
-          <p class="applicant">You have 2 new applicants</p>
-          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
-        </div>
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
-          <p class="p1">Cut grass in the garden.</p>
-          <p class="status-open">Open</p>
-          <p class="applicant">You have 2 new applicants</p>
-          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
-        </div>
-        <div class="swiper-slide main__card">
-          <img class="img-service" src="/img/plumbing.jpg" alt=""/>
-          <p class="p1">Cut grass in the garden.</p>
-          <p class="status-open">Open</p>
-          <p class="applicant">You have 2 new applicants</p>
-          <a href="" class="review"><button class="review-btn">Review applicants</button></a>
+        <div class="swiper-slide main__card your_post" th:each="p:${yourPosts}" th:abbr="${p.getStatus()}">
+          <img class="img-service" th:src="${p.getImageUrl()}" src="/img/Painting.webp" alt=""/>
+          <p class="p1" th:text="${p.getServiceTitle()}">Seeking Assistance for House Painting Project.</p>
+          <p class="status-open" th:class="${p.getStatus() == 'open' ? 'status-open' : (p.getStatus() == 'filled' ? 'status-filled' : 'status-closed')}" th:text="${p.getStatus()}">Open</p>
+          <a th:href="@{/post/{id}(id=${p.getServiceId()})}" class="review"><button class="review-btn">Review Post</button></a>
         </div>
       </div>
       <div class="swiper-button-next swiper-navBtn"></div>
@@ -155,102 +108,14 @@
 
     <div class="swiper mySwiper main__card-container--demand">
       <div class="swiper-wrapper content">
-        <div class="swiper-slide main__card">
-          <a th:href="@{/post_processing}" style="cursor: pointer"
+        <div class="swiper-slide main__card" th:each="d:${requestCards}">
+          <a th:href="@{/post/{id}(id=${d.getServiceId()})}" style="cursor: pointer"
           ><img class="img-service" src="/img/lawn.webp" alt=""
           /></a>
-          <p class="p1">Cut grass in the garden.</p>
+          <p class="p1" th:text="${d.getServiceTitle()}">Cut grass in the garden.</p>
           <div class="main__card-poster">
             <img class="img-poster" src="/img/man.jpg" alt="" />
-            <a href="">Matteo Grasso</a>
-          </div>
-        </div>
-        <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
-          <p class="p1">Drains leaking.</p>
-          <div class="main__card-poster">
-            <img class="img-poster" src="/img/women.jpg" alt="" />
-            <a href="">Sofia Grassini</a>
-          </div>
-        </div>
-        <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img class="img-service" src="/img/lawn.webp" alt=""
-          /></a>
-          <p class="p1">Cut grass in the garden.</p>
-          <div class="main__card-poster">
-            <img class="img-poster" src="/img/man.jpg" alt="" />
-            <a href="">Matteo Grasso</a>
-          </div>
-        </div>
-        <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
-          <p class="p1">Drains leaking.</p>
-          <div class="main__card-poster">
-            <img class="img-poster" src="/img/women.jpg" alt="" />
-            <a href="">Sofia Grassini</a>
-          </div>
-        </div>
-        <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
-          <p class="p1">Drains leaking.</p>
-          <div class="main__card-poster">
-            <img class="img-poster" src="/img/women.jpg" alt="" />
-            <a href="">Sofia Grassini</a>
-          </div>
-        </div>
-        <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
-          <p class="p1">Drains leaking.</p>
-          <div class="main__card-poster">
-            <img class="img-poster" src="/img/women.jpg" alt="" />
-            <a href="">Sofia Grassini</a>
-          </div>
-        </div>
-        <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
-          <p class="p1">Drains leaking.</p>
-          <div class="main__card-poster">
-            <img class="img-poster" src="/img/women.jpg" alt="" />
-            <a href="">Sofia Grassini</a>
-          </div>
-        </div>
-        <div class="swiper-slide main__card">
-          <a href="" style="cursor: pointer"
-          ><img
-                  class="img-service"
-                  src="/img/plumbing.jpg"
-                  alt=""
-          /></a>
-          <p class="p1">Drains leaking.</p>
-          <div class="main__card-poster">
-            <img class="img-poster" src="/img/women.jpg" alt="" />
-            <a href="">Sofia Grassini</a>
+            <a href="" th:text="${d.getPosterFirstName() + ' ' + d.getPosterLastName()}">Matteo Grasso</a>
           </div>
         </div>
       </div>

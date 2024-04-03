@@ -26,17 +26,27 @@ public class PostRepository {
     public long addNewPost(ServiceModel service) {
         long result = 0;
 
-        result = jdbcTemplate.update(
-                "INSERT INTO services (service_title, description, image_url, category_id, status, create_date, deadline, poster_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                service.getServiceTitle(),
-                service.getDescription(),
-                service.getImageUrl(),
-                service.getCategoryId(),
-                service.getStatus(),
-                service.getCreateDate(),
-                service.getDeadline(),
-                service.getPosterId()
-        );
+        if(service.getImageUrl()!=null){
+            result = jdbcTemplate.update(
+                    "INSERT INTO services (service_title, description, image_url, category_id, deadline, poster_id) VALUES (?, ?, ?, ?, ?, ?)",
+                    service.getServiceTitle(),
+                    service.getDescription(),
+                    service.getImageUrl(),
+                    service.getCategoryId(),
+                    service.getDeadline(),
+                    service.getPosterId()
+            );
+        } else {
+            result = jdbcTemplate.update(
+                    "INSERT INTO services (service_title, description, category_id, deadline, poster_id) VALUES (?, ?, ?, ?, ?)",
+                    service.getServiceTitle(),
+                    service.getDescription(),
+                    service.getCategoryId(),
+                    service.getDeadline(),
+                    service.getPosterId()
+            );
+        }
+
 
         return result;
     }

@@ -63,7 +63,7 @@
             src="/svg/savedTalent.svg"
         /></a>
         <a class="header__protfolio" th:href="@{/dashboard}"
-          ><img class="header__protfolio-icon" src="/svg/protfolio.svg"
+          ><img class="header__protfolio-icon" src="/svg/protfolio.svg" th:src="${session.loginUser.getImageUrl()}"
         /></a>
       </div>
     </header>

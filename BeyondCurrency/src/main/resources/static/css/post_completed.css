@@ -436,8 +436,9 @@
 }
 
 .request__pic {
-  width: 1100px; 
-  height: auto; 
+  width: 1100px;
+  height: 495px;
+  object-fit: cover;
   border-radius: 30px;
 }
 

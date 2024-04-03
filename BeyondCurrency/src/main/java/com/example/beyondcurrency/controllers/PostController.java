@@ -4,21 +4,24 @@ import com.example.beyondcurrency.models.ApplicationModel;
 import com.example.beyondcurrency.models.ServiceModel;
 import com.example.beyondcurrency.models.UserApplicationModel;
 import com.example.beyondcurrency.models.UserModel;
-import com.example.beyondcurrency.repositories.ApplicationsRepository;
-import com.example.beyondcurrency.repositories.NotificationRepository;
-import com.example.beyondcurrency.repositories.PostRepository;
-import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
+import com.example.beyondcurrency.repositories.*;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -29,6 +32,8 @@ public class PostController {
     UserLoginRegistrationRepository userLoginRegistrationRepository;
     @Resource
     ApplicationsRepository applicantsRepository;
+    @Resource
+    RequestsRepository requestsRepository;
     @Resource
     NotificationRepository notificationRepository;
 
@@ -188,6 +193,74 @@ public class PostController {
         return "post_completed";
     }
 
+    @GetMapping("/post_new")
+    public String displayNewPost(Model model){
+
+        return "post_new";
+    }
+
+    @PostMapping("/add_new_post")
+    public String addNewPost(Model model, HttpSession session, @RequestParam("skillSelected") String skillSelected, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile){
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        ServiceModel newPost = new ServiceModel();
+        newPost.setServiceTitle(title);
+        newPost.setDescription(description);
+        newPost.setCategoryId(getCategoryId(skillSelected));
+        newPost.setDeadline(deadline);
+        newPost.setPosterId(loginUser.getUserId());
+        if(imageFile != null){
+            try {
+                // Get the byte array of the image
+                byte[] imageData = imageFile.getBytes();
+
+                // Define the directory where you want to save the image
+                String uploadDirectory = "/Users/Ryan/Desktop/Douglas/Winter 2024/Applied Research Project/Project_RYa196/Implementation/Douglas_CSIS4495_BeyondCurrency/BeyondCurrency/src/main/resources/static/img";
+
+                // Define the path where the image will be saved
+                Path imagePath = Paths.get(uploadDirectory, imageFile.getOriginalFilename());
+
+                // Save the image file to the specified path
+                Files.write(imagePath, imageData);
+
+                // Return the URL of the saved image
+                String imageUrl = "/img/" + imageFile.getOriginalFilename();
+                newPost.setImageUrl(imageUrl);
+                // Now you can use the imageUrl as needed
+                // For example, you can save it to the database or use it in your application
+
+            } catch (Exception e) {
+                // Handle any exceptions, e.g., file not found, permission denied, etc.
+                e.printStackTrace();
+            }
+        }
+
+        postRepository.addNewPost(newPost);
+
+        List<ServiceModel> allPosts = requestsRepository.getAllRequests();
+        ServiceModel newAddedPost = allPosts.get(allPosts.size()-1);
+        List<ApplicationModel> applications = applicantsRepository.getAllApplications();
+        List<UserApplicationModel> relatedApp = new ArrayList<>();
+        for(ApplicationModel a : applications) {
+            if (a.getServiceId() == newAddedPost.getServiceId() && a.getStatus().equals("pending")){
+                UserModel user = userLoginRegistrationRepository.getUserById(a.getApplicantId());
+                UserApplicationModel userApplication = new UserApplicationModel(a.getApplicationId(), a.getApplicantId(), a.getServiceId(), a.getPosterId(),a.getStatus(), user.getImageUrl(), user.getFirstName(), user.getLastName(), loginUser.getSkill1(),loginUser.getSkill2(),loginUser.getSkill3());
+                relatedApp.add(userApplication);
+            }
+        }
+        model.addAttribute("relatedApp", relatedApp);
+        UserModel poster = userLoginRegistrationRepository.getUserById(newAddedPost.getPosterId());
+
+        model.addAttribute("post", newAddedPost);
+        model.addAttribute("poster", poster);
+
+        return "post_poster_view";
+    }
+
+    @GetMapping("/post_edit")
+    public String displayEditPost(Model model){
+        return "post_edit";
+    }
+
     public int modifyTrustScore(int rate, int trustScore){
         int score = trustScore;
         switch (rate) {
@@ -222,17 +295,57 @@ public class PostController {
                 break;
         }
 
+        if(score > 100) {
+            score = 100;
+        } else if (score < 0){
+            score = 0;
+        }
         return score;
     }
 
-    @GetMapping("/post_edit")
-    public String displayEditPost(Model model){
-        return "post_edit";
-    }
+    public int getCategoryId(String skillSelected){
 
-    @GetMapping("/post_new")
-    public String displayNewPost(Model model){
-        return "post_new";
+        int categoryId = 0;
+
+        if (skillSelected.equals("General Furniture Assembly")) {
+            categoryId = 1;
+        } else if (skillSelected.equals("Electrical Appliances Assembly")) {
+            categoryId = 2;
+        } else if (skillSelected.equals("General Mounting")) {
+            categoryId = 3;
+        } else if (skillSelected.equals("TV Mounting")) {
+            categoryId = 4;
+        } else if (skillSelected.equals("Help Moving")) {
+            categoryId = 5;
+        } else if (skillSelected.equals("Trash & Furniture Removal")) {
+            categoryId = 6;
+        } else if (skillSelected.equals("Heavy Lifting & Loading")) {
+            categoryId = 7;
+        } else if (skillSelected.equals("Kitchen Cleaning")) {
+            categoryId = 8;
+        } else if (skillSelected.equals("Bathroom Cleaning")) {
+            categoryId = 9;
+        } else if (skillSelected.equals("Yard Work")) {
+            categoryId = 10;
+        } else if (skillSelected.equals("Lawn Care")) {
+            categoryId = 11;
+        } else if (skillSelected.equals("Snow Removal")) {
+            categoryId = 12;
+        } else if (skillSelected.equals("Electrical Help")) {
+            categoryId = 13;
+        } else if (skillSelected.equals("Plumbing Help")) {
+            categoryId = 14;
+        } else if (skillSelected.equals("Minor Home Repairs")) {
+            categoryId = 15;
+        } else if (skillSelected.equals("Light Carpentry")) {
+            categoryId = 16;
+        } else if (skillSelected.equals("Indoor Painting")) {
+            categoryId = 17;
+        } else if (skillSelected.equals("Outdoor Painting")) {
+            categoryId = 18;
+        };
+        
+        return categoryId;
     }
 
 }

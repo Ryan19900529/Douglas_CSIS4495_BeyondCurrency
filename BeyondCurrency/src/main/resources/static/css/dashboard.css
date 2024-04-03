@@ -183,6 +183,7 @@
 .review {
   display: flex;
   justify-content: center;
+  margin-top: 40px;
 }
 
 .review-btn {
@@ -217,6 +218,10 @@
   display: flex;
   align-items:center;
   margin-top: 40px;
+}
+
+.swiper-slide-yourPost{
+  margin-right: 50px;
 }
 
 .img-poster {
