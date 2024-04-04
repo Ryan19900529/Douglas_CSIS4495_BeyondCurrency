@@ -256,9 +256,22 @@ public class PostController {
         return "post_poster_view";
     }
 
-    @GetMapping("/post_edit")
-    public String displayEditPost(Model model){
+    @PostMapping("/post_edit")
+    public String displayEditPost(Model model, @RequestParam("category") int category, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam("previous_image_url") String previous_image_url){
+
+        model.addAttribute("category", category);
+        model.addAttribute("title", title);
+        model.addAttribute("deadline", deadline);
+        model.addAttribute("description", description);
+        model.addAttribute("previous_image_url", previous_image_url);
+
         return "post_edit";
+    }
+
+    @PostMapping("/edited_post")
+    public String editPost(Model model, HttpSession session, @RequestParam("skillSelected") String skillSelected, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile){
+
+        return "post_poster_view";
     }
 
     public int modifyTrustScore(int rate, int trustScore){

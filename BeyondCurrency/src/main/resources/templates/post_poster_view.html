@@ -113,9 +113,14 @@
               <p class="top__container-left-date" th:text="${'Offers will be considered until ' + post.getDeadlineStr()}">Offers will be considered until March 2, 2025.</p>
             </div>
             <div class="top__container-right">
-              <a th:href="@{/post_edit}">
-                <button class="top__container-right-btn">Edit Post</button>
-              </a>
+              <form th:action="@{/post_edit}" method="post">
+                <input type="number" name="category" th:value="${post.getCategoryId()}" class="hidden">
+                <input type="text" name="title" th:value="${post.getServiceTitle()}" class="hidden">
+                <input type="date" name="deadline" th:value="${post.getDeadline()}" class="hidden">
+                <textarea name="description" th:text="${post.getDescription()}"  class="hidden"></textarea>
+                <input type="text" name="previous_image_url" th:value="${post.getImageUrl()}" class="hidden">
+                <button class="top__container-right-btn" type="submit">Edit Post</button>
+              </form>
               <div class="top__container-right-submitted">You made an offer to <span>Matteo Grasso</span>
               </div>
             </div>

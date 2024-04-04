@@ -14,6 +14,7 @@
     <!--  for header-->
     <link rel="stylesheet" href="/css/post_new.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
 
   <body>
@@ -64,23 +65,34 @@
   </header>
     <main>
       <div class="new__request__form">
-        <form action="">
+        <form action="" th:action="@{/edited_post}" method="post" enctype="multipart/form-data">
           <div class="form__title">Edit Request</div>
           <div class="form__subtitles">Skill I need</div>
           <select
             id="skillSelect"
-            name="skillSelected[]"
+            name="skillSelected"
             class="main__section__field-skill1-input"
             required
           >
             <option style="display: none" value=""></option>
-            <option value="assembly">Assembly</option>
-            <option value="mounting">Mounting</option>
-            <option value="moving">Moving</option>
-            <option value="cleaning">Cleaning</option>
-            <option value="outdoorHelp">Outdoor Help</option>
-            <option value="homeRepairs">Home Repairs</option>
-            <option value="painting">Painting</option>
+            <option value="General Furniture Assembly" th:selected="${category == 1}">General Furniture Assembly</option>
+            <option value="Electrical Appliances Assembly" th:selected="${category == 2}">Electrical Appliances Assembly</option>
+            <option value="General Mounting" th:selected="${category == 3}">General Mounting</option>
+            <option value="TV Mounting" th:selected="${category == 4}">TV Mounting</option>
+            <option value="Help Moving" th:selected="${category == 5}">Help Moving</option>
+            <option value="Trash & Furniture Removal" th:selected="${category == 6}">Trash & Furniture Removal</option>
+            <option value="Heavy Lifting & Loading" th:selected="${category == 7}">Heavy Lifting & Loading</option>
+            <option value="Kitchen Cleaning" th:selected="${category == 8}">Kitchen Cleaning</option>
+            <option value="Bathroom Cleaning" th:selected="${category == 9}">Bathroom Cleaning</option>
+            <option value="Yard Work" th:selected="${category == 10}">Yard Work</option>
+            <option value="Lawn Care" th:selected="${category == 11}">Lawn Care</option>
+            <option value="Snow Removal" th:selected="${category == 12}">Snow Removal</option>
+            <option value="Electrical Help" th:selected="${category == 13}">Electrical Help</option>
+            <option value="Plumbing Help" th:selected="${category == 14}">Plumbing Help</option>
+            <option value="Minor Home Repairs" th:selected="${category == 15}">Minor Home Repairs</option>
+            <option value="Light Carpentry" th:selected="${category == 16}">Light Carpentry</option>
+            <option value="Indoor Painting" th:selected="${category == 17}">Indoor Painting</option>
+            <option value="Outdoor Painting" th:selected="${category == 18}">Outdoor Painting</option>
           </select>
 
           <div id="selectedSkillsContainer"></div>
@@ -88,20 +100,22 @@
           <div class="form__subtitles">Title</div>
           <input
             type="text"
-            name=""
+            name="title"
             placeholder="Add a title..."
+            th:value="${title}"
             required
           />
 
           <div class="form__subtitles">Application Deadline</div>
-          <input type="date" name="" required />
+          <input type="date" name="deadline" th:value="${#dates.format(deadline, 'yyyy-MM-dd')}" required />
 
           <div class="form__subtitles">Description</div>
           <textarea
-            name=""
+            name="description"
             cols="30"
             rows="10"
             placeholder="Add descriptions here..."
+            th:text="${description}"
             required
           ></textarea>
 
@@ -110,6 +124,8 @@
             CHOOSE IMAGE
           </button>
           <p>Max upload size: 10MB.</p>
+          <input class="hidden" id="previousImage" th:value="${previous_image_url}" />
+          <div id="fileInputContainer" style="display: none"></div>
           <div id="thumbnailContainer"></div>
           <div class="line__post"></div>
 
@@ -124,92 +140,93 @@
     </main>
 
     <script>
-      document
-        .getElementById("skillSelect")
-        .addEventListener("change", function () {
-          let selectedSkill = this.value;
-          if (!selectedSkill) return;
+      // Check if previous image exists and display it
+      let previousImageSrc = $("#previousImage").val(); // Replace with the URL of the previous image
+      console.log(previousImageSrc);
+      if (previousImageSrc) {
+        let thumbnailContainer = document.getElementById("thumbnailContainer");
 
-          let selectedSkillsContainer = document.getElementById(
-            "selectedSkillsContainer"
-          );
-          let selectedSkillContainer = document.createElement("div");
-          selectedSkillContainer.className = "selected-skill-container";
+        let container = document.createElement("div");
+        container.className = "thumbnail-container";
 
-          let selectedSkillElement = document.createElement("div");
-          selectedSkillElement.className = "selected-skill";
-          selectedSkillElement.textContent = selectedSkill;
+        let imgElement = document.createElement("img");
+        imgElement.src = previousImageSrc;
+        imgElement.alt = "Previous Thumbnail";
 
-          let deleteButton = document.createElement("button");
-          deleteButton.textContent = "x";
-          deleteButton.className = "delete-button";
-          deleteButton.addEventListener("click", function () {
-            // Add selected option back to select
-            let select = document.getElementById("skillSelect");
-            let option = document.createElement("option");
-            option.text = selectedSkill;
-            option.value = selectedSkill;
-            select.add(option);
-
-            selectedSkillsContainer.removeChild(selectedSkillContainer);
-          });
-
-          selectedSkillContainer.appendChild(selectedSkillElement);
-          selectedSkillContainer.appendChild(deleteButton);
-
-          selectedSkillsContainer.appendChild(selectedSkillContainer);
-
-          // Remove selected option from select
-          let selectedIndex = this.selectedIndex;
-          this.remove(selectedIndex);
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "x";
+        deleteButton.className = "image-delete-button";
+        deleteButton.addEventListener("click", function () {
+          thumbnailContainer.removeChild(container);
         });
 
-      // upload image locally
-      document
-        .getElementById("uploadImageBtn")
-        .addEventListener("click", function () {
-          let input = document.createElement("input");
-          input.type = "file";
+        container.appendChild(imgElement);
+        container.appendChild(deleteButton);
 
-          input.accept = "image/*";
+        thumbnailContainer.appendChild(container);
+      }
 
-          input.addEventListener("change", function (event) {
-            let file = event.target.files[0];
+      document.getElementById("uploadImageBtn").addEventListener("click", function () {
+        let fileInputContainer = document.getElementById("fileInputContainer");
 
-            if (file.size > 10 * 1024 * 1024) {
-              alert("The picture you choosed exceeds 10MB!");
-              return;
+        // Create the file input element
+        let input = document.createElement("input");
+        input.type = "file";
+        input.name = "imageFile";
+        input.accept = "image/*";
+
+        input.addEventListener("change", function (event) {
+          let file = event.target.files[0];
+
+          if (file.size > 10 * 1024 * 1024) {
+            alert("The picture you choose exceeds 10MB!");
+            return;
+          }
+
+          let reader = new FileReader();
+          reader.onload = function (event) {
+            let thumbnailContainer = document.getElementById("thumbnailContainer");
+
+            // Hide previous thumbnail container
+            let previousThumbnailContainer = document.querySelector(".thumbnail-container");
+            if (previousThumbnailContainer) {
+              previousThumbnailContainer.style.display = "none";
             }
 
-            let reader = new FileReader();
-            reader.onload = function (event) {
-              let thumbnailContainer =
-                document.getElementById("thumbnailContainer");
+            let container = document.createElement("div");
+            container.className = "thumbnail-container";
 
-              let container = document.createElement("div");
-              container.className = "thumbnail-container";
+            let imgElement = document.createElement("img");
+            imgElement.src = event.target.result;
+            imgElement.alt = "Thumbnail";
 
-              let imgElement = document.createElement("img");
-              imgElement.src = event.target.result;
-              imgElement.alt = "Thumbnail";
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "x";
+            deleteButton.className = "image-delete-button";
+            deleteButton.addEventListener("click", function () {
+              thumbnailContainer.removeChild(container);
+            });
 
-              let deleteButton = document.createElement("button");
-              deleteButton.textContent = "x";
-              deleteButton.className = "image-delete-button";
-              deleteButton.addEventListener("click", function () {
-                thumbnailContainer.removeChild(container);
-              });
+            container.appendChild(imgElement);
+            container.appendChild(deleteButton);
 
-              container.appendChild(imgElement);
-              container.appendChild(deleteButton);
-
-              thumbnailContainer.appendChild(container);
-            };
-            reader.readAsDataURL(file);
-          });
-
-          input.click();
+            thumbnailContainer.appendChild(container);
+          };
+          reader.readAsDataURL(file);
         });
+
+        // Append the file input to the container
+        fileInputContainer.appendChild(input);
+
+        // Programmatically trigger a click on the file input to open the file picker dialog
+        input.click();
+      });
+
+
+      document.getElementById("request__form__cancle").addEventListener("click", function() {
+        history.back();
+      });
+
       let bell = document.getElementById("bell");
       let box = document.querySelector(".notifi-box");
       let dot = document.querySelector(".notifi-dot");
