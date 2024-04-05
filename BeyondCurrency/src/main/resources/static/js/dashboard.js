@@ -23,9 +23,27 @@ document.getElementById("filter").addEventListener("change", function() {
   let selectedOption = this.value;
 
   let cards = document.querySelectorAll(".swiper-slide.main__card.your_post");
+  let cards2 = document.querySelectorAll(".swiper-slide.main__card.other_post");
 
   for (let i = 0; i < cards.length; i++) {
     let card = cards[i];
+    let status = card.getAttribute("abbr");
+
+    if (selectedOption === "all") {
+      card.classList.remove("hidden");
+    } else if (selectedOption === "open" && status === "open") {
+      card.classList.remove("hidden");
+    } else if (selectedOption === "filled" && status === "filled") {
+      card.classList.remove("hidden");
+    }else if (selectedOption === "closed" && status === "closed") {
+      card.classList.remove("hidden");
+    } else {
+      card.classList.add("hidden");
+    }
+  }
+
+  for (let i = 0; i < cards2.length; i++) {
+    let card = cards2[i];
     let status = card.getAttribute("abbr");
 
     if (selectedOption === "all") {

@@ -67,6 +67,7 @@
       <div class="new__request__form">
         <form action="" th:action="@{/edited_post}" method="post" enctype="multipart/form-data">
           <div class="form__title">Edit Request</div>
+          <input type="number" name="postId" th:value="${postId}" class="hidden">
           <div class="form__subtitles">Skill I need</div>
           <select
             id="skillSelect"
@@ -141,8 +142,7 @@
 
     <script>
       // Check if previous image exists and display it
-      let previousImageSrc = $("#previousImage").val(); // Replace with the URL of the previous image
-      console.log(previousImageSrc);
+      let previousImageSrc = document.getElementById("previousImage").value; // Replace with the URL of the previous image
       if (previousImageSrc) {
         let thumbnailContainer = document.getElementById("thumbnailContainer");
 
@@ -173,11 +173,11 @@
         let input = document.createElement("input");
         input.type = "file";
         input.name = "imageFile";
+        input.id = "imageFile";
         input.accept = "image/*";
 
         input.addEventListener("change", function (event) {
           let file = event.target.files[0];
-
           if (file.size > 10 * 1024 * 1024) {
             alert("The picture you choose exceeds 10MB!");
             return;
@@ -205,6 +205,10 @@
             deleteButton.className = "image-delete-button";
             deleteButton.addEventListener("click", function () {
               thumbnailContainer.removeChild(container);
+              let imageFileInput = document.querySelector("#imageFile");
+              if(imageFileInput){
+                document.querySelector("#fileInputContainer").removeChild(imageFileInput);
+              }
             });
 
             container.appendChild(imgElement);

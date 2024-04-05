@@ -1,9 +1,6 @@
 package com.example.beyondcurrency.controllers;
 
-import com.example.beyondcurrency.models.ApplicationModel;
-import com.example.beyondcurrency.models.ServiceModel;
-import com.example.beyondcurrency.models.UserApplicationModel;
-import com.example.beyondcurrency.models.UserModel;
+import com.example.beyondcurrency.models.*;
 import com.example.beyondcurrency.repositories.*;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +33,8 @@ public class PostController {
     RequestsRepository requestsRepository;
     @Resource
     NotificationRepository notificationRepository;
+    @Resource
+    ApplicationsRepository applicationsRepository;
 
     @GetMapping("/post/{id}")
     public String displayPost(Model model, HttpSession session, @PathVariable(name = "id") Integer id){
@@ -130,6 +129,7 @@ public class PostController {
             }
         }
 
+
         // link selected applicant to the post
         ServiceModel post = postRepository.getPostByServiceId(postId);
         postRepository.updateTakerToPost(post, selectedApplicantId, exchangeSkill, "filled");
@@ -142,6 +142,18 @@ public class PostController {
         String[] paragraphs = description.split("\\r?\\n");
         List<String> paragraphList = Arrays.asList(paragraphs);
         model.addAttribute("paragraphList", paragraphList);
+
+
+        // create a new notification
+        UserModel applicant = userLoginRegistrationRepository.getUserById(selectedApplicantId);
+        NotificationModel notification = new NotificationModel();
+        notification.setUserId(applicant.getUserId());
+        notification.setSenderId(post.getPosterId());
+        notification.setSenderImg(poster.getImageUrl());
+        notification.setServiceId(post.getServiceId());
+        String content = "Your application to \"" + post.getServiceTitle() + "\" was accepted!";
+        notification.setContent(content);
+        notificationRepository.addNewNotification(notification);
 
         model.addAttribute("post", updatedPost);
         model.addAttribute("poster", poster);
@@ -193,12 +205,6 @@ public class PostController {
         return "post_completed";
     }
 
-    @GetMapping("/post_new")
-    public String displayNewPost(Model model){
-
-        return "post_new";
-    }
-
     @PostMapping("/add_new_post")
     public String addNewPost(Model model, HttpSession session, @RequestParam("skillSelected") String skillSelected, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile){
         UserModel loginUser = (UserModel) session.getAttribute("loginUser");
@@ -225,8 +231,6 @@ public class PostController {
                 // Return the URL of the saved image
                 String imageUrl = "/img/" + imageFile.getOriginalFilename();
                 newPost.setImageUrl(imageUrl);
-                // Now you can use the imageUrl as needed
-                // For example, you can save it to the database or use it in your application
 
             } catch (Exception e) {
                 // Handle any exceptions, e.g., file not found, permission denied, etc.
@@ -257,8 +261,9 @@ public class PostController {
     }
 
     @PostMapping("/post_edit")
-    public String displayEditPost(Model model, @RequestParam("category") int category, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam("previous_image_url") String previous_image_url){
+    public String displayEditPost(Model model, @RequestParam("postId") int postId, @RequestParam("category") int category, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "previous_image_url", required = false) String previous_image_url){
 
+        model.addAttribute("postId", postId);
         model.addAttribute("category", category);
         model.addAttribute("title", title);
         model.addAttribute("deadline", deadline);
@@ -269,9 +274,95 @@ public class PostController {
     }
 
     @PostMapping("/edited_post")
-    public String editPost(Model model, HttpSession session, @RequestParam("skillSelected") String skillSelected, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile){
+    public String editPost(Model model, @RequestParam("postId") int postId, @RequestParam("skillSelected") String skillSelected, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile){
+
+        ServiceModel post = postRepository.getPostByServiceId(postId);
+        int categoryId = getCategoryId(skillSelected);
+
+        // reject applicants if category is changed
+        if(post.getCategoryId() != categoryId) {
+            List<ApplicationModel> allApplications = applicantsRepository.getAllApplications();
+            for(ApplicationModel a:allApplications){
+                if(a.getServiceId() == postId) {
+                    applicantsRepository.updateApplicationStatus(a.getApplicationId(), postId, "rejected");
+
+                    //create a new reject notification
+                    if(a.getStatus().equals("pending")){
+                        UserModel applicant = userLoginRegistrationRepository.getUserById(a.getApplicantId());
+                        UserModel poster = userLoginRegistrationRepository.getUserById(post.getPosterId());
+                        NotificationModel notification = new NotificationModel();
+                        notification.setSenderId(post.getPosterId());
+                        notification.setSenderImg(poster.getImageUrl());
+                        notification.setUserId(applicant.getUserId());
+                        notification.setServiceId(post.getServiceId());
+                        String content = "Your application to \"" + post.getServiceTitle() + "\" was rejected due to the requirement changed.";
+                        notification.setContent(content);
+                        notificationRepository.addNewNotification(notification);
+                    }
+                }
+            }
+        }
+
+
+        // update post
+        String imageUrl = null;
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                // Get the byte array of the image
+                byte[] imageData = imageFile.getBytes();
+
+                // Define the directory where you want to save the image
+                String uploadDirectory = "/Users/Ryan/Desktop/Douglas/Winter 2024/Applied Research Project/Project_RYa196/Implementation/Douglas_CSIS4495_BeyondCurrency/BeyondCurrency/src/main/resources/static/img";
+
+                // Define the path where the image will be saved
+                Path imagePath = Paths.get(uploadDirectory, imageFile.getOriginalFilename());
+
+                // Save the image file to the specified path
+                Files.write(imagePath, imageData);
+
+                // Return the URL of the saved image
+                imageUrl = "/img/" + imageFile.getOriginalFilename();
+
+            } catch (Exception e) {
+                // Handle any exceptions, e.g., file not found, permission denied, etc.
+                e.printStackTrace();
+            }
+
+        }
+        postRepository.editPost(postId, categoryId, title, deadline, description, imageUrl);
+
+
+        ServiceModel updatedPost = postRepository.getPostByServiceId(postId);
+        UserModel poster = userLoginRegistrationRepository.getUserById(updatedPost.getPosterId());
+
+        model.addAttribute("post", updatedPost);
+        model.addAttribute("poster", poster);
+
+        //sent description content to a list
+        String updatedDescription = post.getDescription();
+        String[] paragraphs = updatedDescription.split("\\r?\\n");
+        List<String> paragraphList = Arrays.asList(paragraphs);
+        model.addAttribute("paragraphList", paragraphList);
+
+        //select related applications (when the logged-in user is the poster of the post)
+        List<ApplicationModel> applications = applicantsRepository.getAllApplications();
+        List<UserApplicationModel> relatedApp = new ArrayList<>();
+        for(ApplicationModel a : applications) {
+            if (a.getServiceId() == updatedPost.getServiceId() && a.getStatus().equals("pending")){
+                UserModel user = userLoginRegistrationRepository.getUserById(a.getApplicantId());
+                UserApplicationModel userApplication = new UserApplicationModel(a.getApplicationId(), a.getApplicantId(), a.getServiceId(), a.getPosterId(),a.getStatus(), user.getImageUrl(), user.getFirstName(), user.getLastName(), poster.getSkill1(),poster.getSkill2(),poster.getSkill3());
+                relatedApp.add(userApplication);
+            }
+        }
+        model.addAttribute("relatedApp", relatedApp);
 
         return "post_poster_view";
+    }
+
+    @GetMapping("/post_new")
+    public String displayNewPost(Model model){
+
+        return "post_new";
     }
 
     public int modifyTrustScore(int rate, int trustScore){

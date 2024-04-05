@@ -1,6 +1,8 @@
 package com.example.beyondcurrency.controllers;
 
+import com.example.beyondcurrency.models.NotificationModel;
 import com.example.beyondcurrency.models.UserModel;
+import com.example.beyondcurrency.repositories.NotificationRepository;
 import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -17,6 +20,8 @@ import java.util.List;
 public class LoginController {
     @Resource
     UserLoginRegistrationRepository userLoginRegistrationRepository;
+    @Resource
+    NotificationRepository notificationRepository;
     @GetMapping("")
     public String displayLogin(Model model){
 
@@ -33,6 +38,21 @@ public class LoginController {
 
         if(valid) {
             UserModel loginUser = getFullInfoUser(userModel.getEmail());
+            boolean isNewNotification = false;
+
+            //get notifications for user
+            List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+            List<NotificationModel> relatedNotifications = new ArrayList<>();
+            for (NotificationModel n : allNotifications) {
+                if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                    relatedNotifications.add(n);
+                }
+                if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                    isNewNotification = true;
+                }
+            }
+            model.addAttribute("isNewNotification", isNewNotification);
+            model.addAttribute("relatedNotifications", relatedNotifications);
             session.setAttribute("loginUser", loginUser);
             return "home";
         } else {

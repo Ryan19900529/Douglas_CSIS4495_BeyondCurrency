@@ -98,6 +98,7 @@
               </a>
               <div class="request__section-title title__nameGroup">
                 <p class="request__section-title title__nameGroup-name" th:text="${a.getApplicantFirstName() + ' ' + a.getApplicantLastName()}">James</p>
+                <input type="number" class="hidden" name="application_id" th:value="${a.getApplicationId()}">
                 <div style="display: flex;gap: 10px;">
                   <button class="btn-accept">Accept</button>
                   <button class="btn-reject">Reject</button>
@@ -114,6 +115,7 @@
             </div>
             <div class="top__container-right">
               <form th:action="@{/post_edit}" method="post">
+                <input type="number" name="postId" th:value="${post.getServiceId()}" class="hidden">
                 <input type="number" name="category" th:value="${post.getCategoryId()}" class="hidden">
                 <input type="text" name="title" th:value="${post.getServiceTitle()}" class="hidden">
                 <input type="date" name="deadline" th:value="${post.getDeadline()}" class="hidden">

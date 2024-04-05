@@ -5,6 +5,8 @@ import com.example.beyondcurrency.models.ServiceModel;
 import jakarta.annotation.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -66,5 +68,14 @@ public class PostRepository {
     public void updatePostStatus(ServiceModel post, String status) {
         jdbcTemplate.update("UPDATE services SET status = ? WHERE service_id = ?", status, post.getServiceId());
 
+    }
+
+    public void editPost (int postId, int skillSelected, String title, Date deadline, String description, String imageFile){
+        if (imageFile != null) {
+            jdbcTemplate.update("UPDATE services SET category_id = ?, service_title = ?, deadline = ?, description = ?, image_url = ? WHERE service_id = ?", skillSelected, title, deadline, description, imageFile, postId);
+        } else {
+            jdbcTemplate.update("UPDATE services SET category_id = ?, service_title = ?, deadline = ?, description = ? WHERE service_id = ?", skillSelected, title, deadline, description, postId);
+
+        }
     }
 }

@@ -11,9 +11,10 @@ public class RequestCardModel {
     private String posterFirstName;
     private String posterLastName;
     private String posterImageUrl;
+    private String status;
 
 
-    public RequestCardModel(int serviceId, String serviceTitle, String imageUrl, int posterId, String skill1, String skill2, String skill3, String posterFirstName, String posterLastName, String posterImageUrl) {
+    public RequestCardModel(int serviceId, String serviceTitle, String imageUrl, int posterId, String skill1, String skill2, String skill3, String posterFirstName, String posterLastName, String posterImageUrl, String status) {
         this.serviceId = serviceId;
         this.serviceTitle = serviceTitle;
         this.imageUrl = imageUrl;
@@ -24,6 +25,15 @@ public class RequestCardModel {
         this.posterFirstName = posterFirstName;
         this.posterLastName = posterLastName;
         this.posterImageUrl = posterImageUrl;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPosterImageUrl() {
@@ -119,6 +129,7 @@ public class RequestCardModel {
                 ", posterFirstName='" + posterFirstName + '\'' +
                 ", posterLastName='" + posterLastName + '\'' +
                 ", posterImageUrl='" + posterImageUrl + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

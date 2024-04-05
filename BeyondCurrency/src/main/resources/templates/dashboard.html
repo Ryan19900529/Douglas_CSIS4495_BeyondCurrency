@@ -108,7 +108,7 @@
 
     <div class="swiper mySwiper main__card-container--demand">
       <div class="swiper-wrapper content">
-        <div class="swiper-slide main__card" th:each="d:${requestCards}">
+        <div class="swiper-slide main__card other_post" th:each="d:${requestCards}" th:abbr="${d.getStatus()}">
           <a th:href="@{/post/{id}(id=${d.getServiceId()})}" style="cursor: pointer"
           ><img class="img-service" src="/img/lawn.webp" alt=""
           /></a>

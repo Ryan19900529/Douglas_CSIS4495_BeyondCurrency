@@ -4,6 +4,9 @@ public class NotificationModel {
 
     private int notificationId;
     private int userId;
+    private int senderId;
+    private String senderImg;
+    private int serviceId;
     private String content;
     private boolean showNotification;
     private boolean newNotification;
@@ -11,12 +14,40 @@ public class NotificationModel {
     public NotificationModel() {
     }
 
-    public NotificationModel(int notificationId, int userId, String content, boolean showNotification, boolean newNotification) {
+
+    public NotificationModel(int notificationId, int userId, int senderId, String senderImg, int serviceId, String content, boolean showNotification, boolean newNotification) {
         this.notificationId = notificationId;
         this.userId = userId;
+        this.senderId = senderId;
+        this.senderImg = senderImg;
+        this.serviceId = serviceId;
         this.content = content;
         this.showNotification = showNotification;
         this.newNotification = newNotification;
+    }
+
+    public String getSenderImg() {
+        return senderImg;
+    }
+
+    public void setSenderImg(String senderImg) {
+        this.senderImg = senderImg;
+    }
+
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
+    }
+
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
     public int getNotificationId() {
@@ -64,6 +95,9 @@ public class NotificationModel {
         return "NotificationModel{" +
                 "notificationId=" + notificationId +
                 ", userId=" + userId +
+                ", senderId=" + senderId +
+                ", senderImg='" + senderImg + '\'' +
+                ", serviceId=" + serviceId +
                 ", content='" + content + '\'' +
                 ", showNotification=" + showNotification +
                 ", newNotification=" + newNotification +

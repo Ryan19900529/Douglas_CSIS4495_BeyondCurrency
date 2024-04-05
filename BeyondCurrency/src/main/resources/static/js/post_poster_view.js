@@ -53,3 +53,29 @@ const closeModal = document.querySelector(".modal__top-button");
 closeModal.addEventListener("click", () => {
   modal.close();
 });
+
+// when btn-reject clicked
+ $(document).ready(function () {
+   $('.btn-reject').click(function () {
+     let button = $(this);
+     let applicationId = button.closest('li').find('input[name="application_id"]').val();
+     let postId = $('#post_id').val();
+     let newStatus = "rejected";
+
+     $.ajax({
+         type: "POST",
+         url: "/rejectApplicant",
+         data: {
+             applicationId: applicationId,
+             postId: postId,
+             newStatus: newStatus
+         },
+         success: function () {
+             button.closest('li').fadeOut();
+         },
+         error: function (xhr, status, error) {  // Callback function for error handling
+             console.error("Error:", error);
+         }
+     })
+   })
+ })

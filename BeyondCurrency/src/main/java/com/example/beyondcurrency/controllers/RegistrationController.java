@@ -1,6 +1,7 @@
 package com.example.beyondcurrency.controllers;
 
 import com.example.beyondcurrency.models.UserModel;
+import com.example.beyondcurrency.repositories.NotificationRepository;
 import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +23,8 @@ import java.util.List;
 public class RegistrationController {
     @Resource
     UserLoginRegistrationRepository userLoginRegistrationRepository;
+    @Resource
+    NotificationRepository notificationRepository;
 
     @GetMapping("")
     public String showRegisterPage(Model model)
@@ -49,8 +52,6 @@ public class RegistrationController {
                 // Return the URL of the saved image
                 String imageUrl = "/img/" + imageFile.getOriginalFilename();
                 newUser.setImageUrl(imageUrl);
-                // Now you can use the imageUrl as needed
-                // For example, you can save it to the database or use it in your application
 
             } catch (Exception e) {
                 // Handle any exceptions, e.g., file not found, permission denied, etc.
@@ -62,6 +63,7 @@ public class RegistrationController {
 
         UserModel loginUser = getFullInfoUser(newUser.getEmail());
         session.setAttribute("loginUser", loginUser);
+
         return "home";
 
     }

@@ -43,7 +43,7 @@ public class DashboardController {
         List<RequestCardModel> requestCards = new ArrayList<>();
         for (ServiceModel service : othersDemands){
             UserModel user = userLoginRegistrationRepository.getUserById(service.getPosterId());
-            RequestCardModel card = new RequestCardModel(service.getServiceId(), service.getServiceTitle(), service.getImageUrl(), user.getUserId(), user.getSkill1(), user.getSkill2(), user.getSkill3(), user.getFirstName(), user.getLastName(), user.getImageUrl());
+            RequestCardModel card = new RequestCardModel(service.getServiceId(), service.getServiceTitle(), service.getImageUrl(), user.getUserId(), user.getSkill1(), user.getSkill2(), user.getSkill3(), user.getFirstName(), user.getLastName(), user.getImageUrl(), service.getStatus());
             requestCards.add(card);
         }
         model.addAttribute("yourPosts", yourPosts);

@@ -34,5 +34,17 @@ public class ApplicationsRepository {
 
     public void updateApplicationStatus(int applicationId, int serviceId, String newStatus) {
         jdbcTemplate.update("UPDATE applications SET status = ? WHERE application_id = ? AND service_id = ?", newStatus, applicationId,serviceId);
+
+
+    }
+
+    public ApplicationModel getApplicationByApplicationId(int id) {
+        List<ApplicationModel> results = jdbcTemplate.query("SELECT * FROM applications WHERE application_id = ?", new ApplicationMapper(), id);
+
+        if(results.size() > 0) {
+            return results.get(0);
+        } else {
+            return null;
+        }
     }
 }

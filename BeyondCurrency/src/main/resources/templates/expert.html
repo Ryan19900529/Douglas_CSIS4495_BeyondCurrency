@@ -167,7 +167,7 @@
           <p class="expert__section-history-title">Work History</p>
           <ul class="expert__section-history-contents">
             <li class="expert__section-history-contents-li" th:each="h : ${history}">
-              <p class="expert__section-history-li-title" th:text="${h.getServiceTitle()}">Yard Work</p>
+              <a th:href="@{/post/{id}(id=${h.getServiceId()})}" style="cursor: pointer"><p class="expert__section-history-li-title" th:text="${h.getServiceTitle()}">Yard Work</p></a>
               <p class="expert__section-history-li-date" th:text="${h.getHistoryDate()}">Feb 23, 2024 - Feb 25, 2024</p>
               <ul>
                 <li th:each="i : ${#numbers.sequence(1, (expert.getUserId()== h.getPosterId()? h.getRateToPoster() : h.getRateToTaker()))}">
@@ -177,38 +177,6 @@
               </ul>
               <p class="expert__section-history-li-comments" th:text="${expert.getUserId()== h.getPosterId()? h.getCommentToPoster() : h.getCommentToTaker()}">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>
             </li>
-<!--            <li class="expert__section-history-contents-li">-->
-<!--              <p class="expert__section-history-li-title">Yard Work</p>-->
-<!--              <p class="expert__section-history-li-date">Feb 23, 2024 - Feb 25, 2024</p>-->
-<!--              <ul>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <img class="expert__section-history-li-star" src="/img/star.png" alt="">-->
-<!--                </li>-->
-<!--                <p class="expert__section-history-li-starCount">8</p>-->
-<!--              </ul>-->
-<!--              <p class="expert__section-history-li-comments">"Couldn't be happier with the level of professionalism and expertise. Highly recommend Matteo Grasso for a job well done!"</p>-->
-<!--            </li>-->
           </ul>
           <p class="expert__section-history-more">more</p>
         </div>

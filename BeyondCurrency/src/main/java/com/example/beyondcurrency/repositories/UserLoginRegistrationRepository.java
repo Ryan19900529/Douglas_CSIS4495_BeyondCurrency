@@ -58,10 +58,6 @@ public class UserLoginRegistrationRepository {
 
         int[] categoryIds = getCategoryId(newUser);
 
-//        System.out.println(newUser.toString());
-//        System.out.println(categoryIds[0]); // Print the first element
-//        System.out.println(categoryIds[1]); // Print the second element
-//        System.out.println(categoryIds[2]);
         if(newUser.getImageUrl()==null){
             //user didn't upload image
             result = jdbcTemplate.update(

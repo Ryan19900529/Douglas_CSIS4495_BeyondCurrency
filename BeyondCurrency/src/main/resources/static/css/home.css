@@ -130,11 +130,17 @@
     font-size: 0.8rem;
     line-height: 1.5em;
     color: black;
+    width: 500px;
 }
 
 .notifi-close {
     height: 2em;
     cursor: pointer;
+}
+
+.notifi-close:active {
+    scale: 0.95;
+
 }
 
 .header__savedTalent-icon {
