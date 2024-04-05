@@ -1,10 +1,13 @@
 package com.example.beyondcurrency.controllers;
 
+import com.example.beyondcurrency.models.NotificationModel;
 import com.example.beyondcurrency.models.ServiceModel;
 import com.example.beyondcurrency.models.UserModel;
+import com.example.beyondcurrency.repositories.NotificationRepository;
 import com.example.beyondcurrency.repositories.RequestsRepository;
 import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +24,13 @@ public class ExpertController {
 
     @Resource
     RequestsRepository requestsRepository;
-
+    @Resource
+    NotificationRepository notificationRepository;
     @Resource
     UserLoginRegistrationRepository userLoginRegistrationRepository;
 
     @GetMapping("/expert/{id}")
-    public String displayExpert(Model model, @PathVariable(name = "id") Integer id){
+    public String displayExpert(Model model, HttpSession session, @PathVariable(name = "id") Integer id){
 
         UserModel user = userLoginRegistrationRepository.getUserById(id);
         List<ServiceModel> services = requestsRepository.getRequestsByUserId(id);
@@ -46,6 +50,22 @@ public class ExpertController {
 
         model.addAttribute("expert", user);
         model.addAttribute("history", history);
+
+        //get notifications for user
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
         return "expert";
     }
 }

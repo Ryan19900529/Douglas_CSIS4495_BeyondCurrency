@@ -1,5 +1,6 @@
 package com.example.beyondcurrency.controllers;
 
+import com.example.beyondcurrency.models.NotificationModel;
 import com.example.beyondcurrency.models.RequestCardModel;
 import com.example.beyondcurrency.models.ServiceModel;
 import com.example.beyondcurrency.models.UserModel;
@@ -46,6 +47,21 @@ public class DashboardController {
             RequestCardModel card = new RequestCardModel(service.getServiceId(), service.getServiceTitle(), service.getImageUrl(), user.getUserId(), user.getSkill1(), user.getSkill2(), user.getSkill3(), user.getFirstName(), user.getLastName(), user.getImageUrl(), service.getStatus());
             requestCards.add(card);
         }
+
+        //get notifications for user
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
         model.addAttribute("yourPosts", yourPosts);
         model.addAttribute("requestCards", requestCards);
 

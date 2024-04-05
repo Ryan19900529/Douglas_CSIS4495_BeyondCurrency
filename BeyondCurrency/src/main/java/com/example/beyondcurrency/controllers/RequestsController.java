@@ -1,11 +1,14 @@
 package com.example.beyondcurrency.controllers;
 
+import com.example.beyondcurrency.models.NotificationModel;
 import com.example.beyondcurrency.models.RequestCardModel;
 import com.example.beyondcurrency.models.ServiceModel;
 import com.example.beyondcurrency.models.UserModel;
+import com.example.beyondcurrency.repositories.NotificationRepository;
 import com.example.beyondcurrency.repositories.RequestsRepository;
 import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,8 @@ public class RequestsController {
     RequestsRepository requestsRepository;
     @Resource
     UserLoginRegistrationRepository userLoginRegistrationRepository;
+    @Resource
+    NotificationRepository notificationRepository;
     @GetMapping("/requests")
     public String displayRequests(Model model){
 
@@ -30,7 +35,7 @@ public class RequestsController {
 
 
     @GetMapping("/requests/{category}")
-    public String showRequestsPage(Model model, @PathVariable(name = "category") Integer category) {
+    public String showRequestsPage(Model model, HttpSession session, @PathVariable(name = "category") Integer category) {
 
         List<ServiceModel> services = requestsRepository.getRequestsByCategoryId(category);
         //filter service status, then create RequestCardModel
@@ -108,6 +113,22 @@ public class RequestsController {
         model.addAttribute("cards", requestCards);
         model.addAttribute("users", users);
         model.addAttribute("path", path);
+
+        //get notifications for user
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
 
         return "request";
     }

@@ -38,7 +38,7 @@
         <ul class="notifi-box" id="box">
           <li class="notifi-item" th:each="n : ${relatedNotifications}">
             <img class="notifi-photo" th:src="${n.getSenderImg()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-            <p th:text="${n.getContent()}">James applied to your job "Seeking Assistance for House Painting Project".</p>
+            <a th:href="@{/post/{id}(id=${n.getServiceId()})}" style="cursor: pointer"><p th:text="${n.getContent()}">James applied to your job "Seeking Assistance for House Painting Project".</p></a>
             <input class="hidden" type="number" name="notification_id" th:value="${n.getNotificationId()}">
             <div class="close-notification">
               <img class="notifi-close" src="/svg/close-black.svg" alt="">

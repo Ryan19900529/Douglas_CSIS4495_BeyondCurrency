@@ -38,9 +38,9 @@ public class LoginController {
 
         if(valid) {
             UserModel loginUser = getFullInfoUser(userModel.getEmail());
-            boolean isNewNotification = false;
 
             //get notifications for user
+            boolean isNewNotification = false;
             List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
             List<NotificationModel> relatedNotifications = new ArrayList<>();
             for (NotificationModel n : allNotifications) {

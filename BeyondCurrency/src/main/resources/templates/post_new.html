@@ -14,6 +14,7 @@
     <!--  for header-->
     <link rel="stylesheet" href="/css/post_new.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
 
   <body>
@@ -35,18 +36,14 @@
         <div class="icon-bell">
           <img class="icon-bell-image" id="bell" src="/img/bell.png" alt="">
         </div>
+        <input class="hidden" type="checkbox" name="isNewNotification" th:value="${isNewNotification}">
+        <input class="hidden" type="number" name="loginUserId" th:value="${session.loginUser.getUserId()}">
         <ul class="notifi-box" id="box">
-          <li class="notifi-item">
-            <img class="notifi-photo" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-            <p>James applied to your job "Seeking Assistance for House Painting Project".</p>
-            <div onclick="">
-              <img class="notifi-close" src="/svg/close-black.svg" alt="">
-            </div>
-          </li>
-          <li class="notifi-item">
-            <img class="notifi-photo" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-            <p>James applied to your job "Seeking Assistance for House Painting Project".</p>
-            <div onclick="">
+          <li class="notifi-item" th:each="n : ${relatedNotifications}">
+            <img class="notifi-photo" th:src="${n.getSenderImg()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
+            <a th:href="@{/post/{id}(id=${n.getServiceId()})}" style="cursor: pointer"><p th:text="${n.getContent()}">James applied to your job "Seeking Assistance for House Painting Project".</p></a>
+            <input class="hidden" type="number" name="notification_id" th:value="${n.getNotificationId()}">
+            <div class="close-notification">
               <img class="notifi-close" src="/svg/close-black.svg" alt="">
             </div>
           </li>
@@ -135,52 +132,52 @@
       </div>
     </main>
 
-    <!-- <footer>
-      <div class="footer__display__area">
-          <div id="uploadImageBtn" class="footer__follow__link">Follow us on: 
-            <a href=""><i class="fa fa-instagram"></i></a>
-            <i>|</i>
-            <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-            <i>|</i>
-            <a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+  <footer>
+    <div class="footer__display__area">
+      <div class="footer__follow__link">Follow us on:
+        <a href=""><i class="fa fa-instagram"></i></a>
+        <i>|</i>
+        <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+        <i>|</i>
+        <a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+      </div>
+      <div class="footer__info">
+        <div class="footer__info__discover">Discover
+          <ul>
+            <li><a href="">Become a Tasker</a></li>
+            <li><a href="">Service By City</a></li>
+            <li><a href="">All Services</a></li>
+            <li><a href="">Elite Taskers</a></li>
+            <li><a href="">Help</a></li>
+          </ul>
+        </div>
+        <div class="footer__info__company">Company
+          <ul>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Careers</a></li>
+            <li><a href="">Press</a></li>
+            <li><a href="">Beyond Currency for Good</a></li>
+            <li><a href="">Blog</a></li>
+            <li><a href="">Terms & Privacy</a></li>
+            <li><a href="">About Our Ads</a></li>
+          </ul>
+        </div>
+        <div class="footer__info__download">Apps coming soon
+          <p>Sorry for your inconvenience, our apps<br>are developing.</p>
+          <div class="ios__google__badge">
+            <a href="">
+              <img src="/svg/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="">
+            </a>
+            <a href="">
+              <img id="google__badge" src="/img/google-play-badge.png" alt="">
+            </a>
           </div>
-          <div class="footer__info">
-            <div class="footer__info__discover">Discover
-              <ul>
-                <li><a href="">Become a Tasker</a></li>
-                <li><a href="">Service By City</a></li>
-                <li><a href="">All Services</a></li>
-                <li><a href="">Elite Taskers</a></li>
-                <li><a href="">Help</a></li>
-              </ul>
-            </div>
-            <div class="footer__info__company">Company
-              <ul>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Careers</a></li>
-                <li><a href="">Press</a></li>
-                <li><a href="">Beyond Currency for Good</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">Terms & Privacy</a></li>
-                <li><a href="">About Our Ads</a></li>
-              </ul>
-            </div>
-            <div class="footer__info__download">Apps coming soon
-              <p>Sorry for your inconvenience, our apps<br>are developing.</p>
-              <div class="ios__google__badge">
-                <a href="">
-                  <img src="../Main/svg/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="">
-                </a>
-                <a href="">
-                  <img id="google__badge" src="../Main/img/google-play-badge.png" alt="">
-                </a>
-              </div>
 
-            </div>
-          </div>
         </div>
       </div>
-    </footer> -->
+    </div>
+    </div>
+  </footer>
 
     <script>
       // document
@@ -330,6 +327,12 @@
       let dot = document.querySelector(".notifi-dot");
       let down = false;
 
+      let isNewNotification = $('input[name="isNewNotification"]').val();
+      console.log(isNewNotification);
+      if(isNewNotification !== 'true'){
+        dot.style.display = "none";
+      }
+
       bell.addEventListener("click", function () {
         if (down) {
           box.style.display = "none";
@@ -343,7 +346,47 @@
           bell.src = "/img/bell-green.png";
           dot.style.display = "none";
         }
+
+        // set isNewNotification to false
+        $.ajax({
+          type: "POST",
+          url: "/setNotificationNotNew",
+          data: {
+            loginUserId: $('input[name="loginUserId"]').val()
+          },
+          success: function () {
+
+          },
+          error: function (xhr, status, error) {  // Callback function for error handling
+            console.error("Error:", error);
+          }
+        })
       });
+
+      $('.close-notification').click(function () {
+        let button = $(this);
+        let notificationId = button.closest('li').find('input[name="notification_id"]').val();
+
+        $.ajax({
+          type: "POST",
+          url: "/notificationNotShow",
+          data: {
+            notificationId: notificationId,
+          },
+          success: function () {
+            button.closest('li').fadeOut("fast");
+          },
+          error: function (xhr, status, error) {  // Callback function for error handling
+            console.error("Error:", error);
+          }
+        })
+      })
+
+      // Check if there are no notifications
+      if ($('.notifi-item').length === 0) {
+        let noNotificationsMessage = '<li class="notifi-item"><p>You have no notifications</p></li>';
+        $(box).append(noNotificationsMessage);
+      }
 
       // Close notification box when clicking outside of it
       document.addEventListener("click", function (event) {

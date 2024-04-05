@@ -80,6 +80,21 @@ public class PostController {
         Integer rateToPoster = post.getRateToPoster();
         Integer rateToTaker = post.getRateToTaker();
 
+        //get notifications for user
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
+
         if (loginUser != null) {
             if (post.getPosterId() == loginUser.getUserId()) {
                 // Logic for when the logged-in user is the poster of the post
@@ -118,7 +133,7 @@ public class PostController {
     }
 
     @PostMapping("/post_processing")
-    public String acceptApplication(@RequestParam("selectedApplicantId") int selectedApplicantId, @RequestParam("exchangeSkill") String exchangeSkill, @RequestParam("post_id") int postId, Model model){
+    public String acceptApplication(@RequestParam("selectedApplicantId") int selectedApplicantId, @RequestParam("exchangeSkill") String exchangeSkill, @RequestParam("post_id") int postId, Model model, HttpSession session){
         // update related applications status
         List<ApplicationModel> allApplications = applicantsRepository.getAllApplications();
         for (ApplicationModel a: allApplications) {
@@ -158,6 +173,22 @@ public class PostController {
         model.addAttribute("post", updatedPost);
         model.addAttribute("poster", poster);
         model.addAttribute("taker", taker);
+
+        //get notifications for user
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
         return "post_processing";
     }
 
@@ -202,6 +233,21 @@ public class PostController {
         model.addAttribute("post", updatedPost2);
         model.addAttribute("poster", updatedPoster);
         model.addAttribute("taker", updatedTaker);
+
+        //get notifications for user
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
         return "post_completed";
     }
 
@@ -257,11 +303,25 @@ public class PostController {
         model.addAttribute("post", newAddedPost);
         model.addAttribute("poster", poster);
 
+        //get notifications for user
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
         return "post_poster_view";
     }
 
     @PostMapping("/post_edit")
-    public String displayEditPost(Model model, @RequestParam("postId") int postId, @RequestParam("category") int category, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "previous_image_url", required = false) String previous_image_url){
+    public String displayEditPost(Model model, HttpSession session, @RequestParam("postId") int postId, @RequestParam("category") int category, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "previous_image_url", required = false) String previous_image_url){
 
         model.addAttribute("postId", postId);
         model.addAttribute("category", category);
@@ -270,11 +330,27 @@ public class PostController {
         model.addAttribute("description", description);
         model.addAttribute("previous_image_url", previous_image_url);
 
+        //get notifications for user
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
+
         return "post_edit";
     }
 
     @PostMapping("/edited_post")
-    public String editPost(Model model, @RequestParam("postId") int postId, @RequestParam("skillSelected") String skillSelected, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile){
+    public String editPost(Model model, HttpSession session, @RequestParam("postId") int postId, @RequestParam("skillSelected") String skillSelected, @RequestParam("title") String title, @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline, @RequestParam("description") String description, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile){
 
         ServiceModel post = postRepository.getPostByServiceId(postId);
         int categoryId = getCategoryId(skillSelected);
@@ -356,12 +432,42 @@ public class PostController {
         }
         model.addAttribute("relatedApp", relatedApp);
 
+        //get notifications for user
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
+
         return "post_poster_view";
     }
 
     @GetMapping("/post_new")
-    public String displayNewPost(Model model){
-
+    public String displayNewPost(Model model, HttpSession session){
+        //get notifications for user
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
         return "post_new";
     }
 

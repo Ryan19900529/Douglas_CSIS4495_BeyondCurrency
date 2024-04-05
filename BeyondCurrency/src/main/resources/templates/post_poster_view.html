@@ -36,18 +36,14 @@
           <div class="icon-bell">
             <img class="icon-bell-image" id="bell" src="/img/bell.png" alt="">
           </div>
+          <input class="hidden" type="checkbox" name="isNewNotification" th:value="${isNewNotification}">
+          <input class="hidden" type="number" name="loginUserId" th:value="${session.loginUser.getUserId()}">
           <ul class="notifi-box" id="box">
-            <li class="notifi-item">
-              <img class="notifi-photo" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-              <p>James applied to your job "Seeking Assistance for House Painting Project".</p>
-              <div onclick="">
-                <img class="notifi-close" src="/svg/close-black.svg" alt="">
-              </div>
-            </li>
-            <li class="notifi-item">
-              <img class="notifi-photo" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-              <p>James applied to your job "Seeking Assistance for House Painting Project".</p>
-              <div onclick="">
+            <li class="notifi-item" th:each="n : ${relatedNotifications}">
+              <img class="notifi-photo" th:src="${n.getSenderImg()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
+              <a th:href="@{/post/{id}(id=${n.getServiceId()})}" style="cursor: pointer"><p th:text="${n.getContent()}">James applied to your job "Seeking Assistance for House Painting Project".</p></a>
+              <input class="hidden" type="number" name="notification_id" th:value="${n.getNotificationId()}">
+              <div class="close-notification">
                 <img class="notifi-close" src="/svg/close-black.svg" alt="">
               </div>
             </li>

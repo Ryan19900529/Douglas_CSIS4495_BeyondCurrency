@@ -36,18 +36,14 @@
         <div class="icon-bell">
           <img class="icon-bell-image" id="bell" src="/img/bell.png" alt="">
         </div>
+        <input class="hidden" type="checkbox" name="isNewNotification" th:value="${isNewNotification}">
+        <input class="hidden" type="number" name="loginUserId" th:value="${session.loginUser.getUserId()}">
         <ul class="notifi-box" id="box">
-          <li class="notifi-item">
-            <img class="notifi-photo" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-            <p>James applied to your job "Seeking Assistance for House Painting Project".</p>
-            <div onclick="">
-              <img class="notifi-close" src="/svg/close-black.svg" alt="">
-            </div>
-          </li>
-          <li class="notifi-item">
-            <img class="notifi-photo" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-            <p>James applied to your job "Seeking Assistance for House Painting Project".</p>
-            <div onclick="">
+          <li class="notifi-item" th:each="n : ${relatedNotifications}">
+            <img class="notifi-photo" th:src="${n.getSenderImg()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
+            <a th:href="@{/post/{id}(id=${n.getServiceId()})}" style="cursor: pointer"><p th:text="${n.getContent()}">James applied to your job "Seeking Assistance for House Painting Project".</p></a>
+            <input class="hidden" type="number" name="notification_id" th:value="${n.getNotificationId()}">
+            <div class="close-notification">
               <img class="notifi-close" src="/svg/close-black.svg" alt="">
             </div>
           </li>
@@ -236,20 +232,66 @@
       let dot = document.querySelector(".notifi-dot");
       let down = false;
 
+      let isNewNotification = $('input[name="isNewNotification"]').val();
+      console.log(isNewNotification);
+      if(isNewNotification !== 'true'){
+        dot.style.display = "none";
+      }
+
       bell.addEventListener("click", function () {
         if (down) {
           box.style.display = "none";
           down = false;
           // Change back to the original source when the box hides
-          bell.src = "./img/bell.png";
+          bell.src = "/img/bell.png";
         } else {
           box.style.display = "block";
           down = true;
           // Change the source when the box shows
-          bell.src = "./img/bell-green.png";
+          bell.src = "/img/bell-green.png";
           dot.style.display = "none";
         }
+
+        // set isNewNotification to false
+        $.ajax({
+          type: "POST",
+          url: "/setNotificationNotNew",
+          data: {
+            loginUserId: $('input[name="loginUserId"]').val()
+          },
+          success: function () {
+
+          },
+          error: function (xhr, status, error) {  // Callback function for error handling
+            console.error("Error:", error);
+          }
+        })
       });
+
+      $('.close-notification').click(function () {
+        let button = $(this);
+        let notificationId = button.closest('li').find('input[name="notification_id"]').val();
+
+        $.ajax({
+          type: "POST",
+          url: "/notificationNotShow",
+          data: {
+            notificationId: notificationId,
+          },
+          success: function () {
+            button.closest('li').fadeOut("fast");
+          },
+          error: function (xhr, status, error) {  // Callback function for error handling
+            console.error("Error:", error);
+          }
+        })
+      })
+
+      // Check if there are no notifications
+      if ($('.notifi-item').length === 0) {
+        let noNotificationsMessage = '<li class="notifi-item"><p>You have no notifications</p></li>';
+        $(box).append(noNotificationsMessage);
+      }
 
       // Close notification box when clicking outside of it
       document.addEventListener("click", function (event) {
@@ -257,7 +299,7 @@
           box.style.display = "none";
           down = false;
           // Change back to the original source when the box hides
-          bell.src = "./img/bell.png";
+          bell.src = "/img/bell.png";
         }
       });
     </script>
