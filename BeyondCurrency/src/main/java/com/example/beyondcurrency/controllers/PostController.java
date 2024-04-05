@@ -1,5 +1,6 @@
 package com.example.beyondcurrency.controllers;
 
+import com.example.beyondcurrency.AppConfig;
 import com.example.beyondcurrency.models.*;
 import com.example.beyondcurrency.repositories.*;
 import jakarta.annotation.Resource;
@@ -266,10 +267,13 @@ public class PostController {
                 byte[] imageData = imageFile.getBytes();
 
                 // Define the directory where you want to save the image
-                String uploadDirectory = "/Users/Ryan/Desktop/Douglas/Winter 2024/Applied Research Project/Project_RYa196/Implementation/Douglas_CSIS4495_BeyondCurrency/BeyondCurrency/src/main/resources/static/img";
+                String uploadDirectory = AppConfig.UPLOAD_DIRECTORY;
 
                 // Define the path where the image will be saved
                 Path imagePath = Paths.get(uploadDirectory, imageFile.getOriginalFilename());
+
+                // Check if the parent directory exists, if not, create it
+                Files.createDirectories(imagePath.getParent());
 
                 // Save the image file to the specified path
                 Files.write(imagePath, imageData);
@@ -360,7 +364,6 @@ public class PostController {
             List<ApplicationModel> allApplications = applicantsRepository.getAllApplications();
             for(ApplicationModel a:allApplications){
                 if(a.getServiceId() == postId) {
-                    applicantsRepository.updateApplicationStatus(a.getApplicationId(), postId, "rejected");
 
                     //create a new reject notification
                     if(a.getStatus().equals("pending")){
@@ -371,10 +374,11 @@ public class PostController {
                         notification.setSenderImg(poster.getImageUrl());
                         notification.setUserId(applicant.getUserId());
                         notification.setServiceId(post.getServiceId());
-                        String content = "Your application to \"" + post.getServiceTitle() + "\" was rejected due to the requirement changed.";
+                        String content = "Your application to \"" + post.getServiceTitle() + "\" was deleted due to the requirement changed.";
                         notification.setContent(content);
                         notificationRepository.addNewNotification(notification);
                     }
+                    applicantsRepository.deleteApplicationsByPostId(postId);
                 }
             }
         }
@@ -388,10 +392,13 @@ public class PostController {
                 byte[] imageData = imageFile.getBytes();
 
                 // Define the directory where you want to save the image
-                String uploadDirectory = "/Users/Ryan/Desktop/Douglas/Winter 2024/Applied Research Project/Project_RYa196/Implementation/Douglas_CSIS4495_BeyondCurrency/BeyondCurrency/src/main/resources/static/img";
+                String uploadDirectory = AppConfig.UPLOAD_DIRECTORY;
 
                 // Define the path where the image will be saved
                 Path imagePath = Paths.get(uploadDirectory, imageFile.getOriginalFilename());
+
+                // Check if the parent directory exists, if not, create it
+                Files.createDirectories(imagePath.getParent());
 
                 // Save the image file to the specified path
                 Files.write(imagePath, imageData);

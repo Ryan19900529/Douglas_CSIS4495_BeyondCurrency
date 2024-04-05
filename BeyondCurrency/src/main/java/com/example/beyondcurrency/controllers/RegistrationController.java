@@ -1,5 +1,7 @@
 package com.example.beyondcurrency.controllers;
 
+import com.example.beyondcurrency.AppConfig;
+import com.example.beyondcurrency.models.NotificationModel;
 import com.example.beyondcurrency.models.UserModel;
 import com.example.beyondcurrency.repositories.NotificationRepository;
 import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,10 +44,13 @@ public class RegistrationController {
                 byte[] imageData = imageFile.getBytes();
 
                 // Define the directory where you want to save the image
-                String uploadDirectory = "/Users/Ryan/Desktop/Douglas/Winter 2024/Applied Research Project/Project_RYa196/Implementation/Douglas_CSIS4495_BeyondCurrency/BeyondCurrency/src/main/resources/static/img";
+                String uploadDirectory = AppConfig.UPLOAD_DIRECTORY;
 
                 // Define the path where the image will be saved
                 Path imagePath = Paths.get(uploadDirectory, imageFile.getOriginalFilename());
+
+                // Check if the parent directory exists, if not, create it
+                Files.createDirectories(imagePath.getParent());
 
                 // Save the image file to the specified path
                 Files.write(imagePath, imageData);
@@ -63,6 +69,21 @@ public class RegistrationController {
 
         UserModel loginUser = getFullInfoUser(newUser.getEmail());
         session.setAttribute("loginUser", loginUser);
+
+        //get notifications for user
+        boolean isNewNotification = false;
+        List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
+        List<NotificationModel> relatedNotifications = new ArrayList<>();
+        for (NotificationModel n : allNotifications) {
+            if(n.getUserId() == loginUser.getUserId() && n.isShowNotification() == true) {
+                relatedNotifications.add(n);
+            }
+            if(n.getUserId() == loginUser.getUserId() && n.isNewNotification() == true){
+                isNewNotification = true;
+            }
+        }
+        model.addAttribute("isNewNotification", isNewNotification);
+        model.addAttribute("relatedNotifications", relatedNotifications);
 
         return "home";
 

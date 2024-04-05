@@ -47,4 +47,8 @@ public class ApplicationsRepository {
             return null;
         }
     }
+
+    public void deleteApplicationsByPostId(int id) {
+        jdbcTemplate.update("DELETE FROM applications WHERE service_id = ?", id);
+    }
 }
