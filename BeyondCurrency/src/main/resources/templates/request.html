@@ -109,17 +109,10 @@
                 <img class="people__card__saved-icon" src="/img/heart.png" alt="">
                 <a th:href="@{/user/expert/{id}(id=${user.getUserId()})}" target="_blank"><img class="people__card__pic" th:src="${user.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
                 <div class="people__card__name" th:text="${user.getFirstName() + ' ' + user.getLastName()}">Matteo Grasso</div>
-<!--                <div class="people__level__area" th:class="${user.getTrustScore() >= 90 ? 'people__level__area' : 'hidden'}">-->
-<!--                  <img src="/img/diamond.png" alt="">-->
-<!--                  <div class="people__level">Top Rated</div>-->
-<!--                </div>-->
                 <div class="people__level__area">
                   <img src="/img/diamond.png" th:class="${user.getTrustScore() >= 90 ? '' : 'hidden'}" alt="">
                   <div class="people__level" th:text="${user.getTrustScore() >= 90 ? 'Top Rated' : ''}" style="height: 20px">Top Rated</div>
                 </div>
-<!--                <div class="expertise" th:text="${user.getTitle()}">-->
-<!--                  Precision Pro-->
-<!--                </div>-->
                 <div class="people__info">
                   <div class="people__trusted__score">
                     <div class="score" th:text="${user.getTrustScore()}">96</div>
@@ -220,6 +213,20 @@
         displayImage.addEventListener("click", (e) => {
           if (e.target.src.includes("/img/heart.png")) {
             e.target.src = "/img/heart-filled.png";
+            // $.ajax({
+            //   type: "POST",
+            //   url: "/addSavedTalent",
+            //   data: {
+            //     userId: notificationId,
+            //     savedTalentId: ,
+            //   },
+            //   success: function () {
+            //
+            //   },
+            //   error: function (xhr, status, error) {  // Callback function for error handling
+            //     console.error("Error:", error);
+            //   }
+            // })
           } else {
             e.target.src = "/img/heart.png";
           }
