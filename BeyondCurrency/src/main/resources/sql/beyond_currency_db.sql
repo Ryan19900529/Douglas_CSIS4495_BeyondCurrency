@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2024 at 09:37 PM
+-- Generation Time: Apr 07, 2024 at 01:26 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -87,6 +87,30 @@ CREATE TABLE `notifications` (
   `show_notification` tinyint(1) NOT NULL DEFAULT 1,
   `new_notification` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saved_talent`
+--
+
+CREATE TABLE `saved_talent` (
+  `saved_talent_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `talent_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `saved_talent`
+--
+
+INSERT INTO `saved_talent` (`saved_talent_id`, `user_id`, `talent_id`) VALUES
+(15, 1, 4),
+(19, 1, 7),
+(20, 1, 8),
+(21, 1, 9),
+(22, 1, 10),
+(23, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -197,6 +221,12 @@ ALTER TABLE `notifications`
   ADD KEY `receiver` (`user_id`);
 
 --
+-- Indexes for table `saved_talent`
+--
+ALTER TABLE `saved_talent`
+  ADD PRIMARY KEY (`saved_talent_id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -225,6 +255,12 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `saved_talent`
+--
+ALTER TABLE `saved_talent`
+  MODIFY `saved_talent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
@@ -234,7 +270,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

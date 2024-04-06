@@ -111,13 +111,42 @@
  });
 
 //toggle like image
-let displayImages = document.querySelectorAll(".people__card__saved-icon");
-displayImages.forEach((displayImage) => {
-  displayImage.addEventListener("click", (e) => {
-    if (e.target.src.includes("/img/heart.png")) {
-      e.target.src = "/img/heart-filled.png";
-    } else {
-      e.target.src = "/img/heart.png";
-    }
-  });
-});
+ $(document).ready(function() {
+   $(".people__card__saved-icon").on("click", function(e) {
+     let $closestLi = $(this).closest("li");
+     let userId = $closestLi.find('input[name="userId"]').val();
+     let savedTalentId = $closestLi.find('input[name="talentId"]').val();
+
+     if ($(this).attr("src").includes("/img/heart.png")) {
+       $.ajax({
+         type: "POST",
+         url: "/addSavedTalent",
+         data: {
+           userId: userId,
+           savedTalentId: savedTalentId,
+         },
+         success: function() {
+           $(e.target).attr("src", "/img/heart-filled.png");
+         },
+         error: function(xhr, status, error) {
+           console.error("Error:", error);
+         },
+       });
+     } else {
+       $.ajax({
+         type: "POST",
+         url: "/deleteSavedTalent",
+         data: {
+           userId: userId,
+           savedTalentId: savedTalentId,
+         },
+         success: function() {
+           $(e.target).attr("src", "/img/heart.png");
+         },
+         error: function(xhr, status, error) {
+           console.error("Error:", error);
+         },
+       });
+     }
+   });
+ });

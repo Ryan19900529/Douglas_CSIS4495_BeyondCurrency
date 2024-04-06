@@ -1,10 +1,9 @@
 package com.example.beyondcurrency.controllers;
 
-import com.example.beyondcurrency.models.NotificationModel;
-import com.example.beyondcurrency.models.ServiceModel;
-import com.example.beyondcurrency.models.UserModel;
+import com.example.beyondcurrency.models.*;
 import com.example.beyondcurrency.repositories.NotificationRepository;
 import com.example.beyondcurrency.repositories.RequestsRepository;
+import com.example.beyondcurrency.repositories.SavedTalentRepository;
 import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -13,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +28,8 @@ public class ExpertController {
     NotificationRepository notificationRepository;
     @Resource
     UserLoginRegistrationRepository userLoginRegistrationRepository;
+    @Resource
+    SavedTalentRepository savedTalentRepository;
 
     @GetMapping("/expert/{id}")
     public String displayExpert(Model model, HttpSession session, @PathVariable(name = "id") Integer id){
@@ -66,6 +68,17 @@ public class ExpertController {
         }
         model.addAttribute("isNewNotification", isNewNotification);
         model.addAttribute("relatedNotifications", relatedNotifications);
+
+        // check if it's saved talent
+        List<SavedTalentModel> allSavedTalents = savedTalentRepository.getAllSavedTalents();
+        boolean isSaved = false;
+        for(SavedTalentModel t : allSavedTalents) {
+            if(t.getUserId() == loginUser.getUserId() && t.getTalentId() == user.getUserId()){
+                isSaved = true;
+            }
+        }
+
+        model.addAttribute("isSavedTalent", isSaved);
         return "expert";
     }
 }

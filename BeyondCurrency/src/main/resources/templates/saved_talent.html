@@ -71,176 +71,29 @@
         </div>
         
         <div class="swiper mySwiper main__card-container--post">
-          <div class="swiper-wrapper content">
-            <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="/img/heart-filled.png" alt="">
-              <a th:href="@{/user/expert}" ><img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
-                <div class="people__card__name">Matteo Grasso</div>
+          <ul class="swiper-wrapper content">
+            <li class="swiper-slide main__card" th:each="user : ${users}">
+              <input type="number" class="hidden" name="talentId" th:value="${user.getUserId()}">
+              <input type="number" class="hidden" name="userId" th:value="${session.loginUser.getUserId()}">
+              <img class="people__card__saved-icon"  src="/img/heart-filled.png" th:src="${user.isSavedTalent()? '/img/heart-filled.png' : '/img/heart.png'}" alt="">
+              <a th:href="@{/user/expert/{id}(id=${user.getUserId()})}" ><img class="people__card__pic" th:src="${user.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
+                <div class="people__card__name" th:text="${user.getFirstName() + ' ' + user.getLastName()}">Matteo Grasso</div>
                 <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
+                  <img src="/img/diamond.png" th:class="${user.getTrustScore() >= 90 ? '' : 'hidden'}" alt="">
+                  <div class="people__level" th:text="${user.getTrustScore() >= 90 ? 'Top Rated' : ''}" style="height: 20px">Top Rated</div>
                 </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
                 <div class="people__info">
                   <div class="people__trusted__score">
-                    <div class="score">96</div>
+                    <div class="score" th:text="${user.getTrustScore()}">96</div>
                     <div>Score</div>
                   </div>
                   <div class="people__jobs">
-                    <div class="jobs">21</div>
+                    <div class="jobs" th:text="${user.getWork_done()}">21</div>
                     Jobs
                   </div>
                 </div>
-            </div>
-            <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="/img/heart-filled.png" alt="">
-                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-            </div>
-            <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="/img/heart-filled.png" alt="">
-                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-            </div>
-            <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="/img/heart-filled.png" alt="">
-                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-            </div>
-            <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="/img/heart-filled.png" alt="">
-                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-            </div>
-            <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="/img/heart-filled.png" alt="">
-                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-            </div>
-            <div class="swiper-slide main__card">
-              <img class="people__card__saved-icon"  src="/img/heart-filled.png" alt="">
-                <img class="people__card__pic" src="/img/photo-1592334873219-42ca023e48ce.avif" alt="">
-                <div class="people__card__name">Matteo Grasso</div>
-                <div class="people__level__area">
-                  <img src="/img/diamond.png" alt="">
-                  <div class="people__level">Top Rated</div>
-                </div>
-
-                <div class="expertise">
-                  Precision Pro
-                </div>
-
-                <div class="people__info">
-                  <div class="people__trusted__score">
-                    <div class="score">96</div>
-                    <div>Score</div>
-                  </div>
-                  <div class="people__jobs">
-                    <div class="jobs">21</div>
-                    Jobs
-                  </div>
-                </div>
-            </div>
-          </div>
+            </li>
+          </ul>
           <div class="swiper-button-next swiper-navBtn"></div>
           <div class="swiper-button-prev swiper-navBtn"></div>
           <div class="swiper-pagination"></div>

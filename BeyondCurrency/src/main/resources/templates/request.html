@@ -106,8 +106,10 @@
             <div class=""></div>
             <ul class="people__tab">
               <li th:each="user : ${users}">
-                <img class="people__card__saved-icon" src="/img/heart.png" alt="">
-                <a th:href="@{/user/expert/{id}(id=${user.getUserId()})}" target="_blank"><img class="people__card__pic" th:src="${user.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
+                <input type="number" class="hidden" name="talentId" th:value="${user.getUserId()}">
+                <input type="number" class="hidden" name="userId" th:value="${session.loginUser.getUserId()}">
+                <img class="people__card__saved-icon" src="/img/heart.png" th:src="${user.isSavedTalent()? '/img/heart-filled.png' : '/img/heart.png'}" alt="">
+                <a th:href="@{/user/expert/{id}(id=${user.getUserId()})}"  target="_blank"><img class="people__card__pic" th:src="${user.getImageUrl()}" src="/img/photo-1592334873219-42ca023e48ce.avif" alt=""></a>
                 <div class="people__card__name" th:text="${user.getFirstName() + ' ' + user.getLastName()}">Matteo Grasso</div>
                 <div class="people__level__area">
                   <img src="/img/diamond.png" th:class="${user.getTrustScore() >= 90 ? '' : 'hidden'}" alt="">
@@ -208,27 +210,42 @@
         });
 
       //toggle like image
-      let displayImages = document.querySelectorAll(".people__card__saved-icon");
-      displayImages.forEach((displayImage) => {
-        displayImage.addEventListener("click", (e) => {
-          if (e.target.src.includes("/img/heart.png")) {
-            e.target.src = "/img/heart-filled.png";
-            // $.ajax({
-            //   type: "POST",
-            //   url: "/addSavedTalent",
-            //   data: {
-            //     userId: notificationId,
-            //     savedTalentId: ,
-            //   },
-            //   success: function () {
-            //
-            //   },
-            //   error: function (xhr, status, error) {  // Callback function for error handling
-            //     console.error("Error:", error);
-            //   }
-            // })
+      $(document).ready(function() {
+        $(".people__card__saved-icon").on("click", function(e) {
+          let $closestLi = $(this).closest("li");
+          let userId = $closestLi.find('input[name="userId"]').val();
+          let savedTalentId = $closestLi.find('input[name="talentId"]').val();
+
+          if ($(this).attr("src").includes("/img/heart.png")) {
+            $.ajax({
+              type: "POST",
+              url: "/addSavedTalent",
+              data: {
+                userId: userId,
+                savedTalentId: savedTalentId,
+              },
+              success: function() {
+                $(e.target).attr("src", "/img/heart-filled.png");
+              },
+              error: function(xhr, status, error) {
+                console.error("Error:", error);
+              },
+            });
           } else {
-            e.target.src = "/img/heart.png";
+            $.ajax({
+              type: "POST",
+              url: "/deleteSavedTalent",
+              data: {
+                userId: userId,
+                savedTalentId: savedTalentId,
+              },
+              success: function() {
+                $(e.target).attr("src", "/img/heart.png");
+              },
+              error: function(xhr, status, error) {
+                console.error("Error:", error);
+              },
+            });
           }
         });
       });

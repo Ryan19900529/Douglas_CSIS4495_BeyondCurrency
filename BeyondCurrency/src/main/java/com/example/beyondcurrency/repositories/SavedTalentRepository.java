@@ -19,12 +19,16 @@ public class SavedTalentRepository {
         long result = 0;
 
         result = jdbcTemplate.update(
-                "INSERT INTO saved_talent (user_id, talent_id) VALUES (?, ?, ?)",
+                "INSERT INTO saved_talent (user_id, talent_id) VALUES (?, ?)",
                 savedTalent.getUserId(),
                 savedTalent.getTalentId()
         );
 
         return result;
+    }
+
+    public void deleteSavedTalent(int talentId, int userId) {
+        jdbcTemplate.update("DELETE FROM saved_talent WHERE talent_id = ? AND user_id = ?", talentId, userId);
     }
 
     public List<SavedTalentModel> getAllSavedTalents() {

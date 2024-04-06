@@ -38,11 +38,41 @@ closeModal.addEventListener("click", () => {
 });
 
 //toggle like image
-let displayImage = document.getElementById("love__icon");
-displayImage.addEventListener("click", (e) => {
-  if (e.target.src.match("/img/love-circled.png")) {
-    e.target.src = "/svg/love-circled-filled.svg";
-  } else {
-    e.target.src = "/img/love-circled.png";
-  }
+$(document).ready(function() {
+  $("#love__icon").on("click", function(e) {
+    let userId = $('input[name="userId"]').val();
+    let savedTalentId = $('input[name="talentId"]').val();
+
+    if ($(this).attr("src").includes("/img/love-circled.png")) {
+      $.ajax({
+        type: "POST",
+        url: "/addSavedTalent",
+        data: {
+          userId: userId,
+          savedTalentId: savedTalentId,
+        },
+        success: function() {
+          $(e.target).attr("src", "/svg/love-circled-filled.svg");
+        },
+        error: function(xhr, status, error) {
+          console.error("Error:", error);
+        },
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "/deleteSavedTalent",
+        data: {
+          userId: userId,
+          savedTalentId: savedTalentId,
+        },
+        success: function() {
+          $(e.target).attr("src", "/img/love-circled.png");
+        },
+        error: function(xhr, status, error) {
+          console.error("Error:", error);
+        },
+      });
+    }
+  });
 });

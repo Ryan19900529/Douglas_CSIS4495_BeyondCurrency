@@ -1,11 +1,9 @@
 package com.example.beyondcurrency.controllers;
 
-import com.example.beyondcurrency.models.NotificationModel;
-import com.example.beyondcurrency.models.RequestCardModel;
-import com.example.beyondcurrency.models.ServiceModel;
-import com.example.beyondcurrency.models.UserModel;
+import com.example.beyondcurrency.models.*;
 import com.example.beyondcurrency.repositories.NotificationRepository;
 import com.example.beyondcurrency.repositories.RequestsRepository;
+import com.example.beyondcurrency.repositories.SavedTalentRepository;
 import com.example.beyondcurrency.repositories.UserLoginRegistrationRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -27,6 +25,8 @@ public class RequestsController {
     UserLoginRegistrationRepository userLoginRegistrationRepository;
     @Resource
     NotificationRepository notificationRepository;
+    @Resource
+    SavedTalentRepository savedTalentRepository;
     @GetMapping("/requests")
     public String displayRequests(Model model){
 
@@ -47,8 +47,6 @@ public class RequestsController {
                 requestCards.add(card);
             }
         }
-
-        List<UserModel> users = userLoginRegistrationRepository.getUsersByCategoryId(category);
 
         //create path wording
         String path = "";
@@ -110,12 +108,27 @@ public class RequestsController {
 
         }
 
+        // get saved talents
+        List<SavedTalentModel> allSavedTalents = savedTalentRepository.getAllSavedTalents();
+        List<UserModel> users = userLoginRegistrationRepository.getUsersByCategoryId(category);
+        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+        List<UserCardModel> userCards = new ArrayList<>();
+        for(UserModel u : users) {
+            UserCardModel card = new UserCardModel(u.getUserId(),u.getFirstName(),u.getLastName(),u.getImageUrl(),u.getTrustScore(),u.getWork_done(), false);
+            for (SavedTalentModel t : allSavedTalents) {
+                if (t.getUserId() == loginUser.getUserId() && t.getTalentId() == card.getUserId()) {
+                    card.setSavedTalent(true);
+                }
+            }
+            userCards.add(card);
+        }
+
         model.addAttribute("cards", requestCards);
-        model.addAttribute("users", users);
+        model.addAttribute("users", userCards);
         model.addAttribute("path", path);
 
         //get notifications for user
-        UserModel loginUser = (UserModel) session.getAttribute("loginUser");
+
         boolean isNewNotification = false;
         List<NotificationModel> allNotifications = notificationRepository.getAllNotifications();
         List<NotificationModel> relatedNotifications = new ArrayList<>();
