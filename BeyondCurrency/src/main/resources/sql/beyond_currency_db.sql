@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 07, 2024 at 01:26 AM
+-- Generation Time: Apr 07, 2024 at 02:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -204,6 +204,7 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `password`, `phone`, 
 -- Indexes for table `applications`
 --
 ALTER TABLE `applications`
+  ADD PRIMARY KEY (`application_id`),
   ADD KEY `applicant` (`applicant_id`),
   ADD KEY `poster` (`poster_id`),
   ADD KEY `service` (`service_id`);
@@ -218,6 +219,7 @@ ALTER TABLE `categories`
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notification_id`),
   ADD KEY `receiver` (`user_id`);
 
 --
@@ -249,10 +251,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `applications`
+--
+ALTER TABLE `applications`
+  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `saved_talent`

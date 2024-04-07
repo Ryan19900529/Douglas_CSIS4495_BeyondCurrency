@@ -66,7 +66,7 @@
           <div style="display: flex;">
             <div class="request__container-left picgroup">
               <div class="request__container-left picgroup__greendot"></div>
-              <img src="/img/man.jpg" class="request__container-left picgroup__pic" alt="">
+              <img src="/img/man.jpg" th:src="${poster.getImageUrl()}"  class="request__container-left picgroup__pic" alt="">
             </div>
             <div class="request__section-title title__nameGroup">
               <p class="request__section-title title__nameGroup-name" th:text="${poster.getFirstName() + ' ' + poster.getLastName()}">Matteo Grasso</p>
@@ -101,7 +101,7 @@
           <div style="display: flex;">
             <div class="request__container-left picgroup">
               <div class="request__container-left picgroup__greendot"></div>
-              <img src="/img/photo-1592334873219-42ca023e48ce.avif" class="request__container-left picgroup__pic" alt="">
+              <img src="/img/photo-1592334873219-42ca023e48ce.avif" th:src="${taker.getImageUrl()}" class="request__container-left picgroup__pic" alt="">
             </div>
             <div class="request__section-title title__nameGroup">
               <p class="request__section-title title__nameGroup-name" th:text="${taker.getFirstName() + ' ' + taker.getLastName()}">James</p>
