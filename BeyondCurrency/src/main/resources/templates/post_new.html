@@ -279,11 +279,11 @@
 
         input.addEventListener("change", function (event) {
           let file = event.target.files[0];
-
-          if (file.size > 10 * 1024 * 1024) {
-            alert("The picture you choose exceeds 10MB!");
-            return;
-          }
+          //
+          // if (file.size > 10 * 1024 * 1024) {
+          //   alert("The picture you choose exceeds 10MB!");
+          //   return;
+          // }
 
           let reader = new FileReader();
           reader.onload = function (event) {
