@@ -113,6 +113,7 @@ cursor: pointer;
   justify-content: left;
   margin-left: 5px;
   margin-top: 10px;
+  height: 63px;
  }
 
  .card__tag__box .card__tag{
@@ -124,6 +125,7 @@ cursor: pointer;
   border-radius: 20px;
   border: 1px solid #108a00;
   padding: 3px 10px 3px 10px;
+  height: fit-content;
  }
 
  .request__user{

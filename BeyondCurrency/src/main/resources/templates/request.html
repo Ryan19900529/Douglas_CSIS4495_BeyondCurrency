@@ -83,8 +83,8 @@
                   <div class="card__title" th:text="${card.getServiceTitle()}"></div>
                   <div class="card__tag__box">
                     <div class="card__tag" th:text="${card.getSkill1()?: ''}" th:class="${card.getSkill1() == null ? 'hidden' : 'card__tag'}"></div>
-                    <div class="card__tag" th:text="${card.getSkill2()?: ''}" th:class="${card.getSkill2() == null ? 'hidden' : 'card__tag'}"></div>
-                    <div class="card__tag" th:text="${card.getSkill3()?: ''}" th:class="${card.getSkill3() == null ? 'hidden' : 'card__tag'}"></div>
+                    <div class="card__tag" th:text="${card.getSkill2() != null and #strings.trim(card.getSkill2()) != '' ? card.getSkill2() : ''}" th:class="${card.getSkill2() == null or #strings.trim(card.getSkill2()) == '' ? 'hidden' : 'card__tag'}"></div>
+                    <div class="card__tag" th:text="${card.getSkill3() != null and #strings.trim(card.getSkill3()) != '' ? card.getSkill3() : ''}" th:class="${card.getSkill3() == null or #strings.trim(card.getSkill3()) == '' ? 'hidden' : 'card__tag'}"></div>
                   </div>
 
                   <div class="request__user">
