@@ -303,7 +303,10 @@ public class PostController {
         }
         model.addAttribute("relatedApp", relatedApp);
         UserModel poster = userLoginRegistrationRepository.getUserById(newAddedPost.getPosterId());
-
+        
+        String[] paragraphs = description.split("\\r?\\n");
+        List<String> paragraphList = Arrays.asList(paragraphs);
+        model.addAttribute("paragraphList", paragraphList);
         model.addAttribute("post", newAddedPost);
         model.addAttribute("poster", poster);
 
