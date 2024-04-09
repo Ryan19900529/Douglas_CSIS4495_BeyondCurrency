@@ -1,7 +1,7 @@
 # Douglas_CSIS4495_BeyondCurrency
 
 Installation Guide
-1. Copy repo link to local and open the project in any IDE which supports Spring Boot project.
+1. Open the project named "BeyondCurrency" in any IDE which supports Spring Boot project.
 2. Start local Apache and MySQL service on XAMPP, check port number of each.
 
     <img width="468" alt="image" src="https://github.com/Ryan19900529/Douglas_CSIS4495_BeyondCurrency/assets/96611678/e360443f-7d76-48f9-9859-01781eccd2a7">
